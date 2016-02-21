@@ -21,29 +21,30 @@ enum SidebarCategory: String {
     case Settings = "Settings"
     case About = "About"
     static var allValues: [SidebarCategory] = [
-        .User,
         .Home,
+        .ReadingList,
         .Explore,
+//        .User,
 //        .Drafts,
-        .Topic,
-        .Search,
-        .Publishment,
-//        .ReadingList,
+//        .Topic,
+//        .Search,
+//        .Publishment,
 //        .History,
-        .Settings,
-        .About]
+//        .Settings,
+//        .About
+    ]
 }
 
 func localizedStringFromSidebarCategory(category: SidebarCategory) -> String {
     let data: [SidebarCategory: String] = [
-        .User: "个人中心",
-        .Home: "首页",
+        .Home: "我关注的",
         .Explore: "发现",
+        .ReadingList: "我在读",
+        .User: "个人中心",
         .Drafts: "草稿",
         .Search: "搜索",
         .Topic: "话题",
         .Publishment: "发布",
-        .ReadingList: "阅读列表",
         .History: "历史记录",
         .Settings: "设置",
         .About: "关于"]

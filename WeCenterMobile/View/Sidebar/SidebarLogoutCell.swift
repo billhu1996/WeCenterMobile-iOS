@@ -10,6 +10,8 @@ import UIKit
 
 class SidebarLogoutCell: UITableViewCell {
     
+    @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var SettingButton: UIButton!
     
     
 }

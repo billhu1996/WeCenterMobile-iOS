@@ -86,6 +86,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     lazy var logoutCell: SidebarLogoutCell = {
         [weak self] in
         let cell = NSBundle.mainBundle().loadNibNamed("SidebarLogoutCell", owner: nil, options: nil).first as! SidebarLogoutCell
+        cell.logoutButton.addTarget(self, action: "didPressLogoutButton:", forControlEvents: .TouchUpInside)
+        cell.SettingButton.addTarget(self, action: "didPressSettingsButton:", forControlEvents: .TouchUpInside)
         return cell
     }()
     convenience init() {
@@ -232,6 +234,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             uevc.delegate = self
             showDetailViewController(uevc, sender: self)
         }
+    }
+    func didPressSettingsButton(sender: UIButton) {
+        let svc = UIStoryboard(name: "SettingsViewController", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! SettingsViewController
+        sidebar.collapse()
+        contentViewController.setViewControllers([svc], animated: true)
+    }
+    func didPressLogoutButton(sender: UIButton) {
+        sidebar.collapse()
+        dismissViewControllerAnimated(true, completion: nil)
     }
     func currentUserPropertyDidChange(notification: NSNotification) {
         let key = notification.userInfo![KeyUserInfoKey] as! String

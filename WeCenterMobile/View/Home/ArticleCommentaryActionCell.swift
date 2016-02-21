@@ -14,41 +14,49 @@ class ArticleCommentaryActionCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var articleTitleLabel: UILabel!
-    @IBOutlet weak var agreementCountLabel: UILabel!
-    @IBOutlet weak var commentBodyLabel: UILabel!
+//    @IBOutlet weak var agreementCountLabel: UILabel!
+//    @IBOutlet weak var commentBodyLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var articleButton: UIButton!
-    @IBOutlet weak var commentButton: UIButton!
+//    @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var userContainerView: UIView!
     @IBOutlet weak var articleContainerView: UIView!
-    @IBOutlet weak var commentContainerView: UIView!
+//    @IBOutlet weak var commentContainerView: UIView!
     @IBOutlet weak var separatorA: UIView!
-    @IBOutlet weak var separatorB: UIView!
+//    @IBOutlet weak var separatorB: UIView!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    lazy var dateFormatter: NSDateFormatter = {
+        let f = NSDateFormatter()
+        f.timeZone = NSTimeZone.localTimeZone()
+        f.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return f
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         msr_scrollView?.delaysContentTouches = false
         let theme = SettingsManager.defaultManager.currentTheme
-        for v in [containerView, agreementCountLabel] {
+        for v in [containerView]{//, agreementCountLabel] {
             v.msr_borderColor = theme.borderColorA
         }
-        for v in [userButton, articleButton, commentButton] {
+        for v in [userButton, articleButton] {//, commentButton] {
             v.msr_setBackgroundImageWithColor(theme.highlightColor, forState: .Highlighted)
         }
         for v in [userContainerView, articleContainerView] {
             v.backgroundColor = theme.backgroundColorB
         }
-        for v in [agreementCountLabel, commentContainerView] {
-            v.backgroundColor = theme.backgroundColorA
-        }
-        for v in [separatorA, separatorB] {
+//        for v in [commentContainerView, agreementCountLabel] {
+//            v.backgroundColor = theme.backgroundColorA
+//        }
+        for v in [separatorA,]{// separatorB] {
             v.backgroundColor = theme.borderColorA
         }
         for v in [userNameLabel, articleTitleLabel] {
             v.textColor = theme.titleTextColor
         }
-        for v in [agreementCountLabel, typeLabel, commentBodyLabel] {
+        for v in [typeLabel, ]{//agreementCountLabel, commentBodyLabel] {
             v.textColor = theme.subtitleTextColor
         }
     }
@@ -58,11 +66,16 @@ class ArticleCommentaryActionCell: UITableViewCell {
         userAvatarView.wc_updateWithUser(action.user)
         userNameLabel.text = action.user?.name ?? "匿名用户"
         articleTitleLabel.text = action.comment!.article!.title!
-        agreementCountLabel.text = "\(action.comment!.agreementCount!)"
-        commentBodyLabel.text = action.comment!.body!.wc_plainString
+//        agreementCountLabel.text = "\(action.comment!.agreementCount!)"
+//        commentBodyLabel.text = action.comment!.body!.wc_plainString
         userButton.msr_userInfo = action.user
         articleButton.msr_userInfo = action.comment!.article
-        commentButton.msr_userInfo = action.comment
+//        commentButton.msr_userInfo = action.comment
+        if let date = action.comment?.date {
+            dateLabel.text = dateFormatter.stringFromDate(date)
+        } else {
+            dateLabel.text = ""
+        }
         setNeedsLayout()
         layoutIfNeeded()
     }

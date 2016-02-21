@@ -14,6 +14,7 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var articleBodyLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var ActionLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var articleButton: UIButton!
     @IBOutlet weak var userAvatarView: MSRRoundedImageView!

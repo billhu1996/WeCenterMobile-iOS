@@ -20,6 +20,14 @@ class ArticleAgreementActionCell: UITableViewCell {
     @IBOutlet weak var userContainerView: UIView!
     @IBOutlet weak var articleContainerView: UIView!
     @IBOutlet weak var separator: UIView!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    lazy var dateFormatter: NSDateFormatter = {
+        let f = NSDateFormatter()
+        f.timeZone = NSTimeZone.localTimeZone()
+        f.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return f
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +51,11 @@ class ArticleAgreementActionCell: UITableViewCell {
         let action = action as! ArticleAgreementAction
         userAvatarView.wc_updateWithUser(action.user)
         userNameLabel.text = action.user?.name ?? "匿名用户"
+        if let date = action.article?.date {
+            dateLabel.text = dateFormatter.stringFromDate(date)
+        } else {
+            dateLabel.text = ""
+        }
         articleTitleLabel.text = action.article!.title
         userButton.msr_userInfo = action.user
         articleButton.msr_userInfo = action.article

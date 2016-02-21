@@ -1,36 +1,77 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ODu-U2-fmp" customClass="SidebarLogoutCell" customModule="WeCenterMobile" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="ODu-U2-fmp" customClass="SidebarLogoutCell" customModule="WeCenterMobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="206" height="56"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ODu-U2-fmp" id="gIC-Xk-xx1">
-                <rect key="frame" x="0.0" y="0.0" width="200" height="49"/>
+                <rect key="frame" x="0.0" y="0.0" width="206" height="55"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="注销" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TW-xD-yRE">
-                        <rect key="frame" x="83" y="15" width="34" height="21"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sidebar-Logout" translatesAutoresizingMaskIntoConstraints="NO" id="dIP-jz-jGr" userLabel="Logout Image View">
+                        <rect key="frame" x="10" y="10" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="dIP-jz-jGr" secondAttribute="height" id="fHI-L2-isY"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sidebar-Settings" translatesAutoresizingMaskIntoConstraints="NO" id="aFZ-le-FX5" userLabel="Settings Image View">
+                        <rect key="frame" x="161" y="10" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="aFZ-le-FX5" secondAttribute="height" id="d7V-ny-WUI"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z37-Hu-dmL" userLabel="Settings Button">
+                        <rect key="frame" x="159" y="8" width="39" height="39"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Z37-Hu-dmL" secondAttribute="height" id="NKQ-cO-5E8"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DR2-0u-fgD" userLabel="Logout Button">
+                        <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="DR2-0u-fgD" secondAttribute="height" id="FGX-We-3ei"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
-                <animations/>
                 <constraints>
-                    <constraint firstAttribute="centerX" secondItem="2TW-xD-yRE" secondAttribute="centerX" id="WhP-Gk-4xo"/>
-                    <constraint firstAttribute="centerY" secondItem="2TW-xD-yRE" secondAttribute="centerY" id="lJI-GC-FJb"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Z37-Hu-dmL" secondAttribute="bottom" id="1cg-tb-gmw"/>
+                    <constraint firstAttribute="bottom" secondItem="dIP-jz-jGr" secondAttribute="bottom" constant="10" id="1iM-Ih-rrz"/>
+                    <constraint firstItem="dIP-jz-jGr" firstAttribute="leading" secondItem="gIC-Xk-xx1" secondAttribute="leading" constant="10" id="4vy-61-VVg"/>
+                    <constraint firstAttribute="bottom" secondItem="aFZ-le-FX5" secondAttribute="bottom" constant="10" id="Fyp-K4-tzC"/>
+                    <constraint firstItem="Z37-Hu-dmL" firstAttribute="top" secondItem="gIC-Xk-xx1" secondAttribute="topMargin" id="SQ5-AM-TQ4"/>
+                    <constraint firstItem="DR2-0u-fgD" firstAttribute="leading" secondItem="gIC-Xk-xx1" secondAttribute="leading" id="bjW-H3-jrz"/>
+                    <constraint firstAttribute="bottom" secondItem="DR2-0u-fgD" secondAttribute="bottom" id="cZS-ID-Y1p"/>
+                    <constraint firstItem="aFZ-le-FX5" firstAttribute="top" secondItem="gIC-Xk-xx1" secondAttribute="top" constant="10" id="fg1-hl-7fB"/>
+                    <constraint firstAttribute="trailing" secondItem="aFZ-le-FX5" secondAttribute="trailing" constant="10" id="gW6-Ef-Z0l"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Z37-Hu-dmL" secondAttribute="trailing" id="hP8-7r-VQT"/>
+                    <constraint firstItem="DR2-0u-fgD" firstAttribute="top" secondItem="gIC-Xk-xx1" secondAttribute="top" id="qaG-4I-tcR"/>
+                    <constraint firstItem="dIP-jz-jGr" firstAttribute="top" secondItem="gIC-Xk-xx1" secondAttribute="top" constant="10" id="z6F-6c-bdl"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
-            <color key="backgroundColor" red="0.74901960784313726" green="0.21176470588235294" blue="0.047058823529411764" alpha="1" colorSpace="calibratedRGB"/>
-            <point key="canvasLocation" x="646" y="510"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="SettingButton" destination="Z37-Hu-dmL" id="j3h-9v-30N"/>
+                <outlet property="logoutButton" destination="DR2-0u-fgD" id="jZ9-N7-mVq"/>
+            </connections>
+            <point key="canvasLocation" x="815" y="505"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Sidebar-Logout" width="24" height="24"/>
+        <image name="Sidebar-Settings" width="20" height="20"/>
+    </resources>
 </document>
