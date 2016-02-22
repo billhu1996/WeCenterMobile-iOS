@@ -20,7 +20,7 @@ class LoginVC: UIViewController, QRCodeReaderDelegate {
         //
         //        _reader.delegate = self;
         
-        let types = ["AVMetadataObjectTypeQRCode"]
+        let types: Array<String> = ["AVMetadataObjectTypeQRCode"]
         
         var qrViewController = QRCodeReaderViewController.readerWithMetadataObjectTypes(types)
         qrViewController.delegate = self
@@ -45,7 +45,7 @@ class LoginVC: UIViewController, QRCodeReaderDelegate {
             },
             failure: {
                 [weak self] error in
-                if let self_ = self {
+                if let _ = self {
                     print((error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误")
                 }
             })
@@ -64,7 +64,7 @@ class LoginVC: UIViewController, QRCodeReaderDelegate {
             },
             failure: {
                 [weak self] error in
-                if let self_ = self {
+                if let _ = self {
                     print((error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误")
                 }
             })
@@ -77,12 +77,13 @@ class LoginVC: UIViewController, QRCodeReaderDelegate {
     }
     
     @IBAction func qrScan(sender: AnyObject) {
-        presentViewController(self.webViewController, animated: true, completion: nil)
+        presentViewController(self.qrViewController, animated: true, completion: nil)
     }
     
     func reader(reader: QRCodeReaderViewController!, didScanResult result: String!) {
         dismissViewControllerAnimated(true) { () -> Void in
             print(result)
+            self.presentViewController(self.webViewController, animated: true, completion: nil)
         }
     }
     func readerDidCancel(reader: QRCodeReaderViewController!) {
