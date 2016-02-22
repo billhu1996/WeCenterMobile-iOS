@@ -105,3 +105,16 @@ module ZFTokenField {
     umbrella header "ZFTokenField/Classes/ZFTokenField.h"
     
 }
+
+module QRCodeReaderViewController {
+    
+    requires objc, objc_arc
+    
+    use UIKit
+    
+    umbrella header "MQRCodeReaderViewController/QRCodeReaderViewController/QRCameraSwitchButton.h"
+    header "MQRCodeReaderViewController/QRCodeReaderViewController/QRCodeReader.h"
+    header "MQRCodeReaderViewController/QRCodeReaderViewController/QRCodeReaderDelegate.h"
+    header "MQRCodeReaderViewController/QRCodeReaderViewController/QRCodeReaderViewController.h"
+    
+}

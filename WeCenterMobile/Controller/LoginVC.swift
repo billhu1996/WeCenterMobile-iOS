@@ -8,10 +8,30 @@
 
 import Foundation
 import UIKit
+import QRCodeReaderViewController
 
-class LoginVC: UIViewController {
+class LoginVC: UIViewController, QRCodeReaderDelegate {
     
     @IBOutlet weak var weiXinLoginButton: UIButton!
+    
+    lazy var qrViewController: QRCodeReaderViewController = {
+        //        NSArray *types = @[AVMetadataObjectTypeQRCode];
+        //        _reader        = [QRCodeReaderViewController readerWithMetadataObjectTypes:types];
+        //
+        //        _reader.delegate = self;
+        
+        let types = ["AVMetadataObjectTypeQRCode"]
+        
+        var qrViewController = QRCodeReaderViewController.readerWithMetadataObjectTypes(types)
+        qrViewController.delegate = self
+        return qrViewController
+    }()
+    
+    lazy var webViewController: WebViewController = {
+        var webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
+        webViewController.requestURL = "http://www.baidu.com/"
+        return webViewController
+    }()
     
     @IBAction func login() {
         User.loginWithName("congmingdehuli666@163.com",
@@ -56,5 +76,17 @@ class LoginVC: UIViewController {
         presentViewController(appDelegate.mainViewController, animated: true, completion: nil)
     }
     
+    @IBAction func qrScan(sender: AnyObject) {
+        presentViewController(self.webViewController, animated: true, completion: nil)
+    }
+    
+    func reader(reader: QRCodeReaderViewController!, didScanResult result: String!) {
+        dismissViewControllerAnimated(true) { () -> Void in
+            print(result)
+        }
+    }
+    func readerDidCancel(reader: QRCodeReaderViewController!) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }

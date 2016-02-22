@@ -34,3 +34,6 @@
 [submodule "WeCenterMobile/External/Msr"]
 	path = WeCenterMobile/External/Msr
 	url = https://github.com/MsrButterfly/Msr.LibSwift.git
+[submodule "WeCenterMobile/External/MQRCodeReaderViewController"]
+	path = WeCenterMobile/External/MQRCodeReaderViewController
+	url = https://github.com/Everyb0dyLies/MQRCodeReaderViewController.git

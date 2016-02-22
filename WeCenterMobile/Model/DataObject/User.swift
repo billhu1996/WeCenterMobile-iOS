@@ -457,7 +457,7 @@ class User: DataObject {
             ],
             success: {
                 [weak self] data in
-                let value = data[0] as! NSDictionary
+                let value = (data as! NSArray)[0] as! NSDictionary
                 if let self_ = self {
                     self_.name = value["user_name"] as? String
                     self_.genderValue = value["sex"] is NSNull ? Gender.Secret.rawValue : Int(msr_object: value["sex"])
