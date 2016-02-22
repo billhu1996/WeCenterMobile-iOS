@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C248A661C7B040A008F0D7E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C248A651C7B040A008F0D7E /* LoginVC.swift */; };
+		5C248A8D1C7B041C008F0D7E /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C248A8C1C7B041C008F0D7E /* LoginVC.xib */; };
 		950FE1241A1DA2A400167D09 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 950FE1161A1DA2A400167D09 /* Configuration.plist */; };
 		950FE1251A1DA2A400167D09 /* Discovery.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950FE1181A1DA2A400167D09 /* Discovery.strings */; };
 		950FE1261A1DA2A400167D09 /* User.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950FE11A1A1DA2A400167D09 /* User.strings */; };
@@ -557,6 +559,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5C248A651C7B040A008F0D7E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		5C248A8C1C7B041C008F0D7E /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
 		950FE1161A1DA2A400167D09 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		950FE1191A1DA2A400167D09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Discovery.strings; sourceTree = "<group>"; };
 		950FE11B1A1DA2A400167D09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/User.strings; sourceTree = "<group>"; };
@@ -978,6 +982,8 @@
 				A9BC4CE51C1858E5009F5468 /* HotTopicListViewController.swift */,
 				95DFA7031B1224BC00DF1C0E /* LoginViewController.swift */,
 				95DFA7041B1224BC00DF1C0E /* LoginViewController.xib */,
+				5C248A651C7B040A008F0D7E /* LoginVC.swift */,
+				5C248A8C1C7B041C008F0D7E /* LoginVC.xib */,
 				950FE12F1A1DA2B300167D09 /* MainViewController.swift */,
 				958CB5BA1AB98DC3002ECCF4 /* PublishmentViewController.swift */,
 				95B9BDC21ABAA67900692889 /* PublishmentViewControllerA.xib */,
@@ -2107,6 +2113,7 @@
 				950FE1241A1DA2A400167D09 /* Configuration.plist in Resources */,
 				9531D74C1AF3E4AC00E6549D /* SidebarCategoryCell.xib in Resources */,
 				9531D72C1AF3E4AC00E6549D /* FeaturedQuestionAnswerCellA.xib in Resources */,
+				5C248A8D1C7B041C008F0D7E /* LoginVC.xib in Resources */,
 				950FE1251A1DA2A400167D09 /* Discovery.strings in Resources */,
 				9531D7251AF3E4AC00E6549D /* ArticleCell.xib in Resources */,
 				9531D7421AF3E4AC00E6549D /* QuestionFooterCell.xib in Resources */,
@@ -2184,6 +2191,7 @@
 				A955A3AC1C02FEB7002501CE /* MJRefreshBackNormalFooter.m in Sources */,
 				950FE50E1A1DA2B500167D09 /* QuestionListViewController.swift in Sources */,
 				9531D79C1AF3E8E400E6549D /* TintColor.swift in Sources */,
+				5C248A661C7B040A008F0D7E /* LoginVC.swift in Sources */,
 				9531D78B1AF3E8E400E6549D /* AnswerAgreementAction.swift in Sources */,
 				95E5355A1A49DCFD00D7B76B /* HomeViewController.swift in Sources */,
 				A955A3261C02FD9D002501CE /* MSRSegmentedControlIndicator.swift in Sources */,

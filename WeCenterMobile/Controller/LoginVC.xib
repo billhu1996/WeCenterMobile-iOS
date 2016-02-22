@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController id="mY1-LQ-mh2" customClass="LoginVC" customModule="WeCenterMobile" customModuleProvider="target">
+            <layoutGuides>
+                <viewControllerLayoutGuide type="top" id="HE4-3g-MUG"/>
+                <viewControllerLayoutGuide type="bottom" id="Dco-Fn-fCj"/>
+            </layoutGuides>
+            <view key="view" contentMode="scaleToFill" id="Zs2-Ik-ns9">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1j-VS-5Pm">
+                        <rect key="frame" x="172" y="470" width="30" height="30"/>
+                        <state key="normal" title="登陆"/>
+                        <connections>
+                            <action selector="login" destination="mY1-LQ-mh2" eventType="touchUpInside" id="fPA-vx-Esv"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9e8-fo-2fA">
+                        <rect key="frame" x="172" y="534" width="30" height="30"/>
+                        <state key="normal" title="注册"/>
+                        <connections>
+                            <action selector="register" destination="mY1-LQ-mh2" eventType="touchUpInside" id="Z9h-QD-d5y"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            </view>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <connections>
+                <outlet property="weiXinLoginButton" destination="c1j-VS-5Pm" id="9uW-YM-N0H"/>
+            </connections>
+            <point key="canvasLocation" x="56" y="355"/>
+        </viewController>
+    </objects>
+</document>

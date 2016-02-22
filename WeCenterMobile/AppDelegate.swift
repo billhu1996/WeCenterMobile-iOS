@@ -39,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return v
     }()
     
-    lazy var loginViewController: LoginViewController = {
-        let vc = NSBundle.mainBundle().loadNibNamed("LoginViewController", owner: nil, options: nil).first as! LoginViewController
+    lazy var loginViewController: LoginVC = {
+        let vc = NSBundle.mainBundle().loadNibNamed("LoginVC", owner: nil, options: nil).first as! LoginVC
         return vc
     }()
     
