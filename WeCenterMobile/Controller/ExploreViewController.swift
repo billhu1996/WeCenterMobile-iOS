@@ -41,13 +41,20 @@ class ExploreViewController: MSRSegmentedViewController, MSRSegmentedViewControl
                 (.Recommended, "推荐"),
                 (.Hot, "热门"),
                 (.New, "最新"),
-                (.Unsolved, "等待回答")]
+                (.Unsolved, "等待回答"),
+                (.Famous, "名人")]
             // [FeaturedObjectListType: String] is not SequenceType
             let vcs: [UIViewController] = titles.map {
                 (type, title) in
-                let vc = FeaturedObjectListViewController(type: type)
-                vc.title = title
-                return vc
+                if type == .Famous {
+                    let vc = UserListViewController(user: User.currentUser!, listType: UserListType.Famous)
+                    vc.title = title
+                    return vc
+                } else {
+                    let vc = FeaturedObjectListViewController(type: type)
+                    vc.title = title
+                    return vc
+                }
             }
             setViewControllers(vcs, animated: false)
         }

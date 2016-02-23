@@ -31,6 +31,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     var keyword = ""
     var page = 1
     var shouldReloadAfterLoadingMore = true
+    var superViewController: UIViewController = HomeViewController(user: User.currentUser!)
     
     lazy var searchBar: UISearchBar = {
         [weak self] in
@@ -43,10 +44,20 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         return v
     }()
     
+    init(superController superC: UIViewController) {
+        superViewController = superC
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         super.loadView()
         navigationItem.titleView = searchBar
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "backToSuperViewController")
+        navigationItem.leftBarButtonItem = nil
         for i in 0..<nibNames.count {
             tableView.registerNib(UINib(nibName: nibNames[i], bundle: NSBundle.mainBundle()), forCellReuseIdentifier: identifiers[i])
         }
@@ -67,6 +78,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "sidebarDidBecomeVisible:", name: SidebarDidBecomeVisibleNotificationName, object: appDelegate.mainViewController.sidebar)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "sidebarDidBecomeInvisible:", name: SidebarDidBecomeInvisibleNotificationName, object: appDelegate.mainViewController.sidebar)
+        searchBar.becomeFirstResponder()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -103,6 +115,16 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
             keyword = searchBar.text ?? ""
             tableView.mj_header.beginRefreshing()
         }
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        if searchBar.text == "" {
+            navigationController?.setViewControllers([superViewController], animated: false)
+        }
+    }
+    
+    func backToSuperViewController() {
+        navigationController?.setViewControllers([superViewController], animated: false)
     }
     
     func didPressUserButton(sender: UIButton) {

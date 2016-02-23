@@ -184,6 +184,8 @@
 		95EBCF511B2EA0FB0088FC2C /* DataObject+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EBCF501B2EA0FB0088FC2C /* DataObject+Search.swift */; };
 		95F380BB1AB269690070A7FB /* FeaturedObjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F380BA1AB269690070A7FB /* FeaturedObjectListViewController.swift */; };
 		A9039B6C1C03ED6900A658EC /* AppSecret.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9039B6B1C03ED6900A658EC /* AppSecret.swift */; };
+		A92F01B11C79E240009FA3C7 /* SearchBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92F01B01C79E240009FA3C7 /* SearchBarCell.swift */; };
+		A92F01D81C79E266009FA3C7 /* SearchBarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A92F01D71C79E266009FA3C7 /* SearchBarCell.xib */; };
 		A955A1FA1C02FD49002501CE /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A955A14F1C02FD49002501CE /* AFHTTPRequestOperation.m */; };
 		A955A1FB1C02FD49002501CE /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A955A1511C02FD49002501CE /* AFHTTPRequestOperationManager.m */; };
 		A955A1FC1C02FD49002501CE /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A955A1531C02FD49002501CE /* AFHTTPSessionManager.m */; };
@@ -295,6 +297,7 @@
 		A973D07A1C106D4300DCF94D /* ArticleCommentaryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A973D0791C106D4300DCF94D /* ArticleCommentaryAction.swift */; };
 		A973D0A11C1070A400DCF94D /* ArticleCommentaryActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A973D0A01C1070A400DCF94D /* ArticleCommentaryActionCell.swift */; };
 		A973D0A31C1070C400DCF94D /* ArticleCommentaryActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A973D0A21C1070C400DCF94D /* ArticleCommentaryActionCell.xib */; };
+		A97A7C611C7BDC9E00650067 /* ReadingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A7C601C7BDC9E00650067 /* ReadingListViewController.swift */; };
 		A982404F1C0307F900F73E9A /* GBDeviceInfo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A98240411C0307F900F73E9A /* GBDeviceInfo-Info.plist */; };
 		A98240501C0307F900F73E9A /* GBDeviceInfo_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A98240451C0307F900F73E9A /* GBDeviceInfo_Common.m */; };
 		A98240511C0307F900F73E9A /* GBDeviceInfo_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = A98240471C0307F900F73E9A /* GBDeviceInfo_iOS.m */; };
@@ -774,6 +777,8 @@
 		95EBCF501B2EA0FB0088FC2C /* DataObject+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataObject+Search.swift"; sourceTree = "<group>"; };
 		95F380BA1AB269690070A7FB /* FeaturedObjectListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedObjectListViewController.swift; sourceTree = "<group>"; };
 		A9039B6B1C03ED6900A658EC /* AppSecret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSecret.swift; sourceTree = "<group>"; };
+		A92F01B01C79E240009FA3C7 /* SearchBarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarCell.swift; sourceTree = "<group>"; };
+		A92F01D71C79E266009FA3C7 /* SearchBarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarCell.xib; sourceTree = "<group>"; };
 		A955A14E1C02FD49002501CE /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		A955A14F1C02FD49002501CE /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		A955A1501C02FD49002501CE /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -947,6 +952,7 @@
 		A973D0791C106D4300DCF94D /* ArticleCommentaryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCommentaryAction.swift; sourceTree = "<group>"; };
 		A973D0A01C1070A400DCF94D /* ArticleCommentaryActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCommentaryActionCell.swift; sourceTree = "<group>"; };
 		A973D0A21C1070C400DCF94D /* ArticleCommentaryActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleCommentaryActionCell.xib; sourceTree = "<group>"; };
+		A97A7C601C7BDC9E00650067 /* ReadingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingListViewController.swift; sourceTree = "<group>"; };
 		A98240411C0307F900F73E9A /* GBDeviceInfo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GBDeviceInfo-Info.plist"; sourceTree = "<group>"; };
 		A98240421C0307F900F73E9A /* GBDeviceInfo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBDeviceInfo-Prefix.pch"; sourceTree = "<group>"; };
 		A98240441C0307F900F73E9A /* GBDeviceInfo_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo_Common.h; sourceTree = "<group>"; };
@@ -1082,6 +1088,7 @@
 				954A76AA1AFD0323002A72A9 /* PublishmentViewControllerB.xib */,
 				950FE1371A1DA2B300167D09 /* QuestionListViewController.swift */,
 				9520AB141AC2C94600637C84 /* QuestionViewController.swift */,
+				A97A7C601C7BDC9E00650067 /* ReadingListViewController.swift */,
 				95EBCF3C1B2BF0810088FC2C /* SearchViewController.swift */,
 				9515766D1B1B4A5300E5BE8E /* SettingsViewController.storyboard */,
 				9515766B1B1A055400E5BE8E /* SettingsViewController.swift */,
@@ -1237,6 +1244,8 @@
 				9531D6F01AF3E4AC00E6549D /* QuestionFocusingActionCell.xib */,
 				9531D6F11AF3E4AC00E6549D /* QuestionPublishmentActionCell.swift */,
 				9531D6F21AF3E4AC00E6549D /* QuestionPublishmentActionCell.xib */,
+				A92F01B01C79E240009FA3C7 /* SearchBarCell.swift */,
+				A92F01D71C79E266009FA3C7 /* SearchBarCell.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2203,6 +2212,7 @@
 				A982404F1C0307F900F73E9A /* GBDeviceInfo-Info.plist in Resources */,
 				5C248AF11C7B2164008F0D7E /* QRCodeLine@3x.png in Resources */,
 				9531D7461AF3E4AC00E6549D /* QuestionCell.xib in Resources */,
+				A92F01D81C79E266009FA3C7 /* SearchBarCell.xib in Resources */,
 				9531D71F1AF3E4AC00E6549D /* AnswerCell.xib in Resources */,
 				950FE1241A1DA2A400167D09 /* Configuration.plist in Resources */,
 				9531D74C1AF3E4AC00E6549D /* SidebarCategoryCell.xib in Resources */,
@@ -2306,6 +2316,7 @@
 				A955A3401C02FD9D002501CE /* UITextField+MSRGetter.swift in Sources */,
 				A955A3271C02FD9D002501CE /* MSRSegmentedControlLinearIndicator.swift in Sources */,
 				9568F39F1AEC748A00B201A8 /* UserEditViewController.swift in Sources */,
+				A92F01B11C79E240009FA3C7 /* SearchBarCell.swift in Sources */,
 				950FE50B1A1DA2B500167D09 /* TopicListViewController.swift in Sources */,
 				A955A2011C02FD49002501CE /* AFURLResponseSerialization.m in Sources */,
 				A955A3241C02FD9D002501CE /* MSRSegmentedControlBlockIndicator.swift in Sources */,
@@ -2459,6 +2470,7 @@
 				95DB722B1AF548EC0072C77E /* ArticleFooterView.swift in Sources */,
 				A955A2881C02FD56002501CE /* UIImageView+AFNetworking.m in Sources */,
 				955E2A061AF75C2100A04791 /* Comment.swift in Sources */,
+				A97A7C611C7BDC9E00650067 /* ReadingListViewController.swift in Sources */,
 				A955A32F1C02FD9D002501CE /* UIButton+MSRSetter.swift in Sources */,
 				954A76A91AFC399D002A72A9 /* DataObject.swift in Sources */,
 				9550A2971AF8B6D0005F81F7 /* KeyboardBar.swift in Sources */,

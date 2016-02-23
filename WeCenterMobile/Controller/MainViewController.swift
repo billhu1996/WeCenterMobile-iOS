@@ -180,7 +180,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 contentViewController.setViewControllers([ExploreViewController()], animated: true)
                 break
             case .Search:
-                contentViewController.setViewControllers([SearchViewController()], animated: true)
+//                contentViewController.setViewControllers([SearchViewController()], animated: true)
                 break
             case .Topic:
                 contentViewController.setViewControllers([HotTopicViewController()], animated: true)
@@ -188,6 +188,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             case .Settings:
                 let svc = UIStoryboard(name: "SettingsViewController", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! SettingsViewController
                 contentViewController.setViewControllers([svc], animated: true)
+                break
+            case .ReadingList:
+                contentViewController.setViewControllers([ReadingListViewController(user: User.currentUser!)], animated: true)
                 break
             default:
                 break

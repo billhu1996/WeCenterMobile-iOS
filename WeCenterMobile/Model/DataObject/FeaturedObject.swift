@@ -19,6 +19,7 @@ enum FeaturedObjectListType: String {
     case Hot = "hot"
     case Unsolved = "unresponsive"
     case Recommended = "reommended"
+    case Famous = "Famous"
 }
 
 class FeaturedObject: DataObject {

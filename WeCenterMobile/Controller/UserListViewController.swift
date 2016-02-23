@@ -13,6 +13,7 @@ import UIKit
     case UserFollowing = 1
     case UserFollower = 2
     case QuestionFollwer = 3
+    case Famous = 4
 }
 
 class UserListViewController: UITableViewController {
@@ -35,7 +36,8 @@ class UserListViewController: UITableViewController {
         super.loadView()
         let titles: [UserListType: String] = [
             .UserFollowing: "\(user.name!) 关注的用户",
-            .UserFollower: "\(user.name!) 的追随者"]
+            .UserFollower: "\(user.name!) 的追随者",
+            .Famous: "名人"]
         self.title = titles[listType]!
         let theme = SettingsManager.defaultManager.currentTheme
         view.backgroundColor = theme.backgroundColorA

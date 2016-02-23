@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  ReadingListViewController.swift
 //  WeCenterMobile
 //
 //  Created by Darren Liu on 14/12/24.
@@ -9,24 +9,7 @@
 import MJRefresh
 import UIKit
 
-@objc protocol ActionCell: class {
-    optional var userButton: UIButton! { get }
-    optional var questionButton: UIButton! { get }
-    optional var answerButton: UIButton! { get }
-    optional var articleButton: UIButton! { get }
-    optional var commentButton: UIButton! { get }
-    func update(action action: Action)
-}
-
-extension AnswerActionCell: ActionCell {}
-extension QuestionPublishmentActionCell: ActionCell {}
-extension QuestionFocusingActionCell: ActionCell {}
-extension AnswerAgreementActionCell: ActionCell {}
-extension ArticlePublishmentActionCell: ActionCell {}
-extension ArticleAgreementActionCell: ActionCell {}
-extension ArticleCommentaryActionCell: ActionCell {}
-
-class HomeViewController: UITableViewController, PublishmentViewControllerDelegate {
+class ReadingListViewController: UITableViewController, PublishmentViewControllerDelegate {
     
     lazy var searchBarCell: SearchBarCell = {
         let c = NSBundle.mainBundle().loadNibNamed("SearchBarCell", owner: nil, options: nil).first as! SearchBarCell
@@ -54,7 +37,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     }
     override func loadView() {
         super.loadView()
-        title = "我关注的" // Needs localization
+        title = "我在读" // Needs localization
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Publishment-Article_Question"), style: .Plain, target: self, action: "showFollowerList")
         for i in 0..<nibNames.count {

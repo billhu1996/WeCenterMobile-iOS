@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
@@ -34,8 +33,8 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户签名，可能很长，只会显示一行。" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sub-9L-yR3">
-                                        <rect key="frame" x="10" y="30" width="169" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="用户签名，可能很长，只会显示一行。" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sub-9L-yR3">
+                                        <rect key="frame" x="10" y="30" width="207" height="17"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -48,8 +47,8 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxT-77-jpX" userLabel="Follow Button">
-                                        <rect key="frame" x="211" y="18" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxT-77-jpX" userLabel="Follow Button">
+                                        <rect key="frame" x="217" y="18" width="30" height="30"/>
                                         <state key="normal" title="关注"/>
                                     </button>
                                 </subviews>
@@ -63,7 +62,7 @@
                                     <constraint firstAttribute="trailing" secondItem="cxT-77-jpX" secondAttribute="trailing" constant="10" id="HIV-Yk-2Kk"/>
                                     <constraint firstItem="Sub-9L-yR3" firstAttribute="top" secondItem="pdd-OY-T6p" secondAttribute="bottom" id="QfE-Qg-CTn"/>
                                     <constraint firstItem="L3s-fc-GCB" firstAttribute="leading" secondItem="ZtT-F8-x0u" secondAttribute="leading" id="YHS-As-22n"/>
-                                    <constraint firstItem="cxT-77-jpX" firstAttribute="leading" secondItem="Sub-9L-yR3" secondAttribute="trailing" constant="10" id="d4l-lT-IJW"/>
+                                    <constraint firstItem="cxT-77-jpX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Sub-9L-yR3" secondAttribute="trailing" id="d4l-lT-IJW"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Sub-9L-yR3" secondAttribute="bottom" constant="10" id="f0Z-pX-lvf"/>
                                     <constraint firstAttribute="bottom" secondItem="L3s-fc-GCB" secondAttribute="bottom" id="tbV-uQ-MkT"/>
                                 </constraints>
