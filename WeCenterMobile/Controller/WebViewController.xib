@@ -17,20 +17,65 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lk-R7-8Eu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                     </webView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fkO-gD-JVb">
+                        <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pau-DJ-off">
+                                <rect key="frame" x="16" y="7" width="30" height="30"/>
+                                <state key="normal" title="评论"/>
+                                <connections>
+                                    <action selector="comment:" destination="dHy-OP-ikw" eventType="touchUpInside" id="azA-sp-1Kj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TGG-QJ-sIu">
+                                <rect key="frame" x="176" y="11" width="22" height="22"/>
+                                <connections>
+                                    <action selector="addToReadingList:" destination="dHy-OP-ikw" eventType="touchUpInside" id="doY-Fd-SYH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Nh-Fd-pIW">
+                                <rect key="frame" x="329" y="7" width="30" height="30"/>
+                                <state key="normal" title="👍"/>
+                                <connections>
+                                    <action selector="like:" destination="dHy-OP-ikw" eventType="touchUpInside" id="q7U-Fx-DiQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5Nh-Fd-pIW" firstAttribute="centerY" secondItem="fkO-gD-JVb" secondAttribute="centerY" id="7kS-oN-OSA"/>
+                            <constraint firstAttribute="trailing" secondItem="5Nh-Fd-pIW" secondAttribute="trailing" constant="16" id="Aot-Gw-OHe"/>
+                            <constraint firstAttribute="height" constant="45" id="UH7-84-sf0"/>
+                            <constraint firstItem="Pau-DJ-off" firstAttribute="leading" secondItem="fkO-gD-JVb" secondAttribute="leading" constant="16" id="a2N-5k-H35"/>
+                            <constraint firstItem="Pau-DJ-off" firstAttribute="centerY" secondItem="fkO-gD-JVb" secondAttribute="centerY" id="p8b-57-p2E"/>
+                            <constraint firstItem="TGG-QJ-sIu" firstAttribute="centerY" secondItem="fkO-gD-JVb" secondAttribute="centerY" id="tG8-4f-LvO"/>
+                            <constraint firstItem="TGG-QJ-sIu" firstAttribute="centerX" secondItem="fkO-gD-JVb" secondAttribute="centerX" id="xlN-2U-b3y"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="6lk-R7-8Eu" firstAttribute="top" secondItem="SOM-uF-GTl" secondAttribute="top" id="Ebr-NW-YLe"/>
+                    <constraint firstItem="Aei-nE-BUb" firstAttribute="top" secondItem="fkO-gD-JVb" secondAttribute="bottom" id="IYp-Zo-17n"/>
+                    <constraint firstItem="fkO-gD-JVb" firstAttribute="top" secondItem="6lk-R7-8Eu" secondAttribute="bottom" id="KWi-vp-CeR"/>
                     <constraint firstItem="6lk-R7-8Eu" firstAttribute="leading" secondItem="SOM-uF-GTl" secondAttribute="leading" id="VWv-Wj-WeG"/>
+                    <constraint firstItem="fkO-gD-JVb" firstAttribute="leading" secondItem="SOM-uF-GTl" secondAttribute="leading" id="WIo-Ie-aPx"/>
                     <constraint firstItem="Aei-nE-BUb" firstAttribute="top" secondItem="6lk-R7-8Eu" secondAttribute="bottom" id="gum-Zy-WIk"/>
+                    <constraint firstAttribute="trailing" secondItem="fkO-gD-JVb" secondAttribute="trailing" id="mMc-jh-3iZ"/>
                     <constraint firstAttribute="trailing" secondItem="6lk-R7-8Eu" secondAttribute="trailing" id="tXu-SW-M9w"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="gum-Zy-WIk"/>
+                    </mask>
+                </variation>
             </view>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
+                <outlet property="addButton" destination="TGG-QJ-sIu" id="kQz-vN-NtQ"/>
                 <outlet property="webView" destination="6lk-R7-8Eu" id="yWT-hD-W6X"/>
             </connections>
             <point key="canvasLocation" x="372.5" y="228.5"/>
