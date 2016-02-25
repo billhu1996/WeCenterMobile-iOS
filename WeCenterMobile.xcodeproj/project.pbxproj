@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5C00C2401C7B29E200B06B6E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00C23F1C7B29E200B06B6E /* WebViewController.swift */; };
 		5C00C2671C7B2A1B00B06B6E /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00C2661C7B2A1B00B06B6E /* WebViewController.xib */; };
+		5C06172A1C7C39EA008CE8D5 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0617291C7C39EA008CE8D5 /* UserVC.swift */; };
 		5C248A661C7B040A008F0D7E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C248A651C7B040A008F0D7E /* LoginVC.swift */; };
 		5C248A8D1C7B041C008F0D7E /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C248A8C1C7B041C008F0D7E /* LoginVC.xib */; };
 		5C248AE61C7B2164008F0D7E /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C248ACE1C7B2164008F0D7E /* QRCameraSwitchButton.m */; };
@@ -27,6 +28,8 @@
 		5C248AF31C7B2164008F0D7E /* QRCodeTopLeft@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C248AE31C7B2164008F0D7E /* QRCodeTopLeft@3x.png */; };
 		5C248AF41C7B2164008F0D7E /* QRCodeTopRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C248AE41C7B2164008F0D7E /* QRCodeTopRight@2x.png */; };
 		5C248AF51C7B2164008F0D7E /* QRCodeTopRight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C248AE51C7B2164008F0D7E /* QRCodeTopRight@3x.png */; };
+		5CDB12121C7ED0C700ED92BF /* UserC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB12111C7ED0C700ED92BF /* UserC.swift */; };
+		5CDB12141C7ED0D800ED92BF /* UserC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CDB12131C7ED0D800ED92BF /* UserC.xib */; };
 		950FE1241A1DA2A400167D09 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 950FE1161A1DA2A400167D09 /* Configuration.plist */; };
 		950FE1251A1DA2A400167D09 /* Discovery.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950FE1181A1DA2A400167D09 /* Discovery.strings */; };
 		950FE1261A1DA2A400167D09 /* User.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950FE11A1A1DA2A400167D09 /* User.strings */; };
@@ -582,6 +585,7 @@
 /* Begin PBXFileReference section */
 		5C00C23F1C7B29E200B06B6E /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		5C00C2661C7B2A1B00B06B6E /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
+		5C0617291C7C39EA008CE8D5 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		5C248A651C7B040A008F0D7E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		5C248A8C1C7B041C008F0D7E /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
 		5C248ACD1C7B2164008F0D7E /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCameraSwitchButton.h; sourceTree = "<group>"; };
@@ -607,6 +611,8 @@
 		5C248AE31C7B2164008F0D7E /* QRCodeTopLeft@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeTopLeft@3x.png"; sourceTree = "<group>"; };
 		5C248AE41C7B2164008F0D7E /* QRCodeTopRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeTopRight@2x.png"; sourceTree = "<group>"; };
 		5C248AE51C7B2164008F0D7E /* QRCodeTopRight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeTopRight@3x.png"; sourceTree = "<group>"; };
+		5CDB12111C7ED0C700ED92BF /* UserC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserC.swift; sourceTree = "<group>"; };
+		5CDB12131C7ED0D800ED92BF /* UserC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserC.xib; sourceTree = "<group>"; };
 		950FE1161A1DA2A400167D09 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		950FE1191A1DA2A400167D09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Discovery.strings; sourceTree = "<group>"; };
 		950FE11B1A1DA2A400167D09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/User.strings; sourceTree = "<group>"; };
@@ -1082,6 +1088,7 @@
 				5C248A8C1C7B041C008F0D7E /* LoginVC.xib */,
 				5C00C23F1C7B29E200B06B6E /* WebViewController.swift */,
 				5C00C2661C7B2A1B00B06B6E /* WebViewController.xib */,
+				5C0617291C7C39EA008CE8D5 /* UserVC.swift */,
 				950FE12F1A1DA2B300167D09 /* MainViewController.swift */,
 				958CB5BA1AB98DC3002ECCF4 /* PublishmentViewController.swift */,
 				95B9BDC21ABAA67900692889 /* PublishmentViewControllerA.xib */,
@@ -1295,6 +1302,8 @@
 		9531D70E1AF3E4AC00E6549D /* User */ = {
 			isa = PBXGroup;
 			children = (
+				5CDB12111C7ED0C700ED92BF /* UserC.swift */,
+				5CDB12131C7ED0D800ED92BF /* UserC.xib */,
 				95DC57141AF8A38D0075C3CB /* UserAtView.swift */,
 				9531D70F1AF3E4AC00E6549D /* UserBodyCell.swift */,
 				9531D7101AF3E4AC00E6549D /* UserBodyCell.xib */,
@@ -2237,6 +2246,7 @@
 				95EBCF4F1B2DB4430088FC2C /* UserSearchResultCell.xib in Resources */,
 				951D2F8F1AB7F8C000DCB678 /* Images.xcassets in Resources */,
 				9531D72E1AF3E4AC00E6549D /* FeaturedQuestionAnswerCellB.xib in Resources */,
+				5CDB12141C7ED0D800ED92BF /* UserC.xib in Resources */,
 				9531D7371AF3E4AC00E6549D /* ArticlePublishmentActionCell.xib in Resources */,
 				9531D71B1AF3E4AC00E6549D /* AnswerAdditionCell.xib in Resources */,
 				95C73C751B7F6AEB003D3072 /* SidebarLogoutCell.xib in Resources */,
@@ -2317,6 +2327,7 @@
 				A955A3271C02FD9D002501CE /* MSRSegmentedControlLinearIndicator.swift in Sources */,
 				9568F39F1AEC748A00B201A8 /* UserEditViewController.swift in Sources */,
 				A92F01B11C79E240009FA3C7 /* SearchBarCell.swift in Sources */,
+				5CDB12121C7ED0C700ED92BF /* UserC.swift in Sources */,
 				950FE50B1A1DA2B500167D09 /* TopicListViewController.swift in Sources */,
 				A955A2011C02FD49002501CE /* AFURLResponseSerialization.m in Sources */,
 				A955A3241C02FD9D002501CE /* MSRSegmentedControlBlockIndicator.swift in Sources */,
@@ -2389,6 +2400,7 @@
 				9531D7901AF3E8E400E6549D /* ArticlePublishmentAction.swift in Sources */,
 				9531D7911AF3E8E400E6549D /* FeaturedArticle.swift in Sources */,
 				A9039B6C1C03ED6900A658EC /* AppSecret.swift in Sources */,
+				5C06172A1C7C39EA008CE8D5 /* UserVC.swift in Sources */,
 				A955A3B51C02FEB7002501CE /* UIView+MJExtension.m in Sources */,
 				A973D07A1C106D4300DCF94D /* ArticleCommentaryAction.swift in Sources */,
 				A9BC4CE61C1858E5009F5468 /* HotTopicListViewController.swift in Sources */,
