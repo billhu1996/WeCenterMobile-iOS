@@ -33,6 +33,22 @@ class LoginVC: UIViewController, QRCodeReaderDelegate {
         return webViewController
     }()
     
+    var firstAppear = true
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if firstAppear {
+            firstAppear = false
+            User.loginWithCookiesAndCacheInStorage(
+                success: {
+                    [weak self] user in
+                    User.currentUser = user
+                    self?.presentMainViewController()
+                },
+                failure: nil)
+        }
+    }
+    
     @IBAction func login() {
         User.loginWithName("congmingdehuli666@163.com",
             password: "qwerty",

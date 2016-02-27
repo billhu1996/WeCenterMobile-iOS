@@ -62,19 +62,10 @@ class UserVC: UITableViewController {
                 [weak self] user in
                 self?.user = user
                 self?.reloadData()
-                self?.user.fetchProfile(
+                self?.user.fetchAvatar(
+                    forced: true,
                     success: {
                         self?.reloadData()
-                        self?.user.fetchAvatar(
-                            forced: true,
-                            success: {
-                                self?.reloadData()
-                            },
-                            failure: {
-                                [weak self] error in
-                                return
-                            })
-                        return
                     },
                     failure: {
                         [weak self] error in

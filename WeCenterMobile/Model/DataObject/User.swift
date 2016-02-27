@@ -127,6 +127,15 @@ class User: DataObject {
                 user.thankCount = Int(msr_object: data["thanks_count"])
                 user.answerFavoriteCount = Int(msr_object: data["answer_favorite_count"])
                 user.following = (data["has_focus"] as! NSNumber == 1)
+                if Int(msr_object: data["sex"]) == 1 {
+                    user.gender = .Male
+                } else if Int(msr_object: data["sex"]) == 2 {
+                    user.gender = .Female
+                } else {
+                    user.gender = .Secret
+                }
+                
+                
                 _ = try? DataManager.defaultManager.saveChanges()
                 success?(user)
             },
@@ -451,7 +460,7 @@ class User: DataObject {
     
     // Needs to be modified
     func fetchProfile(success success: (() -> Void)?, failure: ((NSError) -> Void)?) {
-        NetworkManager.defaultManager!.GET("User Basic Information",
+        NetworkManager.defaultManager!.GET("User Extra Information",
             parameters: [
                 "uid": id
             ],

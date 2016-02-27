@@ -29,15 +29,20 @@ class UserC: UITableViewCell {
         self.userAvatarView.wc_updateWithUser(user)
         userNameLabel.text = user.name
         userSignatureLabel.text = user.signature
-        followersCountLabel.text = "\(user.followerCount)"
-        followingCountLabel.text = "\(user.followingCount)"
-        if user.genderValue == 1 {
+        followersCountLabel.text = "\(user.followerCount ?? 0)"
+        followingCountLabel.text = "\(user.followingCount ?? 0)"
+        print(user.gender)
+        if user.gender == .Male {
             followersTitleLabel.text = "关注他的人"
             followingTitleLabel.text = "他关注的人"
         }
-        if user.genderValue == 2 {
+        if user.gender == .Female {
             followersTitleLabel.text = "关注她的人"
             followingTitleLabel.text = "她关注的人"
+        }
+        if user.gender == .Secret {
+            followersTitleLabel.text = "关注Ta的人"
+            followingTitleLabel.text = "Ta关注的人"
         }
         userLocationLabel.text = ""
         
