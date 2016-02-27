@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
     <entity name="Action" representedClassName="WeCenterMobile.Action" isAbstract="YES" parentEntity="DataObject" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="actions" inverseEntity="User" syncable="YES"/>
@@ -116,12 +116,14 @@
         <attribute name="avatarData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="avatarURI" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="followerCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="followingCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="genderValue" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="jobID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="markCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="questionCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="signature" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thankCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -148,6 +150,7 @@
         <element name="Article" positionX="584" positionY="378" width="128" height="223"/>
         <element name="ArticleAgreementAction" positionX="351" positionY="207" width="128" height="60"/>
         <element name="ArticleComment" positionX="718" positionY="743" width="128" height="118"/>
+        <element name="ArticleCommentaryAction" positionX="81" positionY="270" width="128" height="58"/>
         <element name="ArticlePublishmentAction" positionX="351" positionY="144" width="128" height="60"/>
         <element name="Comment" positionX="648" positionY="635" width="128" height="88"/>
         <element name="DataObject" positionX="448" positionY="-9" width="128" height="58"/>
@@ -158,7 +161,6 @@
         <element name="QuestionFocusingAction" positionX="81" positionY="207" width="128" height="60"/>
         <element name="QuestionPublishmentAction" positionX="81" positionY="144" width="128" height="60"/>
         <element name="Topic" positionX="720" positionY="378" width="128" height="163"/>
-        <element name="User" positionX="180" positionY="377" width="128" height="478"/>
-        <element name="ArticleCommentaryAction" positionX="81" positionY="270" width="128" height="58"/>
+        <element name="User" positionX="180" positionY="377" width="128" height="510"/>
     </elements>
 </model>

@@ -31,7 +31,6 @@ class UserC: UITableViewCell {
         userSignatureLabel.text = user.signature
         followersCountLabel.text = "\(user.followerCount ?? 0)"
         followingCountLabel.text = "\(user.followingCount ?? 0)"
-        print(user.gender)
         if user.gender == .Male {
             followersTitleLabel.text = "关注他的人"
             followingTitleLabel.text = "他关注的人"
@@ -44,7 +43,7 @@ class UserC: UITableViewCell {
             followersTitleLabel.text = "关注Ta的人"
             followingTitleLabel.text = "Ta关注的人"
         }
-        userLocationLabel.text = ""
+        userLocationLabel.text = user.province! + "  " + user.city!
         
     }
 }

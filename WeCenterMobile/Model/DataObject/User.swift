@@ -57,6 +57,8 @@ class User: DataObject {
     @NSManaged var topics: Set<Topic>
     @NSManaged var articleComments: Set<ArticleComment>
     @NSManaged var articleCommentsMentioned: Set<ArticleComment>
+    @NSManaged var province: String?
+    @NSManaged var city: String?
     
     enum Gender: Int {
         case Male = 1
@@ -134,8 +136,9 @@ class User: DataObject {
                 } else {
                     user.gender = .Secret
                 }
-                
-                
+                user.signature = data["signature"] as? String
+                user.province = data["province"] as? String
+                user.city = data["city"] as? String
                 _ = try? DataManager.defaultManager.saveChanges()
                 success?(user)
             },

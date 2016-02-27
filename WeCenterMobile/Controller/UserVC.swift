@@ -32,13 +32,16 @@ class UserVC: UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }
         return 5
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             return self.userCell
         } else {
             let cell = UITableViewCell()
@@ -46,7 +49,7 @@ class UserVC: UITableViewController {
         }
     }
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             return 300
         } else {
             return 50
@@ -69,12 +72,14 @@ class UserVC: UITableViewController {
                     },
                     failure: {
                         [weak self] error in
+                        print(error)
                         return
                     })
                 return
             },
             failure: {
                 [weak self] error in
+                print(error)
                 return
             })
     }
