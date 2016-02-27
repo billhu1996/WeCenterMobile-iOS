@@ -82,7 +82,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return min(page * count, actions.count) + 1
+        return 1 + min(page * count, actions.count)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -159,7 +159,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
-            msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
+            msr_navigationController!.pushViewController(ArticleAnswerViewController(dataObject: article), animated: true)
         }
     }
     
@@ -174,8 +174,6 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     func didPressSearchButton(sender: UIButton) {
         let s = SearchViewController(superController: self)
         navigationController?.setViewControllers([s], animated: false)
-//        presentViewController(s, animated: false, completion: nil)
-//        navigationController?.presentViewController(s, animated: false, completion: nil)
     }
     
     internal func refresh() {

@@ -66,43 +66,43 @@
 		<key>Font Size Offset</key>
 		<integer>0</integer>
 		<key>Title Text Color</key>
-		<real>4294967263</real>
+		<integer>223</integer>
 		<key>Subtitle Text Color</key>
-		<real>4294967178</real>
+		<integer>138</integer>
 		<key>Body Text Color</key>
-		<integer>4294967178</integer>
+		<integer>138</integer>
 		<key>Footnote Text Color</key>
-		<real>4294967106</real>
+		<integer>66</integer>
 		<key>Background Color A</key>
-		<real>555819519</real>
+		<real>4008636159</real>
 		<key>Background Color B</key>
-		<real>825307647</real>
+		<real>4126537215</real>
 		<key>Border Color A</key>
-		<real>555819519</real>
+		<real>3772834047</real>
 		<key>Border Color B</key>
-		<real>1111638783</real>
+		<integer>2661195519</integer>
 		<key>Control Color A</key>
 		<real>2619846911</real>
 		<key>Control Color B</key>
-		<real>1633772031</real>
+		<real>3772834047</real>
 		<key>Highlight Color</key>
-		<real>4294967071</real>
+		<integer>31</integer>
 		<key>Navigation Item Color</key>
-		<real>4294967167</real>
+		<integer>127</integer>
 		<key>Navigation Bar Style</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>Status Bar Style</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>Tool Bar Item Color</key>
-		<real>4294967167</real>
+		<integer>127</integer>
 		<key>Tool Bar Style</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>Background Blur Effect Style</key>
-		<integer>2</integer>
+		<integer>0</integer>
 		<key>Keyboard Appearance</key>
-		<integer>1</integer>
-		<key>Scroll View Indicator Style</key>
 		<integer>2</integer>
+		<key>Scroll View Indicator Style</key>
+		<integer>1</integer>
 	</dict>
 </dict>
 </plist>

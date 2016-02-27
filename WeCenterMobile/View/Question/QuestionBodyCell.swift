@@ -58,6 +58,23 @@ class QuestionBodyCell: DTAttributedTextCell, DTAttributedTextContentViewDelegat
         layoutIfNeeded()
     }
     
+    func update(dataObject dataObject: ArticleViewControllerPresentable) {
+        if dataObject.body != nil {
+            let theme = SettingsManager.defaultManager.currentTheme
+            setHTMLString(dataObject.body ?? "加载中……",
+                options: [
+                    DTDefaultFontName: UIFont.systemFontOfSize(0).fontName,
+                    DTDefaultFontSize: 16,
+                    DTDefaultTextColor: theme.bodyTextColor,
+                    DTDefaultLineHeightMultiplier: 1.5,
+                    DTDefaultLinkColor: UIColor.msr_materialLightBlue(),
+                    DTDefaultLinkDecoration: true
+                ])
+        }
+        setNeedsLayout()
+        layoutIfNeeded()
+    }
+    
     func attributedTextContentView(attributedTextContentView: DTAttributedTextContentView!, viewForAttachment attachment: DTTextAttachment!, frame: CGRect) -> UIView! {
         if attachment is DTImageTextAttachment {
             let imageView = DTLazyImageView(frame: frame)

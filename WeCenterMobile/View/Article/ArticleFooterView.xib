@@ -11,66 +11,23 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <items>
-                <barButtonItem style="plain" systemItem="flexibleSpace" id="JLT-ZM-FJL">
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                </barButtonItem>
-                <barButtonItem image="Share-Button" width="30" id="nB4-c7-NRN"/>
-                <barButtonItem style="plain" systemItem="flexibleSpace" id="MwP-u1-0CS">
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                </barButtonItem>
-                <barButtonItem style="plain" id="8yS-Px-ETx">
-                    <view key="customView" contentMode="scaleToFill" id="Hq4-bP-5DT">
-                        <rect key="frame" x="70" y="22" width="0.0" height="0.0"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </barButtonItem>
-                <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="H7M-In-04w">
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                </barButtonItem>
-                <barButtonItem image="Evaluation-Like-Highlighted" id="ULR-pv-Qfn"/>
-                <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="ZJ3-s0-WSN">
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                </barButtonItem>
-                <barButtonItem enabled="NO" title="12345" width="20" id="hh2-eV-ctb"/>
-                <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="JL4-Ns-9Ms">
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                </barButtonItem>
-                <barButtonItem image="Evaluation-Dislike-Normal" id="pep-yf-I5h"/>
-                <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="VeR-BE-GQx">
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                </barButtonItem>
-                <barButtonItem style="plain" id="EU2-ly-6NO">
-                    <view key="customView" contentMode="scaleToFill" id="UiA-yz-UJx">
-                        <rect key="frame" x="250" y="22" width="0.0" height="0.0"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </barButtonItem>
-                <barButtonItem style="plain" systemItem="flexibleSpace" id="8S4-Je-W0q">
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                </barButtonItem>
-                <barButtonItem image="Comment-Button" width="30" id="Do0-gx-Quo"/>
-                <barButtonItem style="plain" systemItem="flexibleSpace" id="Ml6-0J-6gl">
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                </barButtonItem>
+                <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="r4p-Di-2up"/>
+                <barButtonItem image="Comment-Button" id="Wx3-i0-ZCP"/>
+                <barButtonItem style="plain" systemItem="flexibleSpace" id="1f4-iw-jMj"/>
+                <barButtonItem title="加入" id="2yH-cu-uLy"/>
+                <barButtonItem style="plain" systemItem="flexibleSpace" id="bfF-sC-Hu7"/>
+                <barButtonItem image="Evaluation-Like-Highlighted" id="6XV-9I-IPU"/>
+                <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="S4B-Oi-Rnl"/>
             </items>
             <connections>
-                <outlet property="agreeItem" destination="ULR-pv-Qfn" id="lnV-2l-YP9"/>
-                <outlet property="agreementCountItem" destination="hh2-eV-ctb" id="IiT-oJ-3IR"/>
-                <outlet property="commentItem" destination="Do0-gx-Quo" id="qh2-sN-T3L"/>
-                <outlet property="disagreeItem" destination="pep-yf-I5h" id="Tsj-Vm-k4Y"/>
-                <outlet property="separatorAItem" destination="8yS-Px-ETx" id="o33-xW-xea"/>
-                <outlet property="separatorBItem" destination="EU2-ly-6NO" id="2HO-8f-c8f"/>
-                <outlet property="shareItem" destination="nB4-c7-NRN" id="Aoo-Y1-I7g"/>
+                <outlet property="agreeItem" destination="6XV-9I-IPU" id="MyE-UL-uR7"/>
+                <outlet property="commentItem" destination="Wx3-i0-ZCP" id="dUV-dL-7bN"/>
             </connections>
             <point key="canvasLocation" x="575" y="429"/>
         </toolbar>
     </objects>
     <resources>
         <image name="Comment-Button" width="30" height="24"/>
-        <image name="Evaluation-Dislike-Normal" width="20" height="20"/>
         <image name="Evaluation-Like-Highlighted" width="20" height="20"/>
-        <image name="Share-Button" width="22" height="29"/>
     </resources>
 </document>

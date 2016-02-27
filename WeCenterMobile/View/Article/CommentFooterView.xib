@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="gGI-9w-1nU" customClass="CommentFooterView" customModule="WeCenterMobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="610" height="68"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gf9-2X-Yma">
+                    <rect key="frame" x="0.0" y="0.0" width="610" height="68"/>
+                    <state key="normal" title="Button"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="gf9-2X-Yma" secondAttribute="bottom" id="3hG-Gr-d3U"/>
+                <constraint firstItem="gf9-2X-Yma" firstAttribute="top" secondItem="gGI-9w-1nU" secondAttribute="top" id="C2o-6b-Usw"/>
+                <constraint firstItem="gf9-2X-Yma" firstAttribute="leading" secondItem="gGI-9w-1nU" secondAttribute="leading" id="PZG-rw-Kxy"/>
+                <constraint firstAttribute="trailing" secondItem="gf9-2X-Yma" secondAttribute="trailing" id="xW2-qy-iFM"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="commentButton" destination="gf9-2X-Yma" id="kuc-96-Gyl"/>
+            </connections>
+            <point key="canvasLocation" x="143" y="116"/>
+        </view>
+    </objects>
+</document>

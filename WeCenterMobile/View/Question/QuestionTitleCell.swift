@@ -32,4 +32,10 @@ class QuestionTitleCell: UITableViewCell {
         layoutIfNeeded()
     }
     
+    func update(dataObject dataObject: ArticleViewControllerPresentable) {
+        questionTitleLabel.text = dataObject.title ?? "加载中"
+        setNeedsLayout()
+        layoutIfNeeded()
+    }
+    
 }

@@ -45,11 +45,23 @@ extension Article: CommentListViewControllerPresentable {
 class CommentListViewController: UITableViewController, UITextFieldDelegate {
     var dataObject: CommentListViewControllerPresentable
     var comments = [Comment]()
+    var startEditing = false
     let cellReuseIdentifier = "CommentCell"
     let cellNibName = "CommentCell"
     var keyboardBar: KeyboardBar {
         return tableView.inputAccessoryView as! KeyboardBar
     }
+    init(dataObject: CommentListViewControllerPresentable, editing: Bool) {
+        /// @TODO: DELETE THIS.
+        if let article = dataObject as? Article {
+            self.dataObject = Article.cachedObjectWithID(article.id)
+        } else {
+            self.dataObject = dataObject
+        }
+        startEditing = editing
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     init(dataObject: CommentListViewControllerPresentable) {
         /// @TODO: DELETE THIS.
         if let article = dataObject as? Article {
@@ -98,6 +110,9 @@ class CommentListViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         tableView.becomeFirstResponder()
+        if startEditing {
+            keyboardBar.textField.becomeFirstResponder()
+        }
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)

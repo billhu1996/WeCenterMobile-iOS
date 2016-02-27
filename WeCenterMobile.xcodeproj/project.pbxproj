@@ -186,6 +186,8 @@
 		95EBCF4F1B2DB4430088FC2C /* UserSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95EBCF4E1B2DB4430088FC2C /* UserSearchResultCell.xib */; };
 		95EBCF511B2EA0FB0088FC2C /* DataObject+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EBCF501B2EA0FB0088FC2C /* DataObject+Search.swift */; };
 		95F380BB1AB269690070A7FB /* FeaturedObjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F380BA1AB269690070A7FB /* FeaturedObjectListViewController.swift */; };
+		A90218B61C7F0A3F00C2F028 /* CommentFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90218B51C7F0A3F00C2F028 /* CommentFooterView.swift */; };
+		A90218DD1C7F0AD000C2F028 /* CommentFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90218DC1C7F0AD000C2F028 /* CommentFooterView.xib */; };
 		A9039B6C1C03ED6900A658EC /* AppSecret.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9039B6B1C03ED6900A658EC /* AppSecret.swift */; };
 		A92F01B11C79E240009FA3C7 /* SearchBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92F01B01C79E240009FA3C7 /* SearchBarCell.swift */; };
 		A92F01D81C79E266009FA3C7 /* SearchBarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A92F01D71C79E266009FA3C7 /* SearchBarCell.xib */; };
@@ -309,6 +311,9 @@
 		A9C0083C1C03209F000CBB15 /* DTCoreText.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A955A43C1C03041A002501CE /* DTCoreText.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9C0083D1C0320B1000CBB15 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A955A36B1C02FE14002501CE /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9C009411C03215A000CBB15 /* DTFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9C009401C03214D000CBB15 /* DTFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9E2FADE1C7C90B700325DF4 /* ArticleAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E2FADD1C7C90B700325DF4 /* ArticleAnswerViewController.swift */; };
+		A9E2FB051C7C94FD00325DF4 /* CommentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E2FB041C7C94FD00325DF4 /* CommentHeaderView.swift */; };
+		A9E2FB071C7C951300325DF4 /* CommentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9E2FB061C7C951300325DF4 /* CommentHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -782,6 +787,8 @@
 		95EBCF4E1B2DB4430088FC2C /* UserSearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSearchResultCell.xib; sourceTree = "<group>"; };
 		95EBCF501B2EA0FB0088FC2C /* DataObject+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataObject+Search.swift"; sourceTree = "<group>"; };
 		95F380BA1AB269690070A7FB /* FeaturedObjectListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedObjectListViewController.swift; sourceTree = "<group>"; };
+		A90218B51C7F0A3F00C2F028 /* CommentFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentFooterView.swift; sourceTree = "<group>"; };
+		A90218DC1C7F0AD000C2F028 /* CommentFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentFooterView.xib; sourceTree = "<group>"; };
 		A9039B6B1C03ED6900A658EC /* AppSecret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSecret.swift; sourceTree = "<group>"; };
 		A92F01B01C79E240009FA3C7 /* SearchBarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarCell.swift; sourceTree = "<group>"; };
 		A92F01D71C79E266009FA3C7 /* SearchBarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarCell.xib; sourceTree = "<group>"; };
@@ -973,6 +980,9 @@
 		A9BC4CBE1C1848F4009F5468 /* HotTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotTopicViewController.swift; sourceTree = "<group>"; };
 		A9BC4CE51C1858E5009F5468 /* HotTopicListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotTopicListViewController.swift; sourceTree = "<group>"; };
 		A9C008F21C03214D000CBB15 /* DTFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTFoundation.xcodeproj; path = DTCoreText/Externals/DTFoundation/DTFoundation.xcodeproj; sourceTree = "<group>"; };
+		A9E2FADD1C7C90B700325DF4 /* ArticleAnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleAnswerViewController.swift; sourceTree = "<group>"; };
+		A9E2FB041C7C94FD00325DF4 /* CommentHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentHeaderView.swift; sourceTree = "<group>"; };
+		A9E2FB061C7C951300325DF4 /* CommentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentHeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1105,6 +1115,7 @@
 				950FE1391A1DA2B300167D09 /* UserViewController.swift */,
 				9568F39E1AEC748A00B201A8 /* UserEditViewController.swift */,
 				9568F3A11AEC74AB00B201A8 /* UserEditViewController.xib */,
+				A9E2FADD1C7C90B700325DF4 /* ArticleAnswerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1209,6 +1220,10 @@
 				95DB722A1AF548EC0072C77E /* ArticleFooterView.swift */,
 				95DB722D1AF5490A0072C77E /* ArticleFooterView.xib */,
 				95D153A61AF4CEF800C1617D /* ArticleHeaderView.swift */,
+				A9E2FB041C7C94FD00325DF4 /* CommentHeaderView.swift */,
+				A9E2FB061C7C951300325DF4 /* CommentHeaderView.xib */,
+				A90218B51C7F0A3F00C2F028 /* CommentFooterView.swift */,
+				A90218DC1C7F0AD000C2F028 /* CommentFooterView.xib */,
 			);
 			path = Article;
 			sourceTree = "<group>";
@@ -2242,6 +2257,7 @@
 				9531D7541AF3E4AC00E6549D /* UserBodyCell.xib in Resources */,
 				950FE1271A1DA2A400167D09 /* Welcome.strings in Resources */,
 				9531D7391AF3E4AC00E6549D /* QuestionFocusingActionCell.xib in Resources */,
+				A90218DD1C7F0AD000C2F028 /* CommentFooterView.xib in Resources */,
 				9531D7581AF3E4AC00E6549D /* UserFooterCell.xib in Resources */,
 				95EBCF4F1B2DB4430088FC2C /* UserSearchResultCell.xib in Resources */,
 				951D2F8F1AB7F8C000DCB678 /* Images.xcassets in Resources */,
@@ -2253,6 +2269,7 @@
 				954A76AB1AFD0323002A72A9 /* PublishmentViewControllerB.xib in Resources */,
 				5C248AEE1C7B2164008F0D7E /* QRCodeBottomRight@2x.png in Resources */,
 				95B9BDC31ABAA67900692889 /* PublishmentViewControllerA.xib in Resources */,
+				A9E2FB071C7C951300325DF4 /* CommentHeaderView.xib in Resources */,
 				9531D7481AF3E4AC00E6549D /* QuestionTagListCell.xib in Resources */,
 				9531D7681AF3E85900E6549D /* ImageUploadingProgressBar.xib in Resources */,
 				9531D7331AF3E4AC00E6549D /* AnswerAgreementActionCell.xib in Resources */,
@@ -2341,6 +2358,7 @@
 				A955A3391C02FD9D002501CE /* UIImageView+MSRSetter.swift in Sources */,
 				A955A2001C02FD49002501CE /* AFURLRequestSerialization.m in Sources */,
 				A955A30E1C02FD9D002501CE /* UnsafePointer+MSRInitializer.swift in Sources */,
+				A9E2FADE1C7C90B700325DF4 /* ArticleAnswerViewController.swift in Sources */,
 				9531D6A21AF0A27100E6549D /* AnswerListViewController.swift in Sources */,
 				9531D79B1AF3E8E400E6549D /* String+PlainString.swift in Sources */,
 				A955A3071C02FD9D002501CE /* NSManagedObjectContext+MSROperations.swift in Sources */,
@@ -2371,6 +2389,7 @@
 				A955A1FF1C02FD49002501CE /* AFURLConnectionOperation.m in Sources */,
 				A955A3051C02FD9D002501CE /* MSRValue.swift in Sources */,
 				A955A28F1C02FD68002501CE /* AFViewShaker.m in Sources */,
+				A9E2FB051C7C94FD00325DF4 /* CommentHeaderView.swift in Sources */,
 				A955A1FA1C02FD49002501CE /* AFHTTPRequestOperation.m in Sources */,
 				9531D73F1AF3E4AC00E6549D /* QuestionBodyCell.swift in Sources */,
 				9531D7261AF3E4AC00E6549D /* CommentCell.swift in Sources */,
@@ -2404,6 +2423,7 @@
 				A955A3B51C02FEB7002501CE /* UIView+MJExtension.m in Sources */,
 				A973D07A1C106D4300DCF94D /* ArticleCommentaryAction.swift in Sources */,
 				A9BC4CE61C1858E5009F5468 /* HotTopicListViewController.swift in Sources */,
+				A90218B61C7F0A3F00C2F028 /* CommentFooterView.swift in Sources */,
 				A955A31C1C02FD9D002501CE /* MSRLayoutGuide.swift in Sources */,
 				5C248AEB1C7B2164008F0D7E /* QRCodeReaderViewController.m in Sources */,
 				A955A30C1C02FD9D002501CE /* String+MSREncryption.swift in Sources */,

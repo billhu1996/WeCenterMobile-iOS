@@ -15,13 +15,13 @@ let highlightedDisagreeImage = UIImage(named: "Evaluation-Dislike-Highlighted")
 
 class ArticleFooterView: UIToolbar {
     
-    @IBOutlet weak var shareItem: UIBarButtonItem!
+//    @IBOutlet weak var shareItem: UIBarButtonItem!
     @IBOutlet weak var agreeItem: UIBarButtonItem!
-    @IBOutlet weak var agreementCountItem: UIBarButtonItem!
-    @IBOutlet weak var disagreeItem: UIBarButtonItem!
+//    @IBOutlet weak var agreementCountItem: UIBarButtonItem!
+//    @IBOutlet weak var disagreeItem: UIBarButtonItem!
     @IBOutlet weak var commentItem: UIBarButtonItem!
-    @IBOutlet weak var separatorAItem: UIBarButtonItem!
-    @IBOutlet weak var separatorBItem: UIBarButtonItem!
+//    @IBOutlet weak var separatorAItem: UIBarButtonItem!
+//    @IBOutlet weak var separatorBItem: UIBarButtonItem!
     
     lazy var activityIndicatorView: UIActivityIndicatorView = {
         let v = UIActivityIndicatorView(activityIndicatorStyle: .White)
@@ -38,13 +38,13 @@ class ArticleFooterView: UIToolbar {
         let theme = SettingsManager.defaultManager.currentTheme
         barStyle = theme.toolbarStyle
         tintColor = theme.toolbarItemColor
-        agreementCountItem.setTitleTextAttributes([
-                NSForegroundColorAttributeName: theme.toolbarItemColor,
-                NSFontAttributeName: UIFont.systemFontOfSize(14)],
-            forState: .Normal)
-        for v in [separatorAItem, separatorBItem] {
-            v.customView!.backgroundColor = theme.borderColorA
-        }
+//        agreementCountItem.setTitleTextAttributes([
+//                NSForegroundColorAttributeName: theme.toolbarItemColor,
+//                NSFontAttributeName: UIFont.systemFontOfSize(14)],
+//            forState: .Normal)
+//        for v in [separatorAItem, separatorBItem] {
+//            v.customView!.backgroundColor = theme.borderColorA
+//        }
         for item in items ?? [] {
             item.tintColor = theme.toolbarItemColor
         }
@@ -57,17 +57,17 @@ class ArticleFooterView: UIToolbar {
     func update(dataObject dataObject: ArticleViewControllerPresentable) {
         if let count = dataObject.agreementCount {
             agreeItem.enabled = true
-            disagreeItem.enabled = true
-            agreementCountItem.title = "\(count)"
+//            disagreeItem.enabled = true
+//            agreementCountItem.title = "\(count)"
             activityIndicatorView.stopAnimating()
         } else {
             agreeItem.enabled = false
-            disagreeItem.enabled = false
-            agreementCountItem.title = ""
+//            disagreeItem.enabled = false
+//            agreementCountItem.title = ""
             activityIndicatorView.startAnimating()
         }
         agreeItem.image = dataObject.evaluationRawValue?.integerValue == Evaluation.Up.rawValue ? highlightedAgreeImage : normalAgreeImage
-        disagreeItem.image = dataObject.evaluationRawValue?.integerValue == Evaluation.Down.rawValue ? highlightedDisagreeImage: normalDisagreeImage
+//        disagreeItem.image = dataObject.evaluationRawValue?.integerValue == Evaluation.Down.rawValue ? highlightedDisagreeImage: normalDisagreeImage
     }
     
 }

@@ -109,12 +109,12 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleHead
         header.userButtonB.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
         header.backButton.addTarget(self, action: "didPressBackButton", forControlEvents: .TouchUpInside)
         footer.frame = CGRect(x: 0, y: view.bounds.height - 44, width: view.bounds.width, height: 44)
-        footer.shareItem.target = self
-        footer.shareItem.action = "didPressShareButton"
+//        footer.shareItem.target = self
+//        footer.shareItem.action = "didPressShareButton"
         footer.agreeItem.target = self
         footer.agreeItem.action = "didPressAgreeButton"
-        footer.disagreeItem.target = self
-        footer.disagreeItem.action = "didPressDisagreeButton"
+//        footer.disagreeItem.target = self
+//        footer.disagreeItem.action = "didPressDisagreeButton"
         footer.commentItem.target = self
         footer.commentItem.action = "didPressCommentButton"
         msr_navigationBar!.hidden = true

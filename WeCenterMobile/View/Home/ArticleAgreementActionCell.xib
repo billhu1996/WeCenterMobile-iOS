@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="355" height="178"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gWb-m3-HK2" id="VmS-6X-FNc">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
+                <rect key="frame" x="0.0" y="0.0" width="355" height="177"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRZ-EU-B1q">
@@ -22,34 +22,34 @@
                                 <rect key="frame" x="0.0" y="0.0" width="150" height="169"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User-DefaultAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="yhh-eb-UCj" customClass="MSRRoundedImageView" customModule="WeCenterMobile" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                        <rect key="frame" x="20" y="10" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="PnE-gj-mZH"/>
                                             <constraint firstAttribute="width" secondItem="yhh-eb-UCj" secondAttribute="height" multiplier="1:1" id="UgE-Yy-Pxd"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prc-hX-uO2">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="40"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54R-ZP-9Ic">
-                                        <rect key="frame" x="46" y="8" width="42" height="17"/>
+                                        <rect key="frame" x="58" y="10" width="42" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="XXXX-XX-XX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2q-MP-sa0">
-                                        <rect key="frame" x="46" y="28" width="85" height="17"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Sidebar-Drafts" translatesAutoresizingMaskIntoConstraints="NO" id="L1L-sv-ACf" userLabel="Detail Image View">
+                                        <rect key="frame" x="5" y="144" width="140" height="20"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="XXXX-XX-XX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2q-MP-sa0">
+                                        <rect key="frame" x="57" y="28" width="85" height="17"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sidebar-Drafts" translatesAutoresizingMaskIntoConstraints="NO" id="L1L-sv-ACf" userLabel="Detail Image View">
-                                        <rect key="frame" x="12" y="59" width="130" height="102"/>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -57,38 +57,38 @@
                                     <constraint firstAttribute="trailing" secondItem="L1L-sv-ACf" secondAttribute="trailing" constant="5" id="4bd-He-L1a"/>
                                     <constraint firstAttribute="bottom" secondItem="L1L-sv-ACf" secondAttribute="bottom" constant="5" id="5Nf-kd-DYZ"/>
                                     <constraint firstItem="L1L-sv-ACf" firstAttribute="leading" secondItem="cT9-Q9-hJc" secondAttribute="leading" constant="5" id="8FQ-w4-cFS"/>
-                                    <constraint firstItem="e2q-MP-sa0" firstAttribute="top" secondItem="Prc-hX-uO2" secondAttribute="bottom" id="Llf-SZ-AX7"/>
                                     <constraint firstItem="Prc-hX-uO2" firstAttribute="leading" secondItem="cT9-Q9-hJc" secondAttribute="leading" id="NA8-Ad-zAt"/>
                                     <constraint firstItem="yhh-eb-UCj" firstAttribute="top" secondItem="cT9-Q9-hJc" secondAttribute="top" constant="10" id="TGV-hd-mWI"/>
                                     <constraint firstItem="Prc-hX-uO2" firstAttribute="top" secondItem="cT9-Q9-hJc" secondAttribute="top" id="TiQ-Lu-Fqs"/>
-                                    <constraint firstItem="e2q-MP-sa0" firstAttribute="top" secondItem="54R-ZP-9Ic" secondAttribute="bottom" constant="3" id="era-HC-pYS"/>
                                     <constraint firstAttribute="trailing" secondItem="Prc-hX-uO2" secondAttribute="trailing" id="ewl-b5-xfj"/>
                                     <constraint firstItem="yhh-eb-UCj" firstAttribute="leading" secondItem="cT9-Q9-hJc" secondAttribute="leading" constant="20" id="nlS-rp-7s1"/>
+                                    <constraint firstItem="yhh-eb-UCj" firstAttribute="bottom" secondItem="Prc-hX-uO2" secondAttribute="bottom" id="pKd-Hf-S7W"/>
                                     <constraint firstItem="54R-ZP-9Ic" firstAttribute="leading" secondItem="yhh-eb-UCj" secondAttribute="trailing" constant="8" id="s14-No-ba6"/>
                                     <constraint firstAttribute="width" constant="150" id="sgR-BD-IPv"/>
                                     <constraint firstItem="e2q-MP-sa0" firstAttribute="leading" secondItem="yhh-eb-UCj" secondAttribute="trailing" constant="8" id="xGf-cL-HwS"/>
                                     <constraint firstItem="L1L-sv-ACf" firstAttribute="top" secondItem="e2q-MP-sa0" secondAttribute="bottom" constant="5" id="y38-Ko-xhS"/>
+                                    <constraint firstItem="e2q-MP-sa0" firstAttribute="bottom" secondItem="yhh-eb-UCj" secondAttribute="bottom" id="zu3-I8-2ye"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sn-or-nOV">
                                 <rect key="frame" x="151" y="0.0" width="188" height="169"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="这里是文章标题，可能会很长，但最多显示两行。" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfw-UA-fFR" customClass="MSRMultilineLabel" customModule="WeCenterMobile" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="32" width="168" height="36"/>
+                                        <rect key="frame" x="10" y="38" width="168" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这里是文章的内容，内容比较长，最多可以三行。" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oP0-nw-cIh" customClass="MSRMultilineLabel" customModule="WeCenterMobile" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="73" width="168" height="36"/>
+                                        <rect key="frame" x="10" y="79" width="168" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赞了" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXW-bt-Ftc" userLabel="Action Label">
-                                        <rect key="frame" x="10" y="3" width="142" height="21"/>
+                                        <rect key="frame" x="10" y="10" width="30" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3S-Ne-kWF">
@@ -154,18 +154,17 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="ActionLabel" destination="AXW-bt-Ftc" id="47t-it-geM"/>
-                <outlet property="articleBodyLabel" destination="oP0-nw-cIh" id="LtY-Hs-MVc"/>
-                <outlet property="articleButton" destination="B3S-Ne-kWF" id="Pgv-W0-WPJ"/>
-                <outlet property="articleContainerView" destination="1sn-or-nOV" id="Z0U-nz-mBd"/>
-                <outlet property="articleTitleLabel" destination="Yfw-UA-fFR" id="qTq-KT-laA"/>
-                <outlet property="containerView" destination="jRZ-EU-B1q" id="vWF-fI-rtR"/>
-                <outlet property="dateLabel" destination="e2q-MP-sa0" id="vSg-n0-zWg"/>
-                <outlet property="separator" destination="e0z-5c-vga" id="90L-Ww-9Fw"/>
-                <outlet property="userAvatarView" destination="yhh-eb-UCj" id="gqt-zd-Do5"/>
-                <outlet property="userButton" destination="Prc-hX-uO2" id="ASb-87-Qr0"/>
-                <outlet property="userContainerView" destination="cT9-Q9-hJc" id="hMs-RX-Nuu"/>
-                <outlet property="userNameLabel" destination="54R-ZP-9Ic" id="1uM-le-URE"/>
+                <outlet property="articleButton" destination="B3S-Ne-kWF" id="xvk-hU-ywA"/>
+                <outlet property="articleContainerView" destination="1sn-or-nOV" id="bfT-hT-jFV"/>
+                <outlet property="articleTitleLabel" destination="Yfw-UA-fFR" id="mjM-Fg-ugM"/>
+                <outlet property="containerView" destination="jRZ-EU-B1q" id="l5n-YV-PLB"/>
+                <outlet property="dateLabel" destination="e2q-MP-sa0" id="aaD-VJ-qaH"/>
+                <outlet property="separator" destination="e0z-5c-vga" id="hv0-5S-idS"/>
+                <outlet property="typeLabel" destination="AXW-bt-Ftc" id="BC9-0C-ZmB"/>
+                <outlet property="userAvatarView" destination="yhh-eb-UCj" id="I1p-Gy-wKm"/>
+                <outlet property="userButton" destination="Prc-hX-uO2" id="p7c-pH-dN4"/>
+                <outlet property="userContainerView" destination="cT9-Q9-hJc" id="aGM-YA-I0t"/>
+                <outlet property="userNameLabel" destination="54R-ZP-9Ic" id="o1X-iH-tSU"/>
             </connections>
             <point key="canvasLocation" x="363.5" y="445"/>
         </tableViewCell>
