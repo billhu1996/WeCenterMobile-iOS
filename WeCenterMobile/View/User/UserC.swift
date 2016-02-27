@@ -13,7 +13,7 @@ class UserC: UITableViewCell {
     @IBOutlet weak var userAvatarView: MSRRoundedImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userSignatureLabel: UILabel!
-    @IBOutlet weak var followsButton: UIButton!
+    @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var followingCountLabel: UILabel!
     @IBOutlet weak var followersCountLabel: UILabel!
     @IBOutlet weak var followingTitleLabel: UILabel!
@@ -23,6 +23,7 @@ class UserC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.selectionStyle = .None
     }
     
     func update(user user: User) {
@@ -44,6 +45,11 @@ class UserC: UITableViewCell {
             followingTitleLabel.text = "Ta关注的人"
         }
         userLocationLabel.text = user.province! + "  " + user.city!
-        
+        self.followButton.hidden = user.isCurrentUser
+        print(user.following)
+        if let following = user.following {
+            self.followButton.setTitle(following ? "已关注" : "关注", forState: .Normal)
+        }
     }
+    
 }

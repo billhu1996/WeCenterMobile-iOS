@@ -42,6 +42,7 @@ class UserVC: UITableViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
+            self.userCell.followButton.addTarget(self, action: "toggleFollow:", forControlEvents: .TouchUpInside)
             return self.userCell
         } else {
             let cell = UITableViewCell()
@@ -87,6 +88,19 @@ class UserVC: UITableViewController {
         self.navigationController?.title = self.user.name
         self.userCell.update(user: self.user)
         self.tableView.reloadData()
+    }
+    
+    func toggleFollow(sender: UIButton) {
+        user.toggleFollow(
+            success: {
+                self.refresh()
+                return
+            },
+            failure: {
+                [weak self] error in
+                print(error)
+                return
+            })
     }
 }
 

@@ -16,12 +16,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogd-uS-uvm">
-                        <rect key="frame" x="8" y="96" width="80" height="25"/>
+                        <rect key="frame" x="8" y="93" width="80" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="t2Y-4b-Jdq"/>
                             <constraint firstAttribute="height" constant="25" id="v3n-Wu-wNe"/>
                         </constraints>
-                        <state key="normal" title="+ 关注"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User-DefaultAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="QIQ-gp-B0U" customClass="MSRRoundedImageView" customModule="WeCenterMobile" customModuleProvider="target">
                         <rect key="frame" x="8" y="15" width="80" height="80"/>
@@ -180,11 +179,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="followButton" destination="ogd-uS-uvm" id="bL7-4z-cGD"/>
                 <outlet property="followersCountLabel" destination="ug6-LH-tme" id="BYL-3L-YQX"/>
                 <outlet property="followersTitleLabel" destination="ZV4-9q-R7s" id="R7Z-oV-KWu"/>
                 <outlet property="followingCountLabel" destination="DIk-9d-hiO" id="n1M-4f-2XK"/>
                 <outlet property="followingTitleLabel" destination="yuZ-65-IPK" id="lWr-0X-4t6"/>
-                <outlet property="followsButton" destination="ogd-uS-uvm" id="TjC-dL-fmy"/>
                 <outlet property="userAvatarView" destination="QIQ-gp-B0U" id="puL-8C-HeH"/>
                 <outlet property="userLocationLabel" destination="klh-Am-pxb" id="b5Q-gp-NmP"/>
                 <outlet property="userNameLabel" destination="paj-zq-7cd" id="579-ch-6OC"/>
