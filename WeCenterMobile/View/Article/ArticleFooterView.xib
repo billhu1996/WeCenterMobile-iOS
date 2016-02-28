@@ -20,6 +20,7 @@
                 <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="S4B-Oi-Rnl"/>
             </items>
             <connections>
+                <outlet property="addButton" destination="2yH-cu-uLy" id="cTg-tJ-D71"/>
                 <outlet property="agreeItem" destination="6XV-9I-IPU" id="MyE-UL-uR7"/>
                 <outlet property="commentItem" destination="Wx3-i0-ZCP" id="dUV-dL-7bN"/>
             </connections>

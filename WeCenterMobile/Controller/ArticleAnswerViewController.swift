@@ -96,6 +96,9 @@ class ArticleAnswerViewController: UIViewController, UITableViewDelegate, UITabl
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Share-Button"), style: .Plain, target: self, action: "didPressShareButton")
         footer.commentItem.action = "didPressAnswerButton"
         footer.commentItem.target = self
+        footer.addButton.action = "didPressAddButton"
+        footer.addButton.target = self
+        footer.agreeItem.action = "didPressAgreeButton"
     }
     
     override func viewDidLoad() {
@@ -232,6 +235,44 @@ class ArticleAnswerViewController: UIViewController, UITableViewDelegate, UITabl
         if let dataObject = dataObject as? CommentListViewControllerPresentable {
             msr_navigationController!.pushViewController(CommentListViewController(dataObject: dataObject, editing: true), animated: true)
         }
+    }
+    
+    func didPressAddButton() {
+        let alert = UIAlertController(title: "确认添加到在读列表？", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func didPressAgreeButton() {
+        if let rawValue = dataObject.evaluationRawValue?.integerValue {
+            let e = Evaluation(rawValue: rawValue)!
+            evaluate(value: e == .Up ? .None : .Up)
+        }
+    }
+    
+    
+    func evaluate(value value: Evaluation) {
+        let count = dataObject.agreementCount?.integerValue
+        dataObject.agreementCount = nil
+        footer.update(dataObject: dataObject)
+        dataObject.agreementCount = count
+        dataObject.evaluate(
+            value: value,
+            success: {
+                [weak self] in
+                self?.footer.update(dataObject: self!.dataObject)
+                return
+            },
+            failure: {
+                [weak self] error in
+                self?.footer.update(dataObject: self!.dataObject)
+                let message = error.userInfo[NSLocalizedDescriptionKey] as? String ?? "未知错误"
+                let ac = UIAlertController(title: "错误", message: message, preferredStyle: .Alert)
+                ac.addAction(UIAlertAction(title: "好", style: .Default, handler: nil))
+                self?.showDetailViewController(ac, sender: self)
+                return
+            })
     }
     
 //    func didPressAdditionButton() {

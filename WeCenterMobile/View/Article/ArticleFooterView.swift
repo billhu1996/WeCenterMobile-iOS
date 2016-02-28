@@ -15,6 +15,7 @@ let highlightedDisagreeImage = UIImage(named: "Evaluation-Dislike-Highlighted")
 
 class ArticleFooterView: UIToolbar {
     
+    @IBOutlet weak var addButton: UIBarButtonItem!
 //    @IBOutlet weak var shareItem: UIBarButtonItem!
     @IBOutlet weak var agreeItem: UIBarButtonItem!
 //    @IBOutlet weak var agreementCountItem: UIBarButtonItem!
