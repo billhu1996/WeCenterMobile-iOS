@@ -24,6 +24,7 @@ class Article: DataObject {
     @NSManaged var topics: Set<Topic>
     @NSManaged var user: User?
     @NSManaged var comments: Set<ArticleComment>
+    @NSManaged var url: String?
 
     var evaluation: Evaluation? = nil
     
@@ -61,6 +62,7 @@ class Article: DataObject {
                         article.topics.insert(topic)
                     }
                 }
+                article.url = ""
                 _ = try? DataManager.defaultManager.saveChanges()
                 success?(article)
             },
@@ -179,6 +181,20 @@ class Article: DataObject {
                 "message": body,
                 "attach_access_key": attachmentKey!,
                 "topics": topicsParameter
+            ],
+            success: {
+                _ in
+                success?()
+                return
+            },
+            failure: failure)
+    }
+    
+    func postWithURL(success success: (() -> Void)?, failure: ((NSError) -> Void)?) {
+        let url = self.url!
+        NetworkManager.defaultManager!.POST("Post Article",
+            parameters: [
+                "url": url
             ],
             success: {
                 _ in

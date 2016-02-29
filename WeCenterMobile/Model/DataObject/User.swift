@@ -741,6 +741,7 @@ class User: DataObject {
                             action.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
                             action.article!.title = (articleInfo["title"] as! String)
                             action.article!.user = action.user
+                            action.article!.url = (articleInfo["url"] as! String)
                             break
                         case .ArticleCommentary:
                             let action = ArticleCommentaryAction.cachedObjectWithID(Int(msr_object: object["history_id"]!)!)
