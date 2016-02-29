@@ -30,6 +30,15 @@ class FeaturedObjectListViewController: UITableViewController {
     var shouldReloadAfterLoadingMore = true
     let count = 10
     let objectTypes: [FeaturedObject.Type] = [FeaturedQuestionAnswer.self, FeaturedQuestionAnswer.self, FeaturedArticle.self]
+    var isMedia: Bool {
+        get {
+            if type == .Hot {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
     let identifiers = ["FeaturedQuestionAnswerCellA", "FeaturedQuestionAnswerCellB", "FeaturedArticleCell"]
     let nibNames = ["FeaturedQuestionAnswerCellA", "FeaturedQuestionAnswerCellB", "FeaturedArticleCell"]
     init(type: FeaturedObjectListType) {
@@ -112,7 +121,7 @@ class FeaturedObjectListViewController: UITableViewController {
     func refresh() {
         shouldReloadAfterLoadingMore = false
         tableView.mj_footer?.endRefreshing()
-        FeaturedObject.fetchFeaturedObjects(page: 1, count: count, type: type,
+        FeaturedObject.fetchFeaturedObjects(page: 1, count: count, type: type, isMedia: isMedia,
             success: {
                 [weak self] objects in
                 if let self_ = self {
@@ -138,7 +147,7 @@ class FeaturedObjectListViewController: UITableViewController {
             return
         }
         shouldReloadAfterLoadingMore = true
-        FeaturedObject.fetchFeaturedObjects(page: page + 1, count: count, type: type,
+        FeaturedObject.fetchFeaturedObjects(page: page + 1, count: count, type: type, isMedia: isMedia,
             success: {
                 [weak self] objects in
                 if let self_ = self {

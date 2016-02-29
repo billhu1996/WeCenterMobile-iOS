@@ -705,7 +705,7 @@ class User: DataObject {
                             let articleInfo = object["article_info"] as! NSDictionary
                             action.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
                             action.article!.title = (articleInfo["title"] as! String)
-                            action.article!.body = articleInfo["message"] as! String
+                            action.article!.body = articleInfo["message"] as? String
                             action.article!.imageURL = articleInfo["background_pic"] as? String
                             break
                         case .Answer:

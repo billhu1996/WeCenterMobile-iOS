@@ -17,10 +17,20 @@ class FeaturedArticleCell: UITableViewCell {
     @IBOutlet weak var articleUserButton: UIButton!
     @IBOutlet weak var articleButton: UIButton!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var badgeLabel: UILabel!
+//    @IBOutlet weak var badgeLabel: UILabel!
     @IBOutlet weak var separator: UIView!
     @IBOutlet weak var userContainerView: UIView!
     @IBOutlet weak var articleContainerView: UIView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var detailImageView: UIImageView!
+    @IBOutlet weak var articleDetailLabel: MSRMultilineLabel!
+    
+    lazy var dateFormatter: NSDateFormatter = {
+        let f = NSDateFormatter()
+        f.timeZone = NSTimeZone.localTimeZone()
+        f.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return f
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,8 +39,8 @@ class FeaturedArticleCell: UITableViewCell {
         for v in [userContainerView, articleContainerView] {
             v.backgroundColor = theme.backgroundColorB
         }
-        badgeLabel.backgroundColor = theme.backgroundColorA
-        for v in [containerView, badgeLabel] {
+//        badgeLabel.backgroundColor = theme.backgroundColorA
+        for v in [containerView] {
             v.msr_borderColor = theme.borderColorA
         }
         separator.backgroundColor = theme.borderColorA
@@ -40,7 +50,7 @@ class FeaturedArticleCell: UITableViewCell {
         for v in [userNameLabel, articleTitleLabel] {
             v.textColor = theme.titleTextColor
         }
-        badgeLabel.textColor = theme.footnoteTextColor
+//        badgeLabel.textColor = theme.footnoteTextColor
     }
     
     func update(object object: FeaturedObject) {
@@ -51,6 +61,12 @@ class FeaturedArticleCell: UITableViewCell {
         articleTitleLabel.text = article.title
         articleButton.msr_userInfo = article
         articleUserButton.msr_userInfo = article.user
+        if let date = object.article?.date {
+            dateLabel.text = dateFormatter.stringFromDate(date)
+        } else {
+            dateLabel.text = ""
+        }
+        articleDetailLabel.text = object.article?.body
         setNeedsLayout()
         layoutIfNeeded()
     }
