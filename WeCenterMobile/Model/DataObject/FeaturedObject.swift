@@ -31,9 +31,9 @@ class FeaturedObject: DataObject {
             parameters: [
                 "page": page,
                 "per_page": count,
-                "day": 30,
-                "is_recommend": type == .Recommended ? 1 : 0,
-//                "sort_type": type.rawValue,
+//                "day": 30,
+//                "is_recommend": type == .Recommended ? 1 : 0,
+                "sort_type": type.rawValue,
                 "isMedia": isMedia],
             success: {
                 data in

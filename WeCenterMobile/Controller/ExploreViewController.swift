@@ -39,10 +39,10 @@ class ExploreViewController: MSRSegmentedViewController, MSRSegmentedViewControl
             firstAppear = false
             let titles: [(FeaturedObjectListType, String)] = [
                 (.Recommended, "推荐"),
-                (.Hot, "热门"),
-                (.New, "最新"),
-                (.Unsolved, "等待回答"),
-                (.Famous, "名人")]
+                (.Famous, "名人"),
+                (.Hot, "媒体"),]
+//                (.New, "最新"),
+//                (.Unsolved, "等待回答"),]
             // [FeaturedObjectListType: String] is not SequenceType
             let vcs: [UIViewController] = titles.map {
                 (type, title) in

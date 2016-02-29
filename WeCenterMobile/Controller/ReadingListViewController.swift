@@ -137,7 +137,6 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
     
     func reader(reader: QRCodeReaderViewController!, didScanResult result: String!) {
         dismissViewControllerAnimated(true) { () -> Void in
-            print(result)
             self.webViewController.requestURL = result
             self.msr_navigationController!.pushViewController(self.webViewController, animated: true)
         }
