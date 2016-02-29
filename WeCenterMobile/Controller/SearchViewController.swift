@@ -129,7 +129,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     func didPressUserButton(sender: UIButton) {
         if let user = sender.msr_userInfo as? User {
-            msr_navigationController!.pushViewController(UserViewController(user: user), animated: true)
+            msr_navigationController!.pushViewController(UserVC(user: user), animated: true)
         }
     }
     

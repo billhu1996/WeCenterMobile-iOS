@@ -26,14 +26,15 @@ class FeaturedObject: DataObject {
 
     @NSManaged var date: NSDate?
     
-    class func fetchFeaturedObjects(page page: Int, count: Int, type: FeaturedObjectListType, success: (([FeaturedObject]) -> Void)?, failure: ((NSError) -> Void)?) {
+    class func fetchFeaturedObjects(page page: Int, count: Int, type: FeaturedObjectListType, isMedia: Bool, success: (([FeaturedObject]) -> Void)?, failure: ((NSError) -> Void)?) {
         NetworkManager.defaultManager!.GET("Explore List",
             parameters: [
                 "page": page,
                 "per_page": count,
-                "day": 30,
-                "is_recommend": type == .Recommended ? 1 : 0,
-                "sort_type": type.rawValue],
+//                "day": 30,
+//                "is_recommend": type == .Recommended ? 1 : 0,
+                "sort_type": type.rawValue,
+                "isMedia": isMedia],
             success: {
                 data in
                 let dataManager = DataManager.temporaryManager! // @TODO: Will move to DataManager.defaultManager in future.
@@ -117,6 +118,8 @@ class FeaturedObject: DataObject {
                             article.title = (object["title"] as! String)
                             article.date = featuredArticle.date
                             article.viewCount = Int(msr_object: object["views"])
+                            article.body = object["message"] as? String
+                            article.imageURL = object["imgUrl"] as? String
                             var topics = Set<Topic>()
                             if let topicsInfo = object["topics"] as? [NSDictionary] {
                                 for topicInfo in topicsInfo {

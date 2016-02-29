@@ -21,6 +21,7 @@ class ArticlePublishmentActionCell: UITableViewCell {
     @IBOutlet weak var articleContainerView: UIView!
     @IBOutlet weak var separator: UIView!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var articleBody: MSRMultilineLabel!
     
     lazy var dateFormatter: NSDateFormatter = {
         let f = NSDateFormatter()
@@ -51,10 +52,16 @@ class ArticlePublishmentActionCell: UITableViewCell {
         let action = action as! ArticlePublishmentAction
         userAvatarView.wc_updateWithUser(action.user)
         userNameLabel.text = action.user?.name ?? "匿名用户"
+        articleBody.text = action.article?.body
+        
         if let date = action.article?.date {
             dateLabel.text = dateFormatter.stringFromDate(date)
         } else {
             dateLabel.text = ""
+        }
+        if let URL = action.article?.imageURL {
+            let url = NSURL(string: URL)
+            userAvatarView.setImageWithURL(url)
         }
         articleTitleLabel.text = action.article!.title
         userButton.msr_userInfo = action.user

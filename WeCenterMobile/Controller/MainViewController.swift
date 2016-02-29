@@ -105,7 +105,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.selectRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0), animated: false, scrollPosition: .None)
+        tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: .None)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currentUserPropertyDidChange:", name: CurrentUserPropertyDidChangeNotificationName, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currentThemeDidChange", name: CurrentThemeDidChangeNotificationName, object: nil)
     }
@@ -171,7 +171,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let category = (cell as? SidebarCategoryCell)?.category {
             switch category {
             case .User:
-                contentViewController.setViewControllers([UserViewController(user: User.currentUser!)], animated: true)
+                contentViewController.setViewControllers([UserVC(user: User.currentUser!)], animated: true)
                 break
             case .Home:
                 contentViewController.setViewControllers([HomeViewController(user: User.currentUser!)], animated: true)

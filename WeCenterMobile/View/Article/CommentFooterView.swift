@@ -12,7 +12,4 @@ class CommentFooterView: UITableViewCell {
 
     @IBOutlet weak var commentButton: UIButton!
     
-//    @IBAction func fuck(sender: UIButton) {
-//        print("fuck!!!Action")
-//    }
 }
