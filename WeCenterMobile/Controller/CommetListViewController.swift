@@ -139,7 +139,7 @@ class CommentListViewController: UITableViewController, UITextFieldDelegate {
         keyboardBar.textField.resignFirstResponder()
         if let user = sender.msr_userInfo as? User {
             tableView.resignFirstResponder()
-            msr_navigationController!.pushViewController(UserViewController(user: user), animated: true)
+            msr_navigationController!.pushViewController(UserVC(user: user), animated: true)
         }
     }
     func didPressCommentButton(sender: UIButton) {

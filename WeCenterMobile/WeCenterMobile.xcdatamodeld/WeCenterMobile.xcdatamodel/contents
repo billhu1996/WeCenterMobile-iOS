@@ -33,6 +33,7 @@
         <attribute name="attachmentKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="viewCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="articleAgreementActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ArticleAgreementAction" inverseName="article" inverseEntity="ArticleAgreementAction" syncable="YES"/>
@@ -147,7 +148,7 @@
         <element name="AnswerAction" positionX="216" positionY="144" width="128" height="60"/>
         <element name="AnswerAgreementAction" positionX="216" positionY="207" width="128" height="60"/>
         <element name="AnswerComment" positionX="583" positionY="743" width="128" height="88"/>
-        <element name="Article" positionX="584" positionY="378" width="128" height="223"/>
+        <element name="Article" positionX="584" positionY="378" width="128" height="240"/>
         <element name="ArticleAgreementAction" positionX="351" positionY="207" width="128" height="60"/>
         <element name="ArticleComment" positionX="718" positionY="743" width="128" height="118"/>
         <element name="ArticleCommentaryAction" positionX="81" positionY="270" width="128" height="58"/>

@@ -171,7 +171,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let category = (cell as? SidebarCategoryCell)?.category {
             switch category {
             case .User:
-                contentViewController.setViewControllers([UserViewController(user: User.currentUser!)], animated: true)
+                contentViewController.setViewControllers([UserVC(user: User.currentUser!)], animated: true)
                 break
             case .Home:
                 contentViewController.setViewControllers([HomeViewController(user: User.currentUser!)], animated: true)

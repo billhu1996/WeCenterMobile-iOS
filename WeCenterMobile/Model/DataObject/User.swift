@@ -705,6 +705,8 @@ class User: DataObject {
                             let articleInfo = object["article_info"] as! NSDictionary
                             action.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
                             action.article!.title = (articleInfo["title"] as! String)
+                            action.article!.body = articleInfo["message"] as! String
+                            action.article!.imageURL = articleInfo["background_pic"] as? String
                             break
                         case .Answer:
                             let action = AnswerAction.cachedObjectWithID(Int(msr_object: object["history_id"])!)
@@ -741,6 +743,8 @@ class User: DataObject {
                             action.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
                             action.article!.title = (articleInfo["title"] as! String)
                             action.article!.user = action.user
+                            action.article?.body = articleInfo["message"] as! String
+                            action.article?.imageURL = articleInfo["background_pic"] as? String
                             break
                         case .ArticleCommentary:
                             let action = ArticleCommentaryAction.cachedObjectWithID(Int(msr_object: object["history_id"]!)!)
@@ -767,6 +771,7 @@ class User: DataObject {
                             action.comment!.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
                             action.comment!.article!.title = (articleInfo["title"] as! String)
                             action.comment!.article!.body = (articleInfo["message"] as! String)
+                            action.comment!.article?.imageURL = articleInfo["background_pic"] as? String
                             break
                         }
                         actions.append(action_)

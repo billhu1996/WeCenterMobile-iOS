@@ -92,7 +92,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布了" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVy-Fg-xWx" userLabel="Action Label">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="发布了" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVy-Fg-xWx" userLabel="Action Label">
                                         <rect key="frame" x="89" y="12" width="45" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -154,6 +154,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="articleBody" destination="Eq2-XG-8E9" id="S74-en-AoS"/>
                 <outlet property="articleButton" destination="eHf-nD-eBt" id="j4P-0E-BqB"/>
                 <outlet property="articleContainerView" destination="Q5y-fG-PnB" id="ur3-4e-iHB"/>
                 <outlet property="articleTitleLabel" destination="w4s-i8-axV" id="Pgs-kD-9iT"/>

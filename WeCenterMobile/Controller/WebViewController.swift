@@ -13,17 +13,29 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     
     var requestURL = ""
     var loaded = true;
+//    var superViewController: UIViewController
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var addButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var backButton: UIBarButtonItem = UIBarButtonItem.init(title: "返回", style: UIBarButtonItemStyle.Plain, target: self, action: "back")
-        self.navigationItem.leftBarButtonItem = backButton;
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Back"), style: .Plain, target: nil, action: "didPressBackButton")
         self.loaded = false;
         self.view.backgroundColor = UIColor.whiteColor();
     }
+    
+    func didPressBackButton() {
+        return dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+//    init(superViewController: UIViewController) {
+//        self.superViewController = superViewController
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

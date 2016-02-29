@@ -8,13 +8,30 @@
 
 import MJRefresh
 import UIKit
+import QRCodeReaderViewController
 
-class ReadingListViewController: UITableViewController, PublishmentViewControllerDelegate {
+class ReadingListViewController: UITableViewController, PublishmentViewControllerDelegate, QRCodeReaderDelegate {
     
     lazy var searchBarCell: SearchBarCell = {
         let c = NSBundle.mainBundle().loadNibNamed("SearchBarCell", owner: nil, options: nil).first as! SearchBarCell
         c.searchButton.addTarget(nil, action: "didPressSearchButton:", forControlEvents: .TouchUpInside)
         return c
+    }()
+    lazy var qrViewController: QRCodeReaderViewController = {
+        //        NSArray *types = @[AVMetadataObjectTypeQRCode];
+        //        _reader        = [QRCodeReaderViewController readerWithMetadataObjectTypes:types];
+        //
+        //        _reader.delegate = self;
+        
+        let types: Array<String> = ["AVMetadataObjectTypeQRCode"]
+        
+        var qrViewController = QRCodeReaderViewController.readerWithMetadataObjectTypes(types)
+        qrViewController.delegate = self
+        return qrViewController
+    }()
+    lazy var webViewController: WebViewController = {
+        var webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
+        return webViewController
     }()
     let count = 20
     var page = 1
@@ -118,13 +135,24 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
         presentViewController(ac, animated: true, completion: nil)
     }
     
+    func reader(reader: QRCodeReaderViewController!, didScanResult result: String!) {
+        dismissViewControllerAnimated(true) { () -> Void in
+            print(result)
+            self.webViewController.requestURL = result
+            self.msr_navigationController!.pushViewController(self.webViewController, animated: true)
+        }
+    }
+    func readerDidCancel(reader: QRCodeReaderViewController!) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func showFollowerList() {
-        msr_navigationController!.pushViewController(UserListViewController(user: user, listType: .UserFollowing), animated: true)
+        presentViewController(qrViewController, animated: true, completion: nil)
     }
     
     func didPressUserButton(sender: UIButton) {
         if let user = sender.msr_userInfo as? User {
-            msr_navigationController!.pushViewController(UserViewController(user: user), animated: true)
+            msr_navigationController!.pushViewController(UserVC(user: user), animated: true)
         }
     }
     

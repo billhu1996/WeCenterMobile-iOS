@@ -24,6 +24,7 @@ class Article: DataObject {
     @NSManaged var topics: Set<Topic>
     @NSManaged var user: User?
     @NSManaged var comments: Set<ArticleComment>
+    @NSManaged var imageURL: String?
 
     var evaluation: Evaluation? = nil
     
