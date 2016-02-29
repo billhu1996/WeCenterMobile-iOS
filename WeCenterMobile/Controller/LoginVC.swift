@@ -50,8 +50,8 @@ class LoginVC: UIViewController, QRCodeReaderDelegate {
     }
     
     @IBAction func login() {
-        User.loginWithName("congmingdehuli666@163.com",
-            password: "qwerty",
+        User.loginWithName("adfad@163.com",
+            password: "password",
             success: {
                 [weak self] user in
                 User.currentUser = user
@@ -81,6 +81,7 @@ class LoginVC: UIViewController, QRCodeReaderDelegate {
             failure: {
                 [weak self] error in
                 if let _ = self {
+                    print(error)
                     print((error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误")
                 }
             })
