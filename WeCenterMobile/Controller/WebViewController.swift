@@ -62,7 +62,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
-            print("1")
+//            self.publish()
         }
     }
     
@@ -77,4 +77,10 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     
     @IBAction func like(sender: AnyObject) {
     }
+    
+//    func publish() {
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+//
+//        }
+//    }
 }

@@ -741,10 +741,178 @@ class User: DataObject {
                             }
                             let articleInfo = object["article_info"] as! NSDictionary
                             action.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
+                            action.article?.title = (articleInfo["title"] as? String)
+                            action.article?.user = action.user
+                            action.article?.url = (articleInfo["url"] as? String)
+                            action.article?.body = articleInfo["message"] as? String
+                            action.article?.imageURL = articleInfo["background_pic"] as? String
+                            break
+                        case .ArticleCommentary:
+                            let action = ArticleCommentaryAction.cachedObjectWithID(Int(msr_object: object["history_id"]!)!)
+                            action_ = action
+                            action.date = NSDate(timeIntervalSince1970: (object["add_time"] as! NSNumber).doubleValue)
+                            if let userInfo = object["user_info"] as? [String: AnyObject] {
+                                action.user = User.cachedObjectWithID(Int(msr_object: userInfo["uid"])!)
+                                action.user!.id = Int(msr_object: userInfo["uid"])!
+                                action.user!.name = (userInfo["user_name"] as! String)
+                                action.user!.avatarURL = userInfo["avatar_file"] as? String
+                            } else {
+                                action.user = nil
+                            }
+                            let commentInfo = object["comment_info"] as! [String: AnyObject]
+                            action.comment = ArticleComment.cachedObjectWithID(Int(msr_object: commentInfo["id"]!)!)
+                            action.comment!.body = commentInfo["message"] as? String
+                            action.comment!.agreementCount = Int(msr_object: commentInfo["votes"]!)
+                            if let atID = Int(msr_object: commentInfo["at_uid"]) {
+                                if atID != 0 {
+                                    action.comment!.atUser = User.cachedObjectWithID(atID)
+                                }
+                            }
+                            let articleInfo = object["article_info"] as! [String: AnyObject]
+                            action.comment!.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
+                            action.comment!.article!.title = (articleInfo["title"] as! String)
+                            action.comment!.article!.body = (articleInfo["message"] as! String)
+                            action.comment!.article?.imageURL = articleInfo["background_pic"] as? String
+                            break
+                        }
+                        actions.append(action_)
+                    }
+                    _ = try? DataManager.defaultManager.saveChanges()
+                    success?(actions)
+                } else {
+                    failure?(NSError(domain: NetworkManager.defaultManager!.website, code: NetworkManager.defaultManager!.internalErrorCode.integerValue, userInfo: nil)) // Needs specification
+                }
+            },
+            failure: failure)
+    }
+    
+    func fetchPublishedActions(page page: Int, count: Int, success: (([Action]) -> Void)?, failure: ((NSError) -> Void)?) {
+        NetworkManager.defaultManager!.GET("Home List",
+            parameters: [
+                "page": page - 1,
+                "per_page": count,
+                "uid": self.id
+            ],
+            success: {
+                data in
+                let rows = data["total_rows"] as! Int
+                if rows > 0 {
+                    var actions = [Action]()
+                    let objects = data["rows"] as! [[String: AnyObject]]
+                    for object in objects {
+                        let typeID = ActionTypeID(rawValue: Int(msr_object: object["associate_action"])!)
+                        if typeID == nil { print("ActionTypeID got a nil"); continue }
+                        var action_: Action!
+                        switch typeID! {
+                        case .AnswerAgreement:
+                            let action = AnswerAgreementAction.cachedObjectWithID(Int(msr_object: object["history_id"]!)!)
+                            action_ = action
+                            action.date = NSDate(timeIntervalSince1970: (object["add_time"] as! NSNumber).doubleValue)
+                            if let userInfo = object["user_info"] as? [String: AnyObject] {
+                                action.user = User.cachedObjectWithID(Int(msr_object: userInfo["uid"])!)
+                                action.user!.name = (userInfo["user_name"] as! String)
+                                action.user!.avatarURL = userInfo["avatar_file"] as? String
+                            } else {
+                                action.user = nil
+                            }
+                            let answerInfo = object["answer_info"] as! NSDictionary
+                            action.answer = Answer.cachedObjectWithID(Int(msr_object: answerInfo["answer_id"])!)
+                            action.answer!.body = (answerInfo["answer_content"] as! String)
+                            action.answer!.agreementCount = (answerInfo["agree_count"] as! NSNumber)
+                            /// @TODO: [Bug][Back-End] object["question_info"] is NSNull
+                            if let questionInfo = object["question_info"] as? NSDictionary {
+                                action.answer!.question = Question.cachedObjectWithID(Int(msr_object: questionInfo["question_id"])!)
+                                action.answer!.question!.title = (questionInfo["question_content"] as! String)
+                            } else {
+                                action.answer!.question = Question.cachedObjectWithID(Int(msr_object: answerInfo["question_id"])!)
+                                action.answer!.question!.title = "[问题已被删除]"
+                            }
+                            break
+                        case .QuestionFocusing:
+                            let action = QuestionFocusingAction.cachedObjectWithID(Int(msr_object: object["history_id"])!)
+                            action_ = action
+                            action.date = NSDate(timeIntervalSince1970: (object["add_time"] as! NSNumber).doubleValue)
+                            if let userInfo = object["user_info"] as? NSDictionary {
+                                action.user = User.cachedObjectWithID(Int(msr_object: userInfo["uid"])!)
+                                action.user!.name = (userInfo["user_name"] as! String)
+                                action.user!.avatarURL = userInfo["avatar_file"] as? String
+                            } else {
+                                action.user = nil
+                            }
+                            let questionInfo = object["question_info"] as! NSDictionary
+                            action.question = Question.cachedObjectWithID(Int(msr_object: questionInfo["question_id"])!)
+                            action.question!.title = (questionInfo["question_content"] as! String)
+                            break
+                        case .QuestionPublishment:
+                            let action = QuestionPublishmentAction.cachedObjectWithID(Int(msr_object: object["history_id"])!)
+                            action_ = action
+                            action.date = NSDate(timeIntervalSince1970: (object["add_time"] as! NSNumber).doubleValue)
+                            if let userInfo = object["user_info"] as? NSDictionary {
+                                action.user = User.cachedObjectWithID(Int(msr_object: userInfo["uid"])!)
+                                action.user!.name = (userInfo["user_name"] as! String)
+                                action.user!.avatarURL = userInfo["avatar_file"] as? String
+                            } else {
+                                action.user = nil
+                            }
+                            let questionInfo = object["question_info"] as! NSDictionary
+                            action.question = Question.cachedObjectWithID(Int(msr_object: questionInfo["question_id"])!)
+                            action.question!.title = (questionInfo["question_content"] as! String)
+                            action.question!.user = action.user
+                            break
+                        case .ArticleAgreement:
+                            let action = ArticleAgreementAction.cachedObjectWithID(Int(msr_object: object["history_id"])!)
+                            action_ = action
+                            action.date = NSDate(timeIntervalSince1970: (object["add_time"] as! NSNumber).doubleValue)
+                            if let userInfo = object["user_info"] as? NSDictionary {
+                                action.user = User.cachedObjectWithID(Int(msr_object: userInfo["uid"])!)
+                                action.user!.name = (userInfo["user_name"] as! String)
+                                action.user!.avatarURL = userInfo["avatar_file"] as? String
+                            } else {
+                                action.user = nil
+                            }
+                            let articleInfo = object["article_info"] as! NSDictionary
+                            action.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
                             action.article!.title = (articleInfo["title"] as! String)
-                            action.article!.user = action.user
-                            action.article!.url = (articleInfo["url"] as! String)
-                            action.article?.body = articleInfo["message"] as! String
+                            action.article!.body = articleInfo["message"] as? String
+                            action.article!.imageURL = articleInfo["background_pic"] as? String
+                            break
+                        case .Answer:
+                            let action = AnswerAction.cachedObjectWithID(Int(msr_object: object["history_id"])!)
+                            action_ = action
+                            action.date = NSDate(timeIntervalSince1970: (object["add_time"] as! NSNumber).doubleValue)
+                            if let userInfo = object["user_info"] as? NSDictionary {
+                                action.user = User.cachedObjectWithID(Int(msr_object: userInfo["uid"])!)
+                                action.user!.name = (userInfo["user_name"] as! String)
+                                action.user!.avatarURL = userInfo["avatar_file"] as? String
+                            } else {
+                                action.user = nil
+                            }
+                            let answerInfo = object["answer_info"] as! NSDictionary
+                            action.answer = Answer.cachedObjectWithID(Int(msr_object: answerInfo["answer_id"])!)
+                            action.answer!.body = (answerInfo["answer_content"] as! String)
+                            action.answer!.agreementCount = (answerInfo["agree_count"] as! NSNumber)
+                            let questionInfo = object["question_info"] as! NSDictionary
+                            action.answer!.question = Question.cachedObjectWithID(Int(msr_object: questionInfo["question_id"])!)
+                            action.answer!.question!.title = (questionInfo["question_content"] as! String)
+                            action.answer!.user = action.user
+                            break
+                        case .ArticlePublishment:
+                            let action = ArticlePublishmentAction.cachedObjectWithID(Int(msr_object: object["history_id"])!)
+                            action_ = action
+                            action.date = NSDate(timeIntervalSince1970: (object["add_time"] as! NSNumber).doubleValue)
+                            if let userInfo = object["user_info"] as? NSDictionary {
+                                action.user = User.cachedObjectWithID(Int(msr_object: userInfo["uid"])!)
+                                action.user!.name = (userInfo["user_name"] as! String)
+                                action.user!.avatarURL = userInfo["avatar_file"] as? String
+                            } else {
+                                action.user = nil
+                            }
+                            let articleInfo = object["article_info"] as! NSDictionary
+                            action.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
+                            action.article?.title = (articleInfo["title"] as? String)
+                            action.article?.user = action.user
+                            action.article?.url = (articleInfo["url"] as? String)
+                            action.article?.body = articleInfo["message"] as? String
                             action.article?.imageURL = articleInfo["background_pic"] as? String
                             break
                         case .ArticleCommentary:
