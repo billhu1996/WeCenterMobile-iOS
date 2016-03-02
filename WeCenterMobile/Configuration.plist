@@ -6,6 +6,8 @@
 	<string>http://we.edustack.org/</string>
 	<key>Path</key>
 	<dict>
+		<key>Post Article With URL</key>
+		<string>api/publish/publish_article_by_url/</string>
 		<key>Topic Detail</key>
 		<string>api/topic/topic/</string>
 		<key>Topic Image</key>

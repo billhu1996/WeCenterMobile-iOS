@@ -13,6 +13,9 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     
     var requestURL = ""
     var loaded = true;
+    var published = false
+    var articleID = -1
+    var evaluate: Evaluation = Evaluation.None
 //    var superViewController: UIViewController
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var addButton: UIButton!
@@ -44,7 +47,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
             self.webView.frame = self.view.bounds;
             self.webView.delegate = self;
             self.view.addSubview(self.webView)
-            let req: NSURLRequest = NSURLRequest.init(URL: NSURL.init(string: self.requestURL)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData  , timeoutInterval: 20)
+            let req: NSURLRequest = NSURLRequest.init(URL: NSURL.init(string: self.requestURL)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData  , timeoutInterval: 60)
             self.webView.loadRequest(req)
             self.loaded = true;
         }
@@ -56,31 +59,124 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     }
     
     @IBAction func addToReadingList(sender: AnyObject) {
-        var alertView = UIAlertView.init(title: "确认添加到在读列表？", message: "", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "添加")
+        let alertView = UIAlertView(title: "确认添加到在读列表？", message: "", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "添加")
         alertView.show()
     }
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
-//            self.publish()
+            self.publish(1)
         }
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
-        if self.loaded {
-            addToReadingList(self)
+        if webView.loading {
+            return
         }
+        addToReadingList(self)
     }
     
     @IBAction func comment(sender: AnyObject) {
+        if self.published {
+            let article = Article.temporaryObject()
+            article.id = self.articleID
+            let vc = CommentListViewController(dataObject: article, editing: true)
+            self.msr_navigationController!.pushViewController(vc, animated: true)
+        }
+        self.publish(2)
     }
     
     @IBAction func like(sender: AnyObject) {
+        if self.published {
+            let article = Article.temporaryObject()
+            article.id = self.articleID
+            if self.evaluate == .None {
+                article.evaluate(value: .Up,
+                    success: {
+                        [weak self] in
+                        if let self_ = self {
+                            self_.evaluate = .Up
+                        }
+                    },
+                    failure: {
+                        error in
+                        print(error)
+                    })
+            }
+            if self.evaluate == .Up {
+                article.evaluate(value: .None,
+                    success: {
+                        [weak self] in
+                        if let self_ = self {
+                            self_.evaluate = .None
+                        }
+                    },
+                    failure: {
+                        error in
+                        print(error)
+                })
+            }
+        }
+        self.publish(3)
     }
     
-//    func publish() {
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-//
-//        }
-//    }
+    func publish(mode: Int) {
+        if self.published {
+            return
+        }
+        let article = Article.temporaryObject()
+        article.url = self.requestURL
+        article.postWithURL(
+            success: {
+                [weak self] articleID in
+                if mode == 1 {
+                    let alertView = UIAlertView(title: "发布成功", message: "", delegate: self, cancelButtonTitle: "好的")
+                    alertView.show()
+                }
+                if let self_ = self {
+                    self_.published = true
+                    self_.articleID = articleID
+                    if mode == 2 {
+                        let article = Article.temporaryObject()
+                        article.id = self_.articleID
+                        let vc = CommentListViewController(dataObject: article, editing: true)
+                        self_.msr_navigationController!.pushViewController(vc, animated: true)
+                    }
+                    if mode == 3 {
+                        let article = Article.temporaryObject()
+                        article.id = self_.articleID
+                        if self_.evaluate == .None {
+                            article.evaluate(value: .Up,
+                                success: {
+                                    [weak self] in
+                                    if let self_ = self {
+                                        self_.evaluate = .Up
+                                    }
+                                },
+                                failure: {
+                                    error in
+                                    print(error)
+                            })
+                        }
+                        if self_.evaluate == .Up {
+                            article.evaluate(value: .None,
+                                success: {
+                                    [weak self] in
+                                    if let self_ = self {
+                                        self_.evaluate = .None
+                                    }
+                                },
+                                failure: {
+                                    error in
+                                    print(error)
+                            })
+                        }
+                    }
+                }
+            },
+            failure: {
+                error in
+                print(error)
+        })
+    }
 }

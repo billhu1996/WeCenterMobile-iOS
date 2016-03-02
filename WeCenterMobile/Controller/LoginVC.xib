@@ -30,13 +30,6 @@
                             <action selector="register" destination="mY1-LQ-mh2" eventType="touchUpInside" id="Z9h-QD-d5y"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4qb-6m-pPT">
-                        <rect key="frame" x="265" y="505" width="46" height="30"/>
-                        <state key="normal" title="Button"/>
-                        <connections>
-                            <action selector="qrScan:" destination="mY1-LQ-mh2" eventType="touchUpInside" id="pu0-VH-YAh"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             </view>
