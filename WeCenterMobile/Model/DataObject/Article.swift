@@ -191,15 +191,16 @@ class Article: DataObject {
             failure: failure)
     }
     
-    func postWithURL(success success: (() -> Void)?, failure: ((NSError) -> Void)?) {
+    func postWithURL(success success: ((Int) -> Void)?, failure: ((NSError) -> Void)?) {
         let url = self.url!
-        NetworkManager.defaultManager!.POST("Post Article",
+        NetworkManager.defaultManager!.POST("Post Article With URL",
             parameters: [
                 "url": url
             ],
             success: {
-                _ in
-                success?()
+                data in
+                let id = Int(msr_object: data["article_id"])
+                success?(id!)
                 return
             },
             failure: failure)
