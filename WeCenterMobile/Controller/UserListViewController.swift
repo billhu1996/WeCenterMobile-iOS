@@ -105,6 +105,8 @@ class UserListViewController: UITableViewController {
         case .UserFollowing:
             user.fetchFollowings(page: 1, count: count, success: success, failure: failure)
             break
+        case .Famous:
+            User.fetchFamous(page: 1, count: count, success: success, failure: failure)
         default:
             break
         }
@@ -139,6 +141,8 @@ class UserListViewController: UITableViewController {
         case .UserFollowing:
             user.fetchFollowings(page: page + 1, count: count, success: success, failure: failure)
             break
+        case .Famous:
+            User.fetchFamous(page: page + 1, count: count, success: success, failure: failure)
         default:
             break
         }

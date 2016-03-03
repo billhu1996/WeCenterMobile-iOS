@@ -6,6 +6,8 @@
 	<string>http://we.edustack.org/</string>
 	<key>Path</key>
 	<dict>
+		<key>Famous User List</key>
+		<string>api/famous/famous_users/</string>
 		<key>Topic Detail</key>
 		<string>api/topic/topic/</string>
 		<key>Topic Image</key>

@@ -179,6 +179,33 @@ class User: DataObject {
             failure: failure)
     }
     
+    class func fetchFamous(page page: Int, count: Int, success: (([User]) -> Void)?, failure: ((NSError) -> Void)?) {
+        NetworkManager.defaultManager!.GET("Famous User List",
+            parameters: [
+                "page": page,
+                "per_page": count
+            ],
+            success: {
+                data in
+                if Int(msr_object: data["total_rows"]!!) > 0 && data["rows"] is [NSDictionary] {
+                    var users = [User]()
+                    for value in data["rows"] as! [NSDictionary] {
+                        let userID = Int(msr_object: value["uid"])
+                        let user = User.cachedObjectWithID(userID!)
+                        user.name = value["user_name"] as? String
+                        user.avatarURL = value["avatar_file"] as? String
+                        user.signature = value["signature"] as? String
+                        users.append(user)
+                    }
+                    _ = try? DataManager.defaultManager.saveChanges()
+                    success?(users)
+                } else {
+                    failure?(NSError(domain: NetworkManager.defaultManager!.website, code: NetworkManager.defaultManager!.internalErrorCode.integerValue, userInfo: nil)) // Needs specification
+                }
+            },
+            failure: failure)
+    }
+    
     func fetchFollowers(page page: Int, count: Int, success: (([User]) -> Void)?, failure: ((NSError) -> Void)?) {
         NetworkManager.defaultManager!.GET("User Follower List",
             parameters: [
