@@ -14,6 +14,7 @@ class ArticleCommentaryActionCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var articleTitleLabel: UILabel!
+    @IBOutlet weak var articleBodyLabel: MSRMultilineLabel!
 //    @IBOutlet weak var agreementCountLabel: UILabel!
 //    @IBOutlet weak var commentBodyLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
@@ -71,6 +72,7 @@ class ArticleCommentaryActionCell: UITableViewCell {
         userButton.msr_userInfo = action.user
         articleButton.msr_userInfo = action.comment!.article
 //        commentButton.msr_userInfo = action.comment
+        articleBodyLabel.text = action.comment!.article!.body
         if let date = action.comment?.date {
             dateLabel.text = dateFormatter.stringFromDate(date)
         } else {

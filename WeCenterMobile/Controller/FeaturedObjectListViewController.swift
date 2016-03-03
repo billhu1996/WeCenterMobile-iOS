@@ -39,6 +39,12 @@ class FeaturedObjectListViewController: UITableViewController {
             }
         }
     }
+    weak var superViewController: UIViewController?
+    lazy var searchBarCell: SearchBarCell = {
+        let c = NSBundle.mainBundle().loadNibNamed("SearchBarCell", owner: nil, options: nil).first as! SearchBarCell
+        c.searchButton.addTarget(nil, action: "didPressSearchButton:", forControlEvents: .TouchUpInside)
+        return c
+    }()
     let identifiers = ["FeaturedQuestionAnswerCellA", "FeaturedQuestionAnswerCellB", "FeaturedArticleCell"]
     let nibNames = ["FeaturedQuestionAnswerCellA", "FeaturedQuestionAnswerCellB", "FeaturedArticleCell"]
     init(type: FeaturedObjectListType) {
@@ -74,10 +80,13 @@ class FeaturedObjectListViewController: UITableViewController {
         return 1
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return objects.count + 1
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let object = objects[indexPath.row]
+        if indexPath.row == 0 {
+            return searchBarCell
+        }
+        let object = objects[indexPath.row - 1]
         if var index = (objectTypes.map { object.classForCoder === $0 }).indexOf(true) {
             if let o = object as? FeaturedQuestionAnswer {
                 index += o.answers.count == 0 ? 1 : 0
@@ -118,6 +127,14 @@ class FeaturedObjectListViewController: UITableViewController {
             msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
         }
     }
+    
+    func didPressSearchButton(sender: UIButton) {
+        if let superViewController = superViewController {
+            let s = SearchViewController(superController: superViewController)
+            navigationController?.setViewControllers([s], animated: false)
+        }
+    }
+    
     func refresh() {
         shouldReloadAfterLoadingMore = false
         tableView.mj_footer?.endRefreshing()

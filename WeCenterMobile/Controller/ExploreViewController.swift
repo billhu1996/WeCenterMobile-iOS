@@ -23,7 +23,7 @@ class ExploreViewController: MSRSegmentedViewController, MSRSegmentedViewControl
         (segmentedControl.backgroundView as! UIToolbar).barStyle = theme.toolbarStyle
         view.backgroundColor = theme.backgroundColorA
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Publishment-Article_Question"), style: .Plain, target: self, action: "didPressPublishButton")
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Publishment-Article_Question"), style: .Plain, target: self, action: "didPressPublishButton")
         msr_navigationBar!.msr_shadowImageView?.hidden = true
         scrollView.msr_setTouchesShouldCancel(true, inContentViewWhichIsKindOfClass: UIButton.self)
         scrollView.delaysContentTouches = false
@@ -49,10 +49,12 @@ class ExploreViewController: MSRSegmentedViewController, MSRSegmentedViewControl
                 if type == .Famous {
                     let vc = UserListViewController(user: User.currentUser!, listType: UserListType.Famous)
                     vc.title = title
+                    vc.superViewController = self
                     return vc
                 } else {
                     let vc = FeaturedObjectListViewController(type: type)
                     vc.title = title
+                    vc.superViewController = self
                     return vc
                 }
             }

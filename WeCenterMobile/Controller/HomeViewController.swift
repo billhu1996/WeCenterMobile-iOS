@@ -33,6 +33,10 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         c.searchButton.addTarget(nil, action: "didPressSearchButton:", forControlEvents: .TouchUpInside)
         return c
     }()
+    lazy var webViewController: WebViewController = {
+        var webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
+        return webViewController
+    }()
     let count = 20
     var page = 1
     var shouldReloadAfterLoadingMore = true
@@ -159,7 +163,12 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
-            msr_navigationController!.pushViewController(ArticleAnswerViewController(dataObject: article), animated: true)
+            if let url = article.url {
+                self.webViewController.requestURL = url
+                self.msr_navigationController!.pushViewController(self.webViewController, animated: true)
+            } else {
+                msr_navigationController!.pushViewController(ArticleAnswerViewController(dataObject: article), animated: true)
+            }
         }
     }
     

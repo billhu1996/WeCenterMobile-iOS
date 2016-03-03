@@ -22,6 +22,11 @@ class UserListViewController: UITableViewController {
     var users: [User] = []
     var page = 1
     let count = 20
+    lazy var searchBarCell: SearchBarCell = {
+        let c = NSBundle.mainBundle().loadNibNamed("SearchBarCell", owner: nil, options: nil).first as! SearchBarCell
+        c.searchButton.addTarget(nil, action: "didPressSearchButton:", forControlEvents: .TouchUpInside)
+        return c
+    }()
     init(user: User, listType: UserListType) {
         self.listType = listType
         self.user = user
@@ -30,6 +35,7 @@ class UserListViewController: UITableViewController {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    weak var superViewController: UIViewController?
     let cellNibName = "UserCell"
     let cellReuseIdentifier = "UserCell"
     override func loadView() {
@@ -61,13 +67,16 @@ class UserListViewController: UITableViewController {
         return 1
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return listType == .Famous ? users.count + 1 : users.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.row == 0 && listType == .Famous {
+            return searchBarCell
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! UserCell
         cell.userButtonA.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
         cell.userButtonB.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
-        cell.update(user: users[indexPath.row])
+        cell.update(user: users[listType == .Famous ? indexPath.row - 1 : indexPath.row])
         return cell
     }
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -147,6 +156,14 @@ class UserListViewController: UITableViewController {
             break
         }
     }
+    
+    func didPressSearchButton(sender: UIButton) {
+        if let superViewController = superViewController {
+            let s = SearchViewController(superController: superViewController)
+            navigationController?.setViewControllers([s], animated: false)
+        }
+    }
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return SettingsManager.defaultManager.currentTheme.statusBarStyle
     }
