@@ -1,26 +1,28 @@
+
 //
 //  ArticleAgreementActionCell.swift
 //  WeCenterMobile
 //
-//  Created by Darren Liu on 14/12/30.
-//  Copyright (c) 2014年 Beijing Information Science and Technology University. All rights reserved.
+//  Created by Bill Hu on 16/3/6.
+//  Copyright © 2016年 Beijing Information Science and Technology University. All rights reserved.
 //
 
 import UIKit
 
 class ArticleAgreementActionCell: UITableViewCell {
     
-    @IBOutlet weak var userAvatarView: MSRRoundedImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var articleTitleLabel: UILabel!
-    @IBOutlet weak var userButton: UIButton!
-    @IBOutlet weak var articleButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var userContainerView: UIView!
     @IBOutlet weak var articleContainerView: UIView!
-    @IBOutlet weak var separator: UIView!
+    @IBOutlet weak var userAvatarView: MSRRoundedImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var userButton: UIButton!
+    @IBOutlet weak var detailImageView: UIImageView!
+    @IBOutlet weak var articleTitleLabel: MSRMultilineLabel!
+    @IBOutlet weak var articleBodyLabel: MSRMultilineLabel!
+    @IBOutlet weak var articleButton: UIButton!
+    @IBOutlet weak var separator: UIView!
     
     lazy var dateFormatter: NSDateFormatter = {
         let f = NSDateFormatter()
@@ -44,7 +46,6 @@ class ArticleAgreementActionCell: UITableViewCell {
         for v in [userNameLabel, articleTitleLabel] {
             v.textColor = theme.titleTextColor
         }
-        typeLabel.textColor = theme.subtitleTextColor
     }
     
     func update(action action: Action) {
@@ -52,15 +53,21 @@ class ArticleAgreementActionCell: UITableViewCell {
         userAvatarView.wc_updateWithUser(action.user)
         userNameLabel.text = action.user?.name ?? "匿名用户"
         if let date = action.article?.date {
-            dateLabel.text = dateFormatter.stringFromDate(date)
+                        dateLabel.text = dateFormatter.stringFromDate(date)
         } else {
             dateLabel.text = ""
         }
+        if let url = action.article?.imageURL {
+            detailImageView.setImageWithURL(NSURL(string: url), placeholderImage: nil)
+        } else {
+            print(action.article?.imageURL)
+        }
+            
         articleTitleLabel.text = action.article!.title
+        articleBodyLabel.text = action.article!.body
         userButton.msr_userInfo = action.user
         articleButton.msr_userInfo = action.article
         setNeedsLayout()
         layoutIfNeeded()
     }
-    
 }

@@ -160,6 +160,7 @@
                 <outlet property="articleTitleLabel" destination="w4s-i8-axV" id="Pgs-kD-9iT"/>
                 <outlet property="containerView" destination="YfT-tN-Mqe" id="cXh-w8-OXp"/>
                 <outlet property="dateLabel" destination="WIP-ob-fdU" id="Bsy-uX-f1x"/>
+                <outlet property="detailImageView" destination="j3N-nC-q6Z" id="Lee-Y9-NKL"/>
                 <outlet property="separator" destination="Kya-GB-Ozc" id="flL-xf-V1N"/>
                 <outlet property="typeLabel" destination="nVy-Fg-xWx" id="nhT-73-P4n"/>
                 <outlet property="userAvatarView" destination="j7j-qG-1Vm" id="fLR-m0-wRN"/>

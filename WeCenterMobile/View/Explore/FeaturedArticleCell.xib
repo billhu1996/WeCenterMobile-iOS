@@ -49,6 +49,10 @@
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sidebar-Drafts" translatesAutoresizingMaskIntoConstraints="NO" id="VSj-i9-4Ax" userLabel="Detail Image View">
                                         <rect key="frame" x="5" y="45" width="140" height="119"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="119" id="0N8-fX-EHB"/>
+                                            <constraint firstAttribute="width" constant="140" id="r1X-oC-keH"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

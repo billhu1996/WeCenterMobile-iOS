@@ -56,6 +56,9 @@ class FeaturedArticleCell: UITableViewCell {
     func update(object object: FeaturedObject) {
         let object = object as! FeaturedArticle
         let article = object.article!
+        if let url = article.imageURL {
+            detailImageView.setImageWithURL(NSURL(string: url))
+        }
         userAvatarView.wc_updateWithUser(article.user)
         userNameLabel.text = article.user?.name ?? "匿名用户"
         articleTitleLabel.text = article.title

@@ -22,6 +22,7 @@ class ArticlePublishmentActionCell: UITableViewCell {
     @IBOutlet weak var separator: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var articleBody: MSRMultilineLabel!
+    @IBOutlet weak var detailImageView: UIImageView!
     
     lazy var dateFormatter: NSDateFormatter = {
         let f = NSDateFormatter()
@@ -61,7 +62,7 @@ class ArticlePublishmentActionCell: UITableViewCell {
         }
         if let URL = action.article?.imageURL {
             let url = NSURL(string: URL)
-            userAvatarView.setImageWithURL(url)
+            userAvatarView.setImageWithURL(url, placeholderImage: nil)
         }
         articleTitleLabel.text = action.article!.title
         userButton.msr_userInfo = action.user

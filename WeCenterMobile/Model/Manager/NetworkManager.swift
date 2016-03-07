@@ -52,7 +52,7 @@ class NetworkManager: NSObject {
             do {
                 GETParameters["mobile_sign"] = getMobileSignWithPath(paths[key]!)
                 let URLString = try manager.requestSerializer.requestWithMethod("GET", URLString: paths[key]!, parameters: GETParameters, error: ()).URL!.absoluteString
-//                NSLog((NetworkManager.defaultManager?.website)! + URLString)
+                NSLog((NetworkManager.defaultManager?.website)! + URLString)
                 return manager.POST(URLString,
                     parameters: POSTParameters,
                     constructingBodyWithBlock: block,
