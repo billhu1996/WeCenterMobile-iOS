@@ -40,7 +40,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let self_ = self {
             v.contentView.addSubview(self_.tableView)
             self_.tableView.msr_addAllEdgeAttachedConstraintsToSuperview()
+            v.contentView.addSubview(self_.logoutView)
+            v.contentView.bringSubviewToFront(self_.logoutView)
+            self_.logoutView.msr_addBottomAttachedConstraintToSuperview()
+            self_.logoutView.msr_addHorizontalEdgeAttachedConstraintsToSuperview()
         }
+        return v
+    }()
+    lazy var logoutView: LogoutView = {
+        let v = NSBundle.mainBundle().loadNibNamed("LogoutView", owner: nil, options: nil).first as! LogoutView
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[v(==100)]", options: [], metrics: nil, views: ["v": v]))
+        v.logoutButton.addTarget(self, action: "didPressLogoutButton:", forControlEvents: .TouchUpInside)
+        v.settingButton.addTarget(self, action: "didPressSettingsButton:", forControlEvents: .TouchUpInside)
         return v
     }()
     lazy var tableView: UITableView = {
@@ -76,6 +88,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let self_ = self {
             return SidebarCategory.allValues.map {
                 let cell = NSBundle.mainBundle().loadNibNamed("SidebarCategoryCell", owner: nil, options: nil).first as! SidebarCategoryCell
+                cell.selectedBackgroundView = UIView(frame: cell.frame)
+                cell.selectedBackgroundView?.backgroundColor = UIColor.orangeColor()
                 cell.update(category: $0)
                 return cell
             }
@@ -83,13 +97,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             return []
         }
     }()
-    lazy var logoutCell: SidebarLogoutCell = {
-        [weak self] in
-        let cell = NSBundle.mainBundle().loadNibNamed("SidebarLogoutCell", owner: nil, options: nil).first as! SidebarLogoutCell
-        cell.logoutButton.addTarget(self, action: "didPressLogoutButton:", forControlEvents: .TouchUpInside)
-        cell.SettingButton.addTarget(self, action: "didPressSettingsButton:", forControlEvents: .TouchUpInside)
-        return cell
-    }()
+//    lazy var logoutCell: SidebarLogoutCell = {
+//        [weak self] in
+//        let cell = NSBundle.mainBundle().loadNibNamed("SidebarLogoutCell", owner: nil, options: nil).first as! SidebarLogoutCell
+//        cell.logoutButton.addTarget(self, action: "didPressLogoutButton:", forControlEvents: .TouchUpInside)
+//        cell.SettingButton.addTarget(self, action: "didPressSettingsButton:", forControlEvents: .TouchUpInside)
+//        return cell
+//    }()
     convenience init() {
         self.init(nibName: nil, bundle: nil)
     }
@@ -99,8 +113,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         addChildViewController(contentViewController)
         view.addSubview(contentViewController.view)
         view.insertSubview(sidebar, aboveSubview: contentViewController.view)
-        let theme = SettingsManager.defaultManager.currentTheme
-        sidebar.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: theme.backgroundBlurEffectStyle))
+//        let theme = SettingsManager.defaultManager.currentTheme
+//        sidebar.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: theme.backgroundBlurEffectStyle))
+        sidebar.backgroundView = UIView()
+        sidebar.backgroundView?.backgroundColor = %+0xf5f2ed
         automaticallyAdjustsScrollViewInsets = false
     }
     override func viewDidLoad() {
@@ -118,7 +134,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return [cells.count, 1][section]
@@ -130,7 +146,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             c.updateTheme()
             cell = c
         } else {
-            cell = logoutCell
+//            cell = logoutCell
+            cell = UITableViewCell()
         }
         return cell
     }

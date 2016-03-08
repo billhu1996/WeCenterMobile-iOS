@@ -107,6 +107,9 @@ class Theme {
         if let navigationItemColorRawValue = (configuration["Navigation Item Color"] as? NSNumber)?.unsignedIntValue {
             self.navigationItemColor = %-navigationItemColorRawValue
         }
+        if let navigationBarTintColor = (configuration["Navigation Bar Tint Color"] as? NSNumber)?.unsignedIntValue {
+            self.navigationBarTintColor = %-navigationBarTintColor
+        }
         if let toolbarItemColorRawValue = (configuration["Tool Bar Item Color"] as? NSNumber)?.unsignedIntValue {
             self.toolbarItemColor = %-toolbarItemColorRawValue
         }
@@ -146,7 +149,8 @@ class Theme {
     var borderColorB: UIColor = .msr_materialGray800()
     var controlColorA: UIColor = .msr_materialPurple500()
     var controlColorB: UIColor = .whiteColor()
-    var navigationItemColor: UIColor = %-0x00000042
+    var navigationItemColor: UIColor = %-0xffffffff
+    var navigationBarTintColor: UIColor = %-0x00a85942
     var toolbarItemColor: UIColor = %-0x00000042
     
     var highlightColor: UIColor = %-0x0000007f

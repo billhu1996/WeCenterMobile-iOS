@@ -91,6 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let theme = SettingsManager.defaultManager.currentTheme
         mainViewController?.contentViewController.view.backgroundColor = theme.backgroundColorA
         UINavigationBar.appearance().barStyle = theme.navigationBarStyle
+        UINavigationBar.appearance().barTintColor = theme.navigationBarTintColor
         UINavigationBar.appearance().tintColor = theme.navigationItemColor
     }
     

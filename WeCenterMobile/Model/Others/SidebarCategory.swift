@@ -22,8 +22,8 @@ enum SidebarCategory: String {
     case About = "About"
     static var allValues: [SidebarCategory] = [
         .Home,
-        .ReadingList,
         .Explore,
+        .ReadingList,
 //        .User,
 //        .Drafts,
 //        .Topic,
@@ -37,7 +37,7 @@ enum SidebarCategory: String {
 
 func localizedStringFromSidebarCategory(category: SidebarCategory) -> String {
     let data: [SidebarCategory: String] = [
-        .Home: "我关注的",
+        .Home: "主页",
         .Explore: "发现",
         .ReadingList: "我在读",
         .User: "个人中心",

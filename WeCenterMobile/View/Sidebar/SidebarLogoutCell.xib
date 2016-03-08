@@ -71,7 +71,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Sidebar-Logout" width="24" height="24"/>
-        <image name="Sidebar-Settings" width="20" height="20"/>
+        <image name="Sidebar-Logout" width="36" height="38"/>
+        <image name="Sidebar-Settings" width="46" height="46"/>
     </resources>
 </document>

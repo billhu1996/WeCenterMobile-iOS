@@ -37,7 +37,9 @@
 		<key>Highlight Color</key>
 		<integer>31</integer>
 		<key>Navigation Item Color</key>
-		<integer>127</integer>
+		<integer>4294967106</integer>
+		<key>Navigation Bar Tint Color</key>
+		<string>11,032,898</string>
 		<key>Navigation Bar Style</key>
 		<integer>0</integer>
 		<key>Status Bar Style</key>
@@ -88,7 +90,9 @@
 		<key>Highlight Color</key>
 		<integer>31</integer>
 		<key>Navigation Item Color</key>
-		<integer>127</integer>
+		<integer>4294967295</integer>
+		<key>Navigation Bar Tint Color</key>
+		<string>11,032,898</string>
 		<key>Navigation Bar Style</key>
 		<integer>0</integer>
 		<key>Status Bar Style</key>

@@ -187,6 +187,8 @@
 		A90218B61C7F0A3F00C2F028 /* CommentFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90218B51C7F0A3F00C2F028 /* CommentFooterView.swift */; };
 		A90218DD1C7F0AD000C2F028 /* CommentFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90218DC1C7F0AD000C2F028 /* CommentFooterView.xib */; };
 		A9039B6C1C03ED6900A658EC /* AppSecret.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9039B6B1C03ED6900A658EC /* AppSecret.swift */; };
+		A90DEAEC1C8EA0F2004B84E8 /* LogoutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90DEAEB1C8EA0F2004B84E8 /* LogoutView.xib */; };
+		A90DEB131C8EA55D004B84E8 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90DEB121C8EA55D004B84E8 /* LogoutView.swift */; };
 		A92F01B11C79E240009FA3C7 /* SearchBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92F01B01C79E240009FA3C7 /* SearchBarCell.swift */; };
 		A92F01D81C79E266009FA3C7 /* SearchBarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A92F01D71C79E266009FA3C7 /* SearchBarCell.xib */; };
 		A93CCCEF1C8B306200A2E04B /* ArticleAgreementActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93CCCEE1C8B306200A2E04B /* ArticleAgreementActionCell.xib */; };
@@ -788,6 +790,8 @@
 		A90218B51C7F0A3F00C2F028 /* CommentFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentFooterView.swift; sourceTree = "<group>"; };
 		A90218DC1C7F0AD000C2F028 /* CommentFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentFooterView.xib; sourceTree = "<group>"; };
 		A9039B6B1C03ED6900A658EC /* AppSecret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSecret.swift; sourceTree = "<group>"; };
+		A90DEAEB1C8EA0F2004B84E8 /* LogoutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogoutView.xib; sourceTree = "<group>"; };
+		A90DEB121C8EA55D004B84E8 /* LogoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
 		A92F01B01C79E240009FA3C7 /* SearchBarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarCell.swift; sourceTree = "<group>"; };
 		A92F01D71C79E266009FA3C7 /* SearchBarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarCell.xib; sourceTree = "<group>"; };
 		A93CCCEE1C8B306200A2E04B /* ArticleAgreementActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleAgreementActionCell.xib; sourceTree = "<group>"; };
@@ -1300,6 +1304,8 @@
 				95C73C741B7F6AEB003D3072 /* SidebarLogoutCell.xib */,
 				958600861B187CB50054DAA8 /* SidebarUserView.swift */,
 				958600881B187CC50054DAA8 /* SidebarUserView.xib */,
+				A90DEAEB1C8EA0F2004B84E8 /* LogoutView.xib */,
+				A90DEB121C8EA55D004B84E8 /* LogoutView.swift */,
 			);
 			path = Sidebar;
 			sourceTree = "<group>";
@@ -2255,6 +2261,7 @@
 				5C248AEF1C7B2164008F0D7E /* QRCodeBottomRight@3x.png in Resources */,
 				958600891B187CC50054DAA8 /* SidebarUserView.xib in Resources */,
 				9531D7541AF3E4AC00E6549D /* UserBodyCell.xib in Resources */,
+				A90DEAEC1C8EA0F2004B84E8 /* LogoutView.xib in Resources */,
 				950FE1271A1DA2A400167D09 /* Welcome.strings in Resources */,
 				9531D7391AF3E4AC00E6549D /* QuestionFocusingActionCell.xib in Resources */,
 				A90218DD1C7F0AD000C2F028 /* CommentFooterView.xib in Resources */,
@@ -2420,6 +2427,7 @@
 				9531D7901AF3E8E400E6549D /* ArticlePublishmentAction.swift in Sources */,
 				9531D7911AF3E8E400E6549D /* FeaturedArticle.swift in Sources */,
 				A9039B6C1C03ED6900A658EC /* AppSecret.swift in Sources */,
+				A90DEB131C8EA55D004B84E8 /* LogoutView.swift in Sources */,
 				5C06172A1C7C39EA008CE8D5 /* UserVC.swift in Sources */,
 				A955A3B51C02FEB7002501CE /* UIView+MJExtension.m in Sources */,
 				A973D07A1C106D4300DCF94D /* ArticleCommentaryAction.swift in Sources */,
