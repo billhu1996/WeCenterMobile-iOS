@@ -19,6 +19,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
 //    var superViewController: UIViewController
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var commentButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
