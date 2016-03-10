@@ -11,9 +11,9 @@ import UIKit
 class UserC: UITableViewCell {
     
     @IBOutlet weak var userAvatarView: MSRRoundedImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
+//    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userSignatureLabel: UILabel!
-    @IBOutlet weak var followButton: UIButton!
+//    @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var followingCountLabel: UILabel!
     @IBOutlet weak var followersCountLabel: UILabel!
     @IBOutlet weak var followingTitleLabel: UILabel!
@@ -28,7 +28,7 @@ class UserC: UITableViewCell {
     
     func update(user user: User) {
         self.userAvatarView.wc_updateWithUser(user)
-        userNameLabel.text = user.name
+//        userNameLabel.text = user.name
         userSignatureLabel.text = user.signature
         followersCountLabel.text = "\(user.followerCount ?? 0)"
         followingCountLabel.text = "\(user.followingCount ?? 0)"
@@ -45,10 +45,10 @@ class UserC: UITableViewCell {
             followingTitleLabel.text = "Ta关注的人"
         }
         userLocationLabel.text = user.province! + "  " + user.city!
-        self.followButton.hidden = user.isCurrentUser
+//        self.followButton.hidden = user.isCurrentUser
         print(user.following)
         if let following = user.following {
-            self.followButton.setTitle(following ? "已关注" : "关注", forState: .Normal)
+//            self.followButton.setTitle(following ? "已关注" : "关注", forState: .Normal)
         }
     }
     

@@ -17,7 +17,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     var articleID = -1
     var evaluate: Evaluation = Evaluation.None
     var avatarImage: UIImage = UIImage(named: "User-DefaultAvatar")!
-    var userName = "asdffadsfasdfag"
+    var userName = ""
 //    var superViewController: UIViewController
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var addButton: UIButton!

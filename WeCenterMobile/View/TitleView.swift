@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class TitleView: UIView {
-    @IBOutlet weak var avatarImage: UIImageView!
+    @IBOutlet weak var avatarImage: MSRRoundedImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
 }

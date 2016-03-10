@@ -11,15 +11,15 @@
             <rect key="frame" x="0.0" y="0.0" width="200" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Va-2P-6mI">
-                    <rect key="frame" x="44.5" y="4" width="35" height="35"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User-DefaultAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="8Va-2P-6mI" customClass="MSRRoundedImageView" customModule="WeCenterMobile" customModuleProvider="target">
+                    <rect key="frame" x="78" y="4" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="JrJ-xx-8Jl"/>
                         <constraint firstAttribute="height" constant="35" id="yJo-lQ-YRY"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOp-dQ-zVL">
-                    <rect key="frame" x="84.5" y="12.5" width="4.5" height="20.5"/>
+                    <rect key="frame" x="118" y="12" width="4.5" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -40,4 +40,7 @@
             <point key="canvasLocation" x="304" y="48"/>
         </view>
     </objects>
+    <resources>
+        <image name="User-DefaultAvatar" width="125" height="125"/>
+    </resources>
 </document>
