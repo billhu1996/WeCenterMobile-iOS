@@ -16,13 +16,21 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     var published = false
     var articleID = -1
     var evaluate: Evaluation = Evaluation.None
+    var avatarImage: UIImage = UIImage(named: "User-DefaultAvatar")!
+    var userName = ""
 //    var superViewController: UIViewController
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var commentButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Back"), style: .Plain, target: nil, action: "didPressBackButton")
+        let v = NSBundle.mainBundle().loadNibNamed("TitleView", owner: nil, options: nil).first as! TitleView
+        v.avatarImage.image = self.avatarImage
+        v.nameLabel.text = self.userName
+        v.backgroundColor = UIColor.clearColor()
+        self.navigationItem.titleView = v
         self.loaded = false;
         self.view.backgroundColor = UIColor.whiteColor();
     }
@@ -77,7 +85,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     }
     
     @IBAction func comment(sender: AnyObject) {
-        if self.published {
+        if self.articleID != -1 {
             let article = Article.temporaryObject()
             article.id = self.articleID
             let vc = CommentListViewController(dataObject: article, editing: true)

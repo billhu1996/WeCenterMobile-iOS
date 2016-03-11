@@ -64,7 +64,7 @@ class UserVC: UITableViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            self.userCell.followButton.addTarget(self, action: "toggleFollow:", forControlEvents: .TouchUpInside)
+//            self.userCell.followButton.addTarget(self, action: "toggleFollow:", forControlEvents: .TouchUpInside)
             return self.userCell
         } else {
             let action = actions[indexPath.row - 1]
@@ -79,7 +79,6 @@ class UserVC: UITableViewController {
                 return cell as! UITableViewCell
             } else {
                 return UITableViewCell() // Needs specification
-                print("asdadsfadsfsdf ")
             }
         }
     }

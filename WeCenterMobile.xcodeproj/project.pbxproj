@@ -30,6 +30,8 @@
 		5C248AF51C7B2164008F0D7E /* QRCodeTopRight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C248AE51C7B2164008F0D7E /* QRCodeTopRight@3x.png */; };
 		5CDB12121C7ED0C700ED92BF /* UserC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB12111C7ED0C700ED92BF /* UserC.swift */; };
 		5CDB12141C7ED0D800ED92BF /* UserC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CDB12131C7ED0D800ED92BF /* UserC.xib */; };
+		5CDB44551C902F06009879EA /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB44541C902F06009879EA /* TitleView.swift */; };
+		5CDB44571C902F57009879EA /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CDB44561C902F57009879EA /* TitleView.xib */; };
 		950FE1241A1DA2A400167D09 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 950FE1161A1DA2A400167D09 /* Configuration.plist */; };
 		950FE1251A1DA2A400167D09 /* Discovery.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950FE1181A1DA2A400167D09 /* Discovery.strings */; };
 		950FE1261A1DA2A400167D09 /* User.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950FE11A1A1DA2A400167D09 /* User.strings */; };
@@ -620,6 +622,8 @@
 		5C248AE51C7B2164008F0D7E /* QRCodeTopRight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeTopRight@3x.png"; sourceTree = "<group>"; };
 		5CDB12111C7ED0C700ED92BF /* UserC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserC.swift; sourceTree = "<group>"; };
 		5CDB12131C7ED0D800ED92BF /* UserC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserC.xib; sourceTree = "<group>"; };
+		5CDB44541C902F06009879EA /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		5CDB44561C902F57009879EA /* TitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
 		950FE1161A1DA2A400167D09 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		950FE1191A1DA2A400167D09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Discovery.strings; sourceTree = "<group>"; };
 		950FE11B1A1DA2A400167D09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/User.strings; sourceTree = "<group>"; };
@@ -1074,6 +1078,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		5CDB442E1C902EC7009879EA /* WebVC */ = {
+			isa = PBXGroup;
+			children = (
+				5CDB44541C902F06009879EA /* TitleView.swift */,
+				5CDB44561C902F57009879EA /* TitleView.xib */,
+			);
+			name = WebVC;
+			sourceTree = "<group>";
+		};
 		950FE1171A1DA2A400167D09 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -1163,6 +1176,7 @@
 		950FE4F01A1DA2B500167D09 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5CDB442E1C902EC7009879EA /* WebVC */,
 				9531D6CC1AF3E4AC00E6549D /* Answer */,
 				9531D6D71AF3E4AC00E6549D /* Article */,
 				9531D6DA1AF3E4AC00E6549D /* Comment */,
@@ -2258,6 +2272,7 @@
 				95DB722E1AF5490A0072C77E /* ArticleFooterView.xib in Resources */,
 				9531D7561AF3E4AC00E6549D /* UserCell.xib in Resources */,
 				9531D7211AF3E4AC00E6549D /* AnswerCellWithQuestionTitle.xib in Resources */,
+				5CDB44571C902F57009879EA /* TitleView.xib in Resources */,
 				5C248AEF1C7B2164008F0D7E /* QRCodeBottomRight@3x.png in Resources */,
 				958600891B187CC50054DAA8 /* SidebarUserView.xib in Resources */,
 				9531D7541AF3E4AC00E6549D /* UserBodyCell.xib in Resources */,
@@ -2445,6 +2460,7 @@
 				A955A3351C02FD9D002501CE /* UIImage+MSRColor.swift in Sources */,
 				A955A30A1C02FD9D002501CE /* Numeric+MSRInitializer.swift in Sources */,
 				950FE50C1A1DA2B500167D09 /* TopicViewController.swift in Sources */,
+				5CDB44551C902F06009879EA /* TitleView.swift in Sources */,
 				A98240501C0307F900F73E9A /* GBDeviceInfo_Common.m in Sources */,
 				95D153A41AF4BB3000C1617D /* ArticleViewController.swift in Sources */,
 				A955A3121C02FD9D002501CE /* CGSize+MSRAccessor.swift in Sources */,
