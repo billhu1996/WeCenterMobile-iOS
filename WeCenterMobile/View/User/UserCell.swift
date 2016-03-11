@@ -16,7 +16,9 @@ class UserCell: UITableViewCell {
     @IBOutlet weak var userButtonA: UIButton!
     @IBOutlet weak var userButtonB: UIButton!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var followsButton: UIButton!
+    @IBOutlet weak var userFollowImageView: UIImageView!
+    @IBOutlet weak var userFollowLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +33,13 @@ class UserCell: UITableViewCell {
 
     func update(user user: User) {
         userAvatarView.wc_updateWithUser(user)
+        print(user)
+        if let following = user.following {
+            userFollowImageView.image = following ? UIImage(named: "User-Unfollow") : UIImage(named: "User-Follow")
+            userFollowLabel.text = following ? "已关注" : "加关注"
+        } else {
+            userFollowLabel.text = "加关注"
+        }
         userNameLabel.text = user.name
         /// @TODO: [Bug][Back-End] \n!!!
         userSignatureLabel.text = user.signature?.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())

@@ -262,7 +262,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func didPressLogoutButton(sender: UIButton) {
         sidebar.collapse()
-        dismissViewControllerAnimated(true, completion: nil)
+//        dismissViewControllerAnimated(true, completion: nil)
     }
     func currentUserPropertyDidChange(notification: NSNotification) {
         let key = notification.userInfo![KeyUserInfoKey] as! String

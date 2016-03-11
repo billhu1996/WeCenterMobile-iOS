@@ -90,7 +90,7 @@
 		<key>Highlight Color</key>
 		<integer>31</integer>
 		<key>Navigation Item Color</key>
-		<integer>4294967295</integer>
+		<real>4294967295</real>
 		<key>Navigation Bar Tint Color</key>
 		<string>11,032,898</string>
 		<key>Navigation Bar Style</key>

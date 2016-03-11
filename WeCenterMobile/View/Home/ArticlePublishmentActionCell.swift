@@ -12,14 +12,14 @@ class ArticlePublishmentActionCell: UITableViewCell {
     
     @IBOutlet weak var userAvatarView: MSRRoundedImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
+//    @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var articleTitleLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var articleButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var userContainerView: UIView!
     @IBOutlet weak var articleContainerView: UIView!
-    @IBOutlet weak var separator: UIView!
+//    @IBOutlet weak var separator: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var articleBody: MSRMultilineLabel!
     @IBOutlet weak var detailImageView: UIImageView!
@@ -39,14 +39,14 @@ class ArticlePublishmentActionCell: UITableViewCell {
             v.backgroundColor = theme.backgroundColorB
         }
         containerView.msr_borderColor = theme.borderColorA
-        separator.backgroundColor = theme.borderColorB
+//        separator.backgroundColor = theme.borderColorB
         for v in [userButton, articleButton] {
             v.msr_setBackgroundImageWithColor(theme.highlightColor, forState: .Highlighted)
         }
         for v in [userNameLabel, articleTitleLabel] {
             v.textColor = theme.titleTextColor
         }
-        typeLabel.textColor = theme.subtitleTextColor
+//        typeLabel.textColor = theme.subtitleTextColor
     }
     
     func update(action action: Action) {

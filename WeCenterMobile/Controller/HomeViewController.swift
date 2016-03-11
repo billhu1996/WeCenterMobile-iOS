@@ -37,6 +37,14 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         var webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
         return webViewController
     }()
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "我关注的"
+        label.textColor = .whiteColor()
+        label.font = UIFont.boldSystemFontOfSize(17)
+        label.sizeToFit()
+        return label
+    }()
     let count = 20
     var page = 1
     var shouldReloadAfterLoadingMore = true
@@ -59,6 +67,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     override func loadView() {
         super.loadView()
         title = "我关注的" // Needs localization
+        navigationItem.titleView = titleLabel
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Publishment-Article_Question"), style: .Plain, target: self, action: "showFollowerList")
         for i in 0..<nibNames.count {

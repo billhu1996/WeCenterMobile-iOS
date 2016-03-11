@@ -10,15 +10,15 @@ import UIKit
 
 class SearchBarCell: UITableViewCell {
 
-    @IBOutlet weak var searchBar: UISearchBar!
+//    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let theme = SettingsManager.defaultManager.currentTheme
-        searchBar.placeholder = "搜索用户和内容"
-        searchBar.barStyle = theme.navigationBarStyle
-        searchBar.keyboardAppearance = theme.keyboardAppearance
+//        let theme = SettingsManager.defaultManager.currentTheme
+//        searchBar.placeholder = "搜索用户和内容"
+//        searchBar.barStyle = theme.navigationBarStyle
+//        searchBar.keyboardAppearance = theme.keyboardAppearance
         setNeedsLayout()
         layoutIfNeeded()
     }

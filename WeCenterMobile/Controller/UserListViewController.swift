@@ -14,6 +14,7 @@ import UIKit
     case UserFollower = 2
     case QuestionFollwer = 3
     case Famous = 4
+    case Media = 5
 }
 
 class UserListViewController: UITableViewController {
@@ -43,7 +44,8 @@ class UserListViewController: UITableViewController {
         let titles: [UserListType: String] = [
             .UserFollowing: "\(user.name!) 关注的用户",
             .UserFollower: "\(user.name!) 的追随者",
-            .Famous: "名人"]
+            .Famous: "名人",
+            .Media: "媒体"]
         self.title = titles[listType]!
         let theme = SettingsManager.defaultManager.currentTheme
         view.backgroundColor = theme.backgroundColorA
@@ -67,17 +69,18 @@ class UserListViewController: UITableViewController {
         return 1
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listType == .Famous ? users.count + 1 : users.count
+        return users.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 && listType == .Famous {
-            return searchBarCell
-        }
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! UserCell
         cell.userButtonA.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
-        cell.userButtonB.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
-        cell.update(user: users[listType == .Famous ? indexPath.row - 1 : indexPath.row])
+        cell.userButtonB.addTarget(self, action: "didPressFollowButton:", forControlEvents: .TouchUpInside)
+        cell.update(user: users[indexPath.row])
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
     }
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
@@ -85,6 +88,20 @@ class UserListViewController: UITableViewController {
     func didPressUserButton(sender: UIButton) {
         if let user = sender.msr_userInfo as? User {
             msr_navigationController!.pushViewController(UserVC(user: user), animated: true)
+        }
+    }
+    func didPressFollowButton(sender: UIButton) {
+        if let user = sender.msr_userInfo as? User {
+            user.toggleFollow(success: {
+                [weak self] in
+                if let this = self {
+                    this.tableView.reloadData()
+                }
+                return
+                }, failure: {
+                error in
+                return
+            })
         }
     }
     func refresh() {

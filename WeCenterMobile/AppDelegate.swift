@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainViewController?.contentViewController.view.backgroundColor = theme.backgroundColorA
         UINavigationBar.appearance().barStyle = theme.navigationBarStyle
         UINavigationBar.appearance().barTintColor = theme.navigationBarTintColor
-        UINavigationBar.appearance().tintColor = theme.navigationItemColor
+        UINavigationBar.appearance().tintColor = .whiteColor()//theme.navigationItemColor
     }
     
 }

@@ -14,16 +14,29 @@ class ExploreViewController: MSRSegmentedViewController, MSRSegmentedViewControl
         return .Top
     }
     
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "发现"
+        label.textColor = .whiteColor()
+        label.font = UIFont.boldSystemFontOfSize(17)
+        label.sizeToFit()
+        return label
+    }()
+    
     override func loadView() {
         super.loadView()
+        navigationItem.titleView = titleLabel
         let theme = SettingsManager.defaultManager.currentTheme
+//        navigationController?.navigationBar.tintColor = .whiteColor()//theme.titleTextColor
         segmentedControl.indicator = MSRSegmentedControlUnderlineIndicator()
-        segmentedControl.tintColor = theme.titleTextColor
+        segmentedControl.tintColor = theme.backgroundColorB
         segmentedControl.indicator.tintColor = theme.subtitleTextColor
         (segmentedControl.backgroundView as! UIToolbar).barStyle = theme.toolbarStyle
         view.backgroundColor = theme.backgroundColorA
+        segmentedControl.backgroundColor = %+0x3a374a
+        segmentedControl.scrollView.backgroundColor = %+0x3a374a
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Publishment-Article_Question"), style: .Plain, target: self, action: "didPressPublishButton")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Sidebar-Search"), style: .Plain, target: self, action: nil)
         msr_navigationBar!.msr_shadowImageView?.hidden = true
         scrollView.msr_setTouchesShouldCancel(true, inContentViewWhichIsKindOfClass: UIButton.self)
         scrollView.delaysContentTouches = false
