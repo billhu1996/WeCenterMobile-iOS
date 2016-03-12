@@ -48,13 +48,14 @@ class UserVC: UITableViewController {
         tableView.delaysContentTouches = false
         tableView.msr_wrapperView?.delaysContentTouches = false
         tableView.wc_addRefreshingHeaderWithTarget(self, action: "refresh")
-//        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         refresh()
         tableView.mj_header.beginRefreshing()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Back"), style: .Plain, target: nil, action: "didPressBackButton")
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

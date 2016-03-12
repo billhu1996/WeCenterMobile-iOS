@@ -18,6 +18,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     var evaluate: Evaluation = Evaluation.None
     var avatarImage: UIImage = UIImage(named: "User-DefaultAvatar")!
     var userName = ""
+    var article: Article = Article.temporaryObject()
 //    var superViewController: UIViewController
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var addButton: UIButton!
@@ -34,6 +35,9 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
         self.navigationItem.titleView = v
         self.loaded = false;
         self.view.backgroundColor = UIColor.whiteColor();
+        
+        
+        
         self.reloadData()
     }
     
@@ -57,8 +61,6 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
             self.webView.frame = self.view.bounds;
             self.webView.delegate = self;
             self.view.addSubview(self.webView)
-            print("---------------------------")
-            print(self.requestURL)
             let req: NSURLRequest = NSURLRequest.init(URL: NSURL.init(string: self.requestURL)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData  , timeoutInterval: 60)
             self.webView.loadRequest(req)
             self.loaded = true;
