@@ -62,7 +62,7 @@
                                             <constraint firstAttribute="height" constant="30" id="6bG-hP-1Nk"/>
                                             <constraint firstAttribute="width" constant="30" id="v6C-52-CBO"/>
                                         </constraints>
-                                        <state key="normal" image="WebVCAddGreen"/>
+                                        <state key="normal" image="WebVCAddGray"/>
                                         <connections>
                                             <action selector="addToReadingList:" destination="dHy-OP-ikw" eventType="touchUpInside" id="doY-Fd-SYH"/>
                                         </connections>
@@ -91,7 +91,7 @@
                                             <constraint firstAttribute="height" constant="30" id="jMY-kG-gh2"/>
                                             <constraint firstAttribute="width" constant="30" id="qTo-kT-Str"/>
                                         </constraints>
-                                        <state key="normal" image="WebVCLikeGreen"/>
+                                        <state key="normal" image="WebVCLikeGray"/>
                                         <connections>
                                             <action selector="like:" destination="dHy-OP-ikw" eventType="touchUpInside" id="q7U-Fx-DiQ"/>
                                         </connections>
@@ -181,15 +181,16 @@
             <connections>
                 <outlet property="addButton" destination="TGG-QJ-sIu" id="kQz-vN-NtQ"/>
                 <outlet property="commentButton" destination="Pau-DJ-off" id="jC8-wH-DTg"/>
+                <outlet property="likeButton" destination="5Nh-Fd-pIW" id="E94-eV-wPt"/>
                 <outlet property="webView" destination="6lk-R7-8Eu" id="yWT-hD-W6X"/>
             </connections>
             <point key="canvasLocation" x="372.5" y="228.5"/>
         </viewController>
     </objects>
     <resources>
-        <image name="WebVCAddGreen" width="47" height="47"/>
+        <image name="WebVCAddGray" width="47" height="47"/>
         <image name="WebVCCommentGreen" width="44" height="41"/>
-        <image name="WebVCLikeGreen" width="43" height="40"/>
+        <image name="WebVCLikeGray" width="43" height="40"/>
         <image name="WebVCShareGreen" width="41" height="42"/>
     </resources>
 </document>

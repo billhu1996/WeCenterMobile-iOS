@@ -31,7 +31,7 @@
 			<string>WeChat</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wx4dc4b980c462893b</string>
+				<string>wxb0d4e235d6897257</string>
 			</array>
 		</dict>
 		<dict>
@@ -49,6 +49,7 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>wechat</string>
 		<string>sinaweibo</string>
 		<string>sinaweibohd</string>
 		<string>weibosdk</string>

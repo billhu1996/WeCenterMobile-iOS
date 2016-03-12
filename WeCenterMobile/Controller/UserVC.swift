@@ -48,6 +48,7 @@ class UserVC: UITableViewController {
         tableView.delaysContentTouches = false
         tableView.msr_wrapperView?.delaysContentTouches = false
         tableView.wc_addRefreshingHeaderWithTarget(self, action: "refresh")
+//        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     
     override func viewDidLoad() {
@@ -140,7 +141,8 @@ class UserVC: UITableViewController {
             })
     }
     func reloadData() {
-        self.navigationController?.title = self.user.name
+        self.title = self.user.name
+//        self.navigationController?.title = self.user.name
         self.userCell.update(user: self.user)
         self.tableView.reloadData()
     }

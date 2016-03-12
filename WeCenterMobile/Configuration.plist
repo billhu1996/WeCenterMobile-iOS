@@ -86,7 +86,7 @@
 		<string>api/search/</string>
 	</dict>
 	<key>App Secret</key>
-	<string>12884789df747d7affbcd6a7cadd9359</string>
+	<string>cf81ec43d54276b1e951e6aa41d145f2</string>
 	<key>Success Code</key>
 	<integer>1</integer>
 	<key>Internal Error Code</key>

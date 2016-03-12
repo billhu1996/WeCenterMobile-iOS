@@ -22,6 +22,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
         self.navigationItem.titleView = v
         self.loaded = false;
         self.view.backgroundColor = UIColor.whiteColor();
+        self.reloadData()
     }
     
     func didPressBackButton() {
@@ -55,6 +57,8 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
             self.webView.frame = self.view.bounds;
             self.webView.delegate = self;
             self.view.addSubview(self.webView)
+            print("---------------------------")
+            print(self.requestURL)
             let req: NSURLRequest = NSURLRequest.init(URL: NSURL.init(string: self.requestURL)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData  , timeoutInterval: 60)
             self.webView.loadRequest(req)
             self.loaded = true;
@@ -95,7 +99,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     }
     
     @IBAction func like(sender: AnyObject) {
-        if self.published {
+        if self.articleID != -1 {
             let article = Article.temporaryObject()
             article.id = self.articleID
             if self.evaluate == .None {
@@ -104,6 +108,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
                         [weak self] in
                         if let self_ = self {
                             self_.evaluate = .Up
+                            self_.reloadData()
                         }
                     },
                     failure: {
@@ -117,6 +122,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
                         [weak self] in
                         if let self_ = self {
                             self_.evaluate = .None
+                            self_.reloadData()
                         }
                     },
                     failure: {
@@ -137,18 +143,20 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
         article.postWithURL(
             success: {
                 [weak self] articleID in
-                if mode == 1 {
-                    let alertView = UIAlertView(title: "发布成功", message: "", delegate: self, cancelButtonTitle: "好的")
-                    alertView.show()
-                }
                 if let self_ = self {
                     self_.published = true
                     self_.articleID = articleID
+                    if mode == 1 {
+                        let alertView = UIAlertView(title: "发布成功", message: "", delegate: self, cancelButtonTitle: "好的")
+                        alertView.show()
+                        self_.reloadData()
+                    }
                     if mode == 2 {
                         let article = Article.temporaryObject()
                         article.id = self_.articleID
                         let vc = CommentListViewController(dataObject: article, editing: true)
                         self_.msr_navigationController!.pushViewController(vc, animated: true)
+                        self_.reloadData()
                     }
                     if mode == 3 {
                         let article = Article.temporaryObject()
@@ -159,6 +167,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
                                     [weak self] in
                                     if let self_ = self {
                                         self_.evaluate = .Up
+                                        self_.reloadData()
                                     }
                                 },
                                 failure: {
@@ -172,6 +181,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
                                     [weak self] in
                                     if let self_ = self {
                                         self_.evaluate = .None
+                                        self_.reloadData()
                                     }
                                 },
                                 failure: {
@@ -186,5 +196,18 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
                 error in
                 print(error)
         })
+    }
+    
+    func reloadData() {
+        if self.published {
+            self.addButton.setImage(UIImage(named: "WebVCAddGreen"), forState: .Normal)
+        } else {
+            self.addButton.setImage(UIImage(named: "WebVCAddGray"), forState: .Normal)
+        }
+        if self.evaluate == .None {
+            self.likeButton.setImage(UIImage(named: "WebVCLikeGray"), forState: .Normal)
+        } else {
+            self.likeButton.setImage(UIImage(named: "WebVCLikeGreen"), forState: .Normal)
+        }
     }
 }

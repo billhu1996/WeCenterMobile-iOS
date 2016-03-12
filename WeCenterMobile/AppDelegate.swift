@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DTAttributedTextContentView.setLayerClass(DTTiledLayerWithoutFade.self)
         SVProgressHUD.setDefaultMaskType(.Gradient)
         WeiboSDK.registerApp("3758958382")
-        WXApi.registerApp("wx4dc4b980c462893b")
+        WXApi.registerApp("wxb0d4e235d6897257")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateTheme", name: CurrentThemeDidChangeNotificationName, object: nil)
         updateTheme()
         window!.rootViewController = loginViewController
