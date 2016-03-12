@@ -51,13 +51,13 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wr5-u5-ieh">
                                         <rect key="frame" x="0.0" y="0.0" width="528" height="100"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="用户名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKi-48-sZt">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKi-48-sZt">
                                                 <rect key="frame" x="8" y="8" width="51" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="三小时前 转发" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05q-Ff-jtI">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="三小时前 转发" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05q-Ff-jtI">
                                                 <rect key="frame" x="67" y="11" width="88" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -69,7 +69,7 @@
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="这是作者的评论可能会很长但是只会显示两行" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXg-K4-kGi" customClass="MSRMultilineLabel" customModule="WeCenterMobile" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是作者的评论可能会很长但是只会显示两行" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXg-K4-kGi" customClass="MSRMultilineLabel" customModule="WeCenterMobile" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="51" width="306" height="41"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -88,7 +88,6 @@
                                             <constraint firstItem="uKG-kk-X6A" firstAttribute="top" secondItem="wr5-u5-ieh" secondAttribute="top" constant="8" id="1m2-uN-M7J"/>
                                             <constraint firstItem="05q-Ff-jtI" firstAttribute="centerY" secondItem="tKi-48-sZt" secondAttribute="centerY" constant="1" id="2bh-G5-sQL"/>
                                             <constraint firstAttribute="bottom" secondItem="LXg-K4-kGi" secondAttribute="bottom" constant="8" id="3os-Fy-Xao"/>
-                                            <constraint firstAttribute="height" constant="100" id="6Bs-6C-xWo"/>
                                             <constraint firstItem="LXg-K4-kGi" firstAttribute="leading" secondItem="wr5-u5-ieh" secondAttribute="leading" constant="8" id="OZ1-0v-s0A"/>
                                             <constraint firstItem="tKi-48-sZt" firstAttribute="leading" secondItem="wr5-u5-ieh" secondAttribute="leading" constant="8" id="kau-k3-jFz"/>
                                             <constraint firstItem="05q-Ff-jtI" firstAttribute="leading" secondItem="tKi-48-sZt" secondAttribute="trailing" constant="8" id="keO-DM-JQj"/>
@@ -130,6 +129,7 @@
                                             <constraint firstAttribute="trailing" secondItem="VJB-Qb-Q1a" secondAttribute="trailing" id="DQW-u5-zlH"/>
                                             <constraint firstItem="L2Z-t7-sRo" firstAttribute="leading" secondItem="iae-Mp-KKS" secondAttribute="trailing" constant="8" id="IIe-Hw-sfe"/>
                                             <constraint firstItem="L2Z-t7-sRo" firstAttribute="top" secondItem="NO9-RI-TyY" secondAttribute="bottom" constant="8" id="Ike-gc-DOz"/>
+                                            <constraint firstAttribute="height" constant="100" id="LcT-rr-3br"/>
                                             <constraint firstAttribute="bottom" secondItem="iae-Mp-KKS" secondAttribute="bottom" id="MqZ-Li-2Gg"/>
                                             <constraint firstItem="NO9-RI-TyY" firstAttribute="top" secondItem="2Z2-c1-RdN" secondAttribute="top" constant="8" id="aoz-LU-STX"/>
                                             <constraint firstItem="VJB-Qb-Q1a" firstAttribute="top" secondItem="2Z2-c1-RdN" secondAttribute="top" id="dqy-oj-TZP"/>
@@ -178,6 +178,7 @@
                 <outlet property="articleButton" destination="VJB-Qb-Q1a" id="Ulq-45-Oz0"/>
                 <outlet property="articleContainerView" destination="hgP-Xi-fm7" id="Hmj-Td-3e3"/>
                 <outlet property="articleTitleLabel" destination="NO9-RI-TyY" id="OtH-va-QIO"/>
+                <outlet property="articleView" destination="2Z2-c1-RdN" id="jaa-VK-2Zs"/>
                 <outlet property="containerView" destination="9yo-UI-LT5" id="6eh-K9-jVj"/>
                 <outlet property="dateLabel" destination="05q-Ff-jtI" id="PfK-Z1-iTG"/>
                 <outlet property="detailImageView" destination="iae-Mp-KKS" id="40S-EG-qhW"/>

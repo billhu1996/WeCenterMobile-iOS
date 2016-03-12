@@ -9,6 +9,7 @@
 import AFNetworking
 import CoreData
 import Foundation
+import UIKit
 
 class Article: DataObject {
 
@@ -204,6 +205,54 @@ class Article: DataObject {
                 return
             },
             failure: failure)
+    }
+    
+    var imageData: NSData?
+    var image: UIImage? {
+        get {
+            if imageData != nil {
+                return UIImage(data: imageData!)
+            } else {
+                return nil
+            }
+        }
+        set {
+            imageData = newValue == nil ? nil : UIImagePNGRepresentation(newValue!)
+        }
+    }
+    
+    private let imageView = UIImageView()
+    func fetchImage(forced forced: Bool, success: (() -> Void)?, failure: ((NSError) -> Void)?) {
+        if imageURL != nil {
+            let request = NSMutableURLRequest(URL: NSURL(string: imageURL!)!)
+            request.addValue("image/*", forHTTPHeaderField:"Accept")
+            if forced {
+                (UIImageView.sharedImageCache() as! NSCache).removeObjectForKey(request.URL!.absoluteString)
+            }
+            imageView.setImageWithURLRequest(request,
+                placeholderImage: nil,
+                success: {
+                    [weak self] request, response, image in
+                    if let self_ = self {
+                        if self_.image == nil || response != nil {
+                            self_.image = image
+                            _ = try? DataManager.defaultManager.saveChanges()
+                            success?()
+                        } else {
+                            failure?(NSError(domain: NetworkManager.defaultManager!.website, code: NetworkManager.defaultManager!.internalErrorCode.integerValue, userInfo: nil)) // Needs specification
+                        }
+                    } else {
+                        failure?(NSError(domain: NetworkManager.defaultManager!.website, code: NetworkManager.defaultManager!.internalErrorCode.integerValue, userInfo: nil)) // Needs specification
+                    }
+                },
+                failure: {
+                    _, _, error in
+                    failure?(error)
+                    return
+            })
+        } else {
+            failure?(NSError(domain: NetworkManager.defaultManager!.website, code: NetworkManager.defaultManager!.internalErrorCode.integerValue, userInfo: nil)) // Needs specification
+        }
     }
     
 }

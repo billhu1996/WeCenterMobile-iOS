@@ -173,6 +173,9 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
             if let url = article.url {
+                self.webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
+                self.webViewController.article = article
+                self.webViewController.published = false
                 self.webViewController.requestURL = url
                 self.msr_navigationController!.pushViewController(self.webViewController, animated: true)
             } else {
