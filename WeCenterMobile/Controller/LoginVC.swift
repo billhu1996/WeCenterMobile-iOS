@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import QRCodeReaderViewController
+import UMSocial
+import SocialWechat
 
 class LoginVC: UIViewController, QRCodeReaderDelegate {
     
@@ -31,39 +33,70 @@ class LoginVC: UIViewController, QRCodeReaderDelegate {
     }
     
     @IBAction func login() {
-        User.loginWithName("adfad@163.com",
-            password: "password",
-            success: {
-                [weak self] user in
-                User.currentUser = user
-                if let self_ = self {
-                    self_.presentMainViewController()
-                }
-            },
-            failure: {
-                [weak self] error in
-                if let _ = self {
-                    print((error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误")
-                }
-            })
+        let snsPlatform = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
+        snsPlatform.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {response in
+            if response.responseCode == UMSResponseCodeSuccess {
+                
+                let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
+                print(snsAccount)
+                print("username is \(snsAccount.userName), uid is \(snsAccount.usid), token is \(snsAccount.accessToken) url is \(snsAccount.iconURL)")
+                User.registerWithEmail("\(snsAccount.usid)@zaidu.com",
+                    name: "\(snsAccount.userName)",
+                    password: "123456",
+                    success: {
+                        [weak self] user in
+                        User.currentUser = user
+                        if let self_ = self {
+                            self_.presentMainViewController()
+                        }
+                    },
+                    failure: {
+                        [weak self] error in
+                        if error.code == 23333 {
+                            User.loginWithName("\(snsAccount.usid)@zaidu.com",
+                                password: "123456",
+                                success: {
+                                    [weak self] user in
+                                    User.currentUser = user
+                                    if let self_ = self {
+                                        self_.presentMainViewController()
+                                    }
+                                },
+                                failure: {
+                                    [weak self] error in
+                                    if let _ = self {
+                                        print((error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误")
+                                    }
+                                })
+                        } else {
+                            print((error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误")
+                        }
+                    })
+            } else {
+                print(response)
+            }
+        })
     }
     
     @IBAction func register() {
-        User.registerWithEmail("adfad@163.com",
-            name: "nicheng",
-            password: "password",
-            success: {
-                [weak self] user in
-                User.currentUser = user
-                if let self_ = self {
-                    self_.presentMainViewController()
-                }
-            },
-            failure: {
-                [weak self] error in
-                print(error)
-                print((error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误")
-            })
+//        User.registerWithEmail("adfad@163.com",
+//            name: "nicheng",
+//            password: "password",
+//            success: {
+//                [weak self] user in
+//                User.currentUser = user
+//                if let self_ = self {
+//                    self_.presentMainViewController()
+//                }
+//            },
+//            failure: {
+//                [weak self] error in
+//                if error.code == 23333 {
+//                    print("fasdfasdf")
+//                } else {
+//                    print((error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误")
+//                }
+//            })
     }
     
     func presentMainViewController() {

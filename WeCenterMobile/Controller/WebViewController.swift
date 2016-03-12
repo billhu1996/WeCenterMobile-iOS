@@ -16,9 +16,8 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     var published = false
     var articleID = -1
     var evaluate: Evaluation = Evaluation.None
-    var avatarImage: UIImage = UIImage(named: "User-DefaultAvatar")!
     var userName = ""
-    var article: Article = Article.temporaryObject()
+    var article: Article? = nil
 //    var superViewController: UIViewController
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var addButton: UIButton!
@@ -28,15 +27,19 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Back"), style: .Plain, target: nil, action: "didPressBackButton")
-        let v = NSBundle.mainBundle().loadNibNamed("TitleView", owner: nil, options: nil).first as! TitleView
-        v.avatarImage.image = self.avatarImage
-        v.nameLabel.text = self.userName
-        v.backgroundColor = UIColor.clearColor()
-        self.navigationItem.titleView = v
+        
         self.loaded = false;
         self.view.backgroundColor = UIColor.whiteColor();
         
-        
+        if article != nil {
+            self.articleID = (self.article?.id.integerValue)!
+            self.evaluate = (self.article?.evaluation)!
+            let v = NSBundle.mainBundle().loadNibNamed("TitleView", owner: nil, options: nil).first as! TitleView
+            v.nameLabel.text = self.article?.user?.name
+            v.avatarImage.wc_updateWithUser(self.article?.user)
+            v.backgroundColor = UIColor.clearColor()
+            self.navigationItem.titleView = v
+        }
         
         self.reloadData()
     }

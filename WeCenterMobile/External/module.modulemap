@@ -118,3 +118,37 @@ module QRCodeReaderViewController {
     header "MQRCodeReaderViewController/QRCodeReaderViewController/QRCodeReaderViewController.h"
     
 }
+
+module UMSocial {
+    
+    requires objc, objc_arc
+    
+    use UIKit
+    
+    umbrella header "UMSocial_Sdk_4.4/Header/UMSocial.h"
+    header "UMSocial_Sdk_4.4/Header/UMSocialData.h"
+    header "UMSocial_Sdk_4.4/Header/UMSocialDataService.h"
+    header "UMSocial_Sdk_4.4/Header/UMSocialControllerService.h"
+    header "UMSocial_Sdk_4.4/Header/UMSocialControllerServiceComment.h"
+    header "UMSocial_Sdk_4.4/Header/UMSocialAccountManager.h"
+    header "UMSocial_Sdk_4.4/Header/UMSocialSnsPlatformManager.h"
+    header "UMSocial_Sdk_4.4/Header/UMSocialSnsService.h"
+    header "UMSocial_Sdk_4.4/Header/UMSocialBar.h"
+    header "UMSocial_Sdk_4.4/Header/UMSocialConfig.h"
+    header "UMSocial_Sdk_4.4/Header/UMSocialSnsData.h"
+    
+    link "UMSocial_Sdk_4.4"
+    
+}
+
+module SocialWechat {
+    
+    requires objc, objc_arc
+    
+    use UIKit
+    
+    umbrella header "UMSocial_Sdk_Extra_Frameworks/Wechat/UMSocialWechatHandler.h"
+    
+    link "SocialWechat"
+    
+}
