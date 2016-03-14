@@ -41,6 +41,8 @@
 		5CA5A8601C940CF000646650 /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5CA5A84D1C940CF000646650 /* UMSocialSDKResourcesNew.bundle */; };
 		5CA5A8611C940CF000646650 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CA5A8511C940CF000646650 /* libSocialWechat.a */; };
 		5CA5A8621C940CF000646650 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CA5A8521C940CF000646650 /* libWeChatSDK.a */; };
+		5CAFA9591C9693B6006E66A2 /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAFA9581C9693B6006E66A2 /* libiconv.2.dylib */; };
+		5CAFA95B1C96940D006E66A2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAFA95A1C96940D006E66A2 /* CoreGraphics.framework */; };
 		5CDB12121C7ED0C700ED92BF /* UserC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB12111C7ED0C700ED92BF /* UserC.swift */; };
 		5CDB12141C7ED0D800ED92BF /* UserC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CDB12131C7ED0D800ED92BF /* UserC.xib */; };
 		5CDB44551C902F06009879EA /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB44541C902F06009879EA /* TitleView.swift */; };
@@ -661,6 +663,8 @@
 		5CA5A8531C940CF000646650 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
 		5CA5A8541C940CF000646650 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		5CA5A8551C940CF000646650 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		5CAFA9581C9693B6006E66A2 /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = ../../../../../../usr/lib/libiconv.2.dylib; sourceTree = "<group>"; };
+		5CAFA95A1C96940D006E66A2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5CDB12111C7ED0C700ED92BF /* UserC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserC.swift; sourceTree = "<group>"; };
 		5CDB12131C7ED0D800ED92BF /* UserC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserC.xib; sourceTree = "<group>"; };
 		5CDB44541C902F06009879EA /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
@@ -1039,6 +1043,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CAFA95B1C96940D006E66A2 /* CoreGraphics.framework in Frameworks */,
+				5CAFA9591C9693B6006E66A2 /* libiconv.2.dylib in Frameworks */,
 				95EAF69A1B3B21B600863F19 /* Accounts.framework in Frameworks */,
 				95EAF68C1B3B212600863F19 /* CoreMotion.framework in Frameworks */,
 				95EAF68D1B3B212600863F19 /* CoreTelephony.framework in Frameworks */,
@@ -1540,6 +1546,8 @@
 		9588F5DA1A1D9D1C001BC426 = {
 			isa = PBXGroup;
 			children = (
+				5CAFA95A1C96940D006E66A2 /* CoreGraphics.framework */,
+				5CAFA9581C9693B6006E66A2 /* libiconv.2.dylib */,
 				9588F5E51A1D9D1C001BC426 /* WeCenterMobile */,
 				9588F5FE1A1D9D1C001BC426 /* WeCenterMobileTests */,
 				9588F5E41A1D9D1C001BC426 /* Products */,

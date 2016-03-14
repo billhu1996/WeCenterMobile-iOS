@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import WeChatSDK
+import UMSocial
+import SocialWechat
 
 class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegate {
     
@@ -23,10 +26,13 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var likeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Back"), style: .Plain, target: nil, action: "didPressBackButton")
+        let item = UIBarButtonItem(image: UIImage(named: "WebVCShareGreen"), style: .Plain, target: self, action: "share:")
+        self.navigationItem.rightBarButtonItem = item
         
         self.loaded = false;
         self.view.backgroundColor = UIColor.whiteColor();
@@ -44,8 +50,21 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
         self.reloadData()
     }
     
-    func didPressBackButton() {
-        return dismissViewControllerAnimated(true, completion: nil)
+    func share(sender: AnyObject) {
+        if article != nil {
+            let title = self.article!.title!
+            let image = self.article!.user?.avatar ?? defaultUserAvatar
+            let body = self.article!.body!.wc_plainString
+            let url: String = self.requestURL
+            var items = [title, body, NSURL(string: url)!]
+            if image != nil {
+                items.append(image!)
+            }
+            let vc = UIActivityViewController(
+                activityItems: items,
+                applicationActivities: [WeChatSessionActivity(), WeChatTimelineActivity()])
+            showDetailViewController(vc, sender: self)
+        }
     }
     
 //    init(superViewController: UIViewController) {
@@ -90,7 +109,9 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
         if webView.loading {
             return
         }
-        addToReadingList(self)
+        if self.articleID == -1 {
+            addToReadingList(self)
+        }
     }
     
     @IBAction func comment(sender: AnyObject) {
@@ -214,5 +235,8 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
         } else {
             self.likeButton.setImage(UIImage(named: "WebVCLikeGreen"), forState: .Normal)
         }
+//        if self.articleID != -1 {
+//            self.commentLabel.text = "\(self.article.)"
+//        }
     }
 }

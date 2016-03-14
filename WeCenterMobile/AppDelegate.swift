@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DTAttributedTextContentView.setLayerClass(DTTiledLayerWithoutFade.self)
         SVProgressHUD.setDefaultMaskType(.Gradient)
 //        WeiboSDK.registerApp("3758958382")
-//        WXApi.registerApp("wxb0d4e235d6897257")
+        WXApi.registerApp("wxb0d4e235d6897257")
         UMSocialData.setAppKey("56e3b4b0e0f55aa2c60011ea")
         UMSocialWechatHandler.setWXAppId("wxb0d4e235d6897257", appSecret: "cf81ec43d54276b1e951e6aa41d145f2", url: "http://we.edustack.org")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateTheme", name: CurrentThemeDidChangeNotificationName, object: nil)
@@ -78,7 +78,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        return UMSocialSnsService.handleOpenURL(url, wxApiDelegate: nil)
+        return UMSocialSnsService.handleOpenURL(url, wxApiDelegate: nil) || WXApi.handleOpenURL(url, delegate: nil)
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        let result = UMSocialSnsService.handleOpenURL(url)
+        if result == false {
+            //调用其他SDK，例如支付宝SDK等
+        }
+        return result;
     }
     
     func clearCaches() {
