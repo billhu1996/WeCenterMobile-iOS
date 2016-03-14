@@ -61,8 +61,26 @@ class ArticlePublishmentActionCell: UITableViewCell {
                         return
                 })
             }
-            print("image \(url)")
         }
+        if let url = action.user?.avatarURL {
+            if let url = NSURL(string: url) {
+                detailImageView.setImageWithURLRequest(NSURLRequest(URL: url), placeholderImage: UIImage(named: "User-Follow"), success: {
+                    [weak self] request, response, image in
+                    if let self_ = self {
+//                        avatar = image
+                        self_.detailImageView.image = image//avatar
+                    }
+                    }, failure: {
+                        [weak self] _, _, _ in
+                        if let self_ = self {
+                            self_.detailImageView.image = UIImage(named: "User-Follow")
+                        }
+                        return
+                    })
+            }
+        }
+
+        
         userNameLabel.text = action.user?.name ?? "匿名用户"
         articleBody.text = action.article?.body
         
@@ -78,7 +96,7 @@ class ArticlePublishmentActionCell: UITableViewCell {
         articleTitleLabel.text = action.article!.title
         userButton.msr_userInfo = action.user
         articleButton.msr_userInfo = action.article
-        userAvatarView.wc_updateWithUser(action.user)
+//        userAvatarView.wc_updateWithUser(action.user)
         setNeedsLayout()
         layoutIfNeeded()
     }

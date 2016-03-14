@@ -59,10 +59,7 @@ class ArticleAgreementActionCell: UITableViewCell {
         }
         if let url = action.article?.imageURL {
             detailImageView.setImageWithURL(NSURL(string: url), placeholderImage: nil)
-        } else {
-            print(action.article?.imageURL)
-        }
-            
+        }            
         articleTitleLabel.text = action.article!.title
         articleBodyLabel.text = action.article!.body
         userButton.msr_userInfo = action.user

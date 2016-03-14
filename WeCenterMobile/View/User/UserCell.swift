@@ -33,7 +33,6 @@ class UserCell: UITableViewCell {
 
     func update(user user: User) {
         userAvatarView.wc_updateWithUser(user)
-        print(user)
         if let following = user.following {
             userFollowImageView.image = following ? UIImage(named: "User-Unfollow") : UIImage(named: "User-Follow")
             userFollowLabel.text = following ? "已关注" : "加关注"

@@ -33,10 +33,6 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         c.searchButton.addTarget(nil, action: "didPressSearchButton:", forControlEvents: .TouchUpInside)
         return c
     }()
-    lazy var webViewController: WebViewController = {
-        var webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
-        return webViewController
-    }()
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "我关注的"
@@ -53,8 +49,8 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     var actions = [Action]()
     
     let actionTypes: [Action.Type] = [AnswerAction.self, QuestionPublishmentAction.self, QuestionFocusingAction.self, AnswerAgreementAction.self, ArticlePublishmentAction.self, ArticleAgreementAction.self, ArticleCommentaryAction.self]
-    let identifiers = ["AnswerActionCell", "QuestionPublishmentActionCell", "QuestionFocusingActionCell", "AnswerAgreementActionCell", "ArticlePublishmentActionCell", "ArticleAgreementActionCell", "ArticleCommentaryActionCell"]
-    let nibNames = ["AnswerActionCell", "QuestionPublishmentActionCell", "QuestionFocusingActionCell", "AnswerAgreementActionCell", "ArticlePublishmentActionCell", "ArticleAgreementActionCell", "ArticleCommentaryActionCell"]
+    let identifiers = ["ArticlePublishmentActionCell", "ArticleAgreementActionCell", "ArticleCommentaryActionCell"]
+    let nibNames = ["ArticlePublishmentActionCell", "ArticleAgreementActionCell", "ArticleCommentaryActionCell"]
     
     init(user: User) {
         self.user = user
@@ -173,11 +169,11 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
             if let url = article.url {
-                self.webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
-                self.webViewController.article = article
-                self.webViewController.published = false
-                self.webViewController.requestURL = url
-                self.msr_navigationController!.pushViewController(self.webViewController, animated: true)
+                let webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
+                webViewController.article = article
+                webViewController.published = false
+                webViewController.requestURL = url
+                msr_navigationController!.pushViewController(webViewController, animated: true)
             } else {
                 msr_navigationController!.pushViewController(ArticleAnswerViewController(dataObject: article), animated: true)
             }
