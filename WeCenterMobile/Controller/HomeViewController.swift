@@ -48,7 +48,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     let user: User
     var actions = [Action]()
     
-    let actionTypes: [Action.Type] = [AnswerAction.self, QuestionPublishmentAction.self, QuestionFocusingAction.self, AnswerAgreementAction.self, ArticlePublishmentAction.self, ArticleAgreementAction.self, ArticleCommentaryAction.self]
+    let actionTypes: [Action.Type] = [ArticlePublishmentAction.self, ArticleAgreementAction.self, ArticleCommentaryAction.self]
     let identifiers = ["ArticlePublishmentActionCell", "ArticleAgreementActionCell", "ArticleCommentaryActionCell"]
     let nibNames = ["ArticlePublishmentActionCell", "ArticleAgreementActionCell", "ArticleCommentaryActionCell"]
     
@@ -91,14 +91,11 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + min(page * count, actions.count)
+        return min(page * count, actions.count)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            return searchBarCell
-        }
-        let action = actions[indexPath.row - 1]
+        let action = actions[indexPath.row]
         if let index = (actionTypes.map { action.classForCoder === $0 }).indexOf(true) {
             let cell = tableView.dequeueReusableCellWithIdentifier(identifiers[index], forIndexPath: indexPath) as! ActionCell
             cell.update(action: action)

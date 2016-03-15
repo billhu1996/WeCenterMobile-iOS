@@ -768,11 +768,15 @@ class User: DataObject {
                             }
                             let articleInfo = object["article_info"] as! NSDictionary
                             action.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
-                            action.article?.title = (articleInfo["title"] as? String)
                             action.article?.user = action.user
-                            action.article?.url = (object["url"] as? String)
-                            action.article?.body = articleInfo["message"] as? String
-                            action.article?.imageURL = object["imgUrl"] as? String
+                            if Int(msr_object: articleInfo["category_id"]) == 2 {
+                                action.article?.title = (articleInfo["outline"] as? String)
+                                action.article?.url = (object["url"] as? String)
+                                action.article?.imageURL = object["imgUrl"] as? String
+                            } else {
+                                action.article?.title = (articleInfo["title"] as? String)
+                                action.article?.body = articleInfo["message"] as? String
+                            }
                             break
                         case .ArticleCommentary:
                             let action = ArticleCommentaryAction.cachedObjectWithID(Int(msr_object: object["history_id"]!)!)
