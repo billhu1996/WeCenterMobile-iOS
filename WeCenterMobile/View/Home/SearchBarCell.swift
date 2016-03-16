@@ -10,16 +10,15 @@ import UIKit
 
 class SearchBarCell: UITableViewCell {
 
-//    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var searchImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        let theme = SettingsManager.defaultManager.currentTheme
-//        searchBar.placeholder = "搜索用户和内容"
-//        searchBar.barStyle = theme.navigationBarStyle
-//        searchBar.keyboardAppearance = theme.keyboardAppearance
+        searchButton.msr_setBackgroundImageWithColor(contentView.backgroundColor!.colorWithAlphaComponent(0.5), forState: .Highlighted)
+        searchImageView.tintColor = %+0x049c55
         setNeedsLayout()
         layoutIfNeeded()
     }
+    
 }

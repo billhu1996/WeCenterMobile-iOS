@@ -125,7 +125,7 @@ class UserVC: UITableViewController {
             })
         shouldReloadAfterLoadingMore = false
         tableView.mj_footer?.endRefreshing()
-        user.fetchPublishedActions(
+        user.fetchRelatedActions(
             page: 1,
             count: count,
             success: {

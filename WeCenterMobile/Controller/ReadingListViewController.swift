@@ -206,7 +206,7 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
     internal func refresh() {
         shouldReloadAfterLoadingMore = false
         tableView.mj_footer?.endRefreshing()
-        user.fetchPublishedActions(
+        user.fetchRelatedActions(
             page: 1,
             count: count,
             success: {
@@ -234,7 +234,7 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
             return
         }
         shouldReloadAfterLoadingMore = true
-        user.fetchPublishedActions(
+        user.fetchRelatedActions(
             page: page + 1,
             count: count,
             success: {

@@ -39,11 +39,11 @@
 		<key>Navigation Item Color</key>
 		<integer>4294967106</integer>
 		<key>Navigation Bar Tint Color</key>
-		<string>11,032,898</string>
+		<integer>77354495</integer>
 		<key>Navigation Bar Style</key>
 		<integer>0</integer>
 		<key>Status Bar Style</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>Tool Bar Item Color</key>
 		<integer>127</integer>
 		<key>Tool Bar Style</key>
@@ -92,11 +92,11 @@
 		<key>Navigation Item Color</key>
 		<real>4294967295</real>
 		<key>Navigation Bar Tint Color</key>
-		<string>11,032,898</string>
+		<integer>77354495</integer>
 		<key>Navigation Bar Style</key>
 		<integer>0</integer>
 		<key>Status Bar Style</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>Tool Bar Item Color</key>
 		<integer>127</integer>
 		<key>Tool Bar Style</key>

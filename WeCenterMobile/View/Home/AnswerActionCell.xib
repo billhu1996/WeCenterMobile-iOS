@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kEP-s0-gIf" id="Rqk-1K-RrD">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="143"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="143.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UdY-t1-1Ec">
@@ -170,7 +170,6 @@
                             <constraint firstAttribute="bottom" secondItem="VR3-T1-vFu" secondAttribute="bottom" id="4hy-Qh-jrR"/>
                             <constraint firstAttribute="trailing" secondItem="xgD-93-gSb" secondAttribute="trailing" id="6az-Nz-gyf"/>
                             <constraint firstItem="xgD-93-gSb" firstAttribute="leading" secondItem="L7l-IR-Ca8" secondAttribute="trailing" id="6fA-JG-2KK"/>
-                            <constraint firstAttribute="bottom" secondItem="xgD-93-gSb" secondAttribute="bottom" id="936-AN-BS6"/>
                             <constraint firstItem="L7l-IR-Ca8" firstAttribute="top" secondItem="UdY-t1-1Ec" secondAttribute="top" id="BYu-6E-Z5b"/>
                             <constraint firstItem="VR3-T1-vFu" firstAttribute="top" secondItem="oaf-yy-pRk" secondAttribute="bottom" id="Gh1-4c-AhB"/>
                             <constraint firstAttribute="bottom" secondItem="L7l-IR-Ca8" secondAttribute="bottom" id="HO0-MQ-Ljs"/>
@@ -188,11 +187,6 @@
                                 <real key="value" value="0.5"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="936-AN-BS6"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

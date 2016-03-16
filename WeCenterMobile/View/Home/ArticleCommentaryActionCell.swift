@@ -10,23 +10,18 @@ import UIKit
 
 class ArticleCommentaryActionCell: UITableViewCell {
     
-    @IBOutlet weak var userAvatarView: MSRRoundedImageView!
+    @IBOutlet weak var userAvatarView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var articleTitleLabel: UILabel!
-    @IBOutlet weak var articleBodyLabel: MSRMultilineLabel!
-//    @IBOutlet weak var agreementCountLabel: UILabel!
-//    @IBOutlet weak var commentBodyLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var articleButton: UIButton!
-//    @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var userContainerView: UIView!
-    @IBOutlet weak var articleContainerView: UIView!
-//    @IBOutlet weak var commentContainerView: UIView!
-    @IBOutlet weak var separatorA: UIView!
-//    @IBOutlet weak var separatorB: UIView!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var articleBodyLabel: UILabel!
+    @IBOutlet weak var detailImageView: UIImageView!
+    @IBOutlet weak var articleView: UIView!
+    @IBOutlet weak var viewCountLabel: UILabel!
+    @IBOutlet weak var commentLabel: UILabel!
     
     lazy var dateFormatter: NSDateFormatter = {
         let f = NSDateFormatter()
@@ -38,48 +33,31 @@ class ArticleCommentaryActionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         msr_scrollView?.delaysContentTouches = false
-        let theme = SettingsManager.defaultManager.currentTheme
-        for v in [containerView]{//, agreementCountLabel] {
-            v.msr_borderColor = theme.borderColorA
-        }
-        for v in [userButton, articleButton] {//, commentButton] {
-            v.msr_setBackgroundImageWithColor(theme.highlightColor, forState: .Highlighted)
-        }
-        for v in [userContainerView, articleContainerView] {
-            v.backgroundColor = theme.backgroundColorB
-        }
-//        for v in [commentContainerView, agreementCountLabel] {
-//            v.backgroundColor = theme.backgroundColorA
-//        }
-        for v in [separatorA,]{// separatorB] {
-            v.backgroundColor = theme.borderColorA
-        }
-        for v in [userNameLabel, articleTitleLabel] {
-            v.textColor = theme.titleTextColor
-        }
-        for v in [typeLabel, ]{//agreementCountLabel, commentBodyLabel] {
-            v.textColor = theme.subtitleTextColor
-        }
     }
     
     func update(action action: Action) {
         let action = action as! ArticleCommentaryAction
+        if let urlString = action.comment!.article?.imageURL {
+            if let url = NSURL(string: urlString) {
+                detailImageView.cancelImageRequestOperation()
+                detailImageView.setImageWithURL(url, placeholderImage: UIImage())
+            }
+        }
         userAvatarView.wc_updateWithUser(action.user)
         userNameLabel.text = action.user?.name ?? "匿名用户"
-        articleTitleLabel.text = action.comment!.article!.title!
-//        agreementCountLabel.text = "\(action.comment!.agreementCount!)"
-//        commentBodyLabel.text = action.comment!.body!.wc_plainString
-        userButton.msr_userInfo = action.user
-        articleButton.msr_userInfo = action.comment!.article
-//        commentButton.msr_userInfo = action.comment
-        articleBodyLabel.text = action.comment!.article!.body
-        if let date = action.comment?.date {
-            dateLabel.text = dateFormatter.stringFromDate(date)
+        articleBodyLabel.text = action.comment!.article?.body
+        if let date = action.date {
+            dateLabel.text = TimeDifferenceStringFromDate(date) + " "
         } else {
             dateLabel.text = ""
         }
+        dateLabel.text = dateLabel.text! + "评论了"
+        articleTitleLabel.text = action.comment!.article!.title
+        viewCountLabel.text = "\(action.comment!.article!.viewCount!)"
+        commentLabel.text = action.comment!.body
+        userButton.msr_userInfo = action.user
+        articleButton.msr_userInfo = action.comment!.article
         setNeedsLayout()
         layoutIfNeeded()
     }
-    
 }

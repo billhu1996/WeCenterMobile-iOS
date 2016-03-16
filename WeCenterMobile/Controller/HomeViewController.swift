@@ -63,6 +63,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     override func loadView() {
         super.loadView()
         title = "我关注的" // Needs localization
+        msr_navigationBar!.msr_shadowImageView?.hidden = true
         navigationItem.titleView = titleLabel
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Publishment-Article_Question"), style: .Plain, target: self, action: "showFollowerList")
@@ -87,14 +88,17 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return min(page * count, actions.count)
+        return [1, min(page * count, actions.count)][section]
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if (indexPath.section == 0) {
+            return searchBarCell
+        }
         let action = actions[indexPath.row]
         if let index = (actionTypes.map { action.classForCoder === $0 }).indexOf(true) {
             let cell = tableView.dequeueReusableCellWithIdentifier(identifiers[index], forIndexPath: indexPath) as! ActionCell
@@ -193,9 +197,10 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     internal func refresh() {
         shouldReloadAfterLoadingMore = false
         tableView.mj_footer?.endRefreshing()
-        user.fetchRelatedActions(
+        User.fetchActions(
             page: 1,
             count: count,
+            userID: nil,
             success: {
                 [weak self] actions in
                 if let self_ = self {
@@ -221,9 +226,10 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
             return
         }
         shouldReloadAfterLoadingMore = true
-        user.fetchRelatedActions(
+        User.fetchActions(
             page: page + 1,
             count: count,
+            userID: nil,
             success: {
                 [weak self] actions in
                 if let self_ = self {

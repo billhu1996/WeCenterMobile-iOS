@@ -10,18 +10,17 @@ import UIKit
 
 class ArticlePublishmentActionCell: UITableViewCell {
     
-    @IBOutlet weak var userAvatarView: MSRRoundedImageView!
+    @IBOutlet weak var userAvatarView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var articleTitleLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var articleButton: UIButton!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var userContainerView: UIView!
-    @IBOutlet weak var articleContainerView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var articleBody: MSRMultilineLabel!
+    @IBOutlet weak var articleBodyLabel: UILabel!
     @IBOutlet weak var detailImageView: UIImageView!
     @IBOutlet weak var articleView: UIView!
+    @IBOutlet weak var viewCountLabel: UILabel!
     
     lazy var dateFormatter: NSDateFormatter = {
         let f = NSDateFormatter()
@@ -33,70 +32,29 @@ class ArticlePublishmentActionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         msr_scrollView?.delaysContentTouches = false
-        let theme = SettingsManager.defaultManager.currentTheme
-        articleView.backgroundColor = theme.borderColorA
-        containerView.msr_borderColor = theme.borderColorA
-        for v in [userButton, articleButton] {
-            v.msr_setBackgroundImageWithColor(theme.highlightColor, forState: .Highlighted)
-        }
-        for v in [userNameLabel, articleTitleLabel] {
-            v.textColor = theme.titleTextColor
-        }
     }
     
     func update(action action: Action) {
         let action = action as! ArticlePublishmentAction
-        if let url = action.article?.imageURL {
-            if let url = NSURL(string: url) {
-                detailImageView.setImageWithURLRequest(NSURLRequest(URL: url), placeholderImage: UIImage(named: "User-Follow"), success: {
-                    [weak self] request, response, image in
-                    if let self_ = self {
-                        self_.detailImageView.image = image
-                    }
-                    }, failure: {
-                    [weak self] _, _, _ in
-                        if let self_ = self {
-                            self_.detailImageView.image = UIImage(named: "User-Follow")
-                        }
-                        return
-                })
+        if let urlString = action.article?.imageURL {
+            if let url = NSURL(string: urlString) {
+                detailImageView.cancelImageRequestOperation()
+                detailImageView.setImageWithURL(url, placeholderImage: UIImage())
             }
         }
-        if let url = action.user?.avatarURL {
-            if let url = NSURL(string: url) {
-                detailImageView.setImageWithURLRequest(NSURLRequest(URL: url), placeholderImage: UIImage(named: "User-Follow"), success: {
-                    [weak self] request, response, image in
-                    if let self_ = self {
-//                        avatar = image
-                        self_.detailImageView.image = image//avatar
-                    }
-                    }, failure: {
-                        [weak self] _, _, _ in
-                        if let self_ = self {
-                            self_.detailImageView.image = UIImage(named: "User-Follow")
-                        }
-                        return
-                    })
-            }
-        }
-
-        
+        userAvatarView.wc_updateWithUser(action.user)
         userNameLabel.text = action.user?.name ?? "匿名用户"
-        articleBody.text = action.article?.body
-        
-        if let date = action.article?.date {
-            dateLabel.text = dateFormatter.stringFromDate(date)
+        articleBodyLabel.text = action.article?.body
+        if let date = action.date {
+            dateLabel.text = TimeDifferenceStringFromDate(date) + " "
         } else {
             dateLabel.text = ""
         }
-        if let URL = action.article?.imageURL {
-            let url = NSURL(string: URL)
-            userAvatarView.setImageWithURL(url, placeholderImage: nil)
-        }
+        dateLabel.text = dateLabel.text! + "在读"
         articleTitleLabel.text = action.article!.title
+        viewCountLabel.text = "\(action.article!.viewCount!)"
         userButton.msr_userInfo = action.user
         articleButton.msr_userInfo = action.article
-//        userAvatarView.wc_updateWithUser(action.user)
         setNeedsLayout()
         layoutIfNeeded()
     }
