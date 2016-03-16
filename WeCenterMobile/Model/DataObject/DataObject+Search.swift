@@ -19,6 +19,7 @@ extension DataObject {
             ],
             success: {
                 data in
+                print(data)
                 var objects = [DataObject]()
                 for objectData in data["rows"] as? [NSDictionary] ?? [] {
                     if let typeRawValue = objectData["type"] as? String {

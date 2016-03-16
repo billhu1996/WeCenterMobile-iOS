@@ -39,7 +39,6 @@ class FeaturedObjectListViewController: UITableViewController {
             }
         }
     }
-    weak var superViewController: UIViewController?
     lazy var searchBarCell: SearchBarCell = {
         let c = NSBundle.mainBundle().loadNibNamed("SearchBarCell", owner: nil, options: nil).first as! SearchBarCell
         c.searchButton.addTarget(nil, action: "didPressSearchButton:", forControlEvents: .TouchUpInside)
@@ -129,10 +128,7 @@ class FeaturedObjectListViewController: UITableViewController {
     }
     
     func didPressSearchButton(sender: UIButton) {
-        if let superViewController = superViewController {
-            let s = SearchViewController(superController: superViewController)
-            navigationController?.setViewControllers([s], animated: false)
-        }
+        
     }
     
     func refresh() {

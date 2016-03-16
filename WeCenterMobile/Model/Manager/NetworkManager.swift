@@ -52,7 +52,6 @@ class NetworkManager: NSObject {
             do {
                 GETParameters["mobile_sign"] = getMobileSignWithPath(paths[key]!)
                 let URLString = try manager.requestSerializer.requestWithMethod("GET", URLString: paths[key]!, parameters: GETParameters, error: ()).URL!.absoluteString
-                NSLog((NetworkManager.defaultManager?.website)! + URLString)
                 return manager.POST(URLString,
                     parameters: POSTParameters,
                     constructingBodyWithBlock: block,
@@ -87,27 +86,27 @@ class NetworkManager: NSObject {
             var userInfo = [
                 NSLocalizedDescriptionKey: "Failed to parse JSON.",
                 NSLocalizedFailureReasonErrorKey: "The data returned from the server does not meet the JSON syntax.",
-                NSURLErrorKey: operation.response.URL!
+                NSURLErrorKey: operation.request.URL!
             ]
             userInfo[NSUnderlyingErrorKey] = error
             let error = NSError(
                 domain: website,
                 code: self.internalErrorCode.integerValue,
                 userInfo: userInfo)
-            NSLog("\(operation.response.URL!)\n\(error)\n\(NSString(data: data, encoding: NSUTF8StringEncoding)))")
+            NSLog("\(operation.request.URL!)\n\(error)\n\(NSString(data: data, encoding: NSUTF8StringEncoding)))")
             failure?(error)
             return
         }
         let data = object as! NSDictionary
         if data["errno"] as! NSNumber == successCode {
-            let info: AnyObject = data["rsm"]!
-//            NSLog("\(operation.response.URL!)\n\(info)")
+            let info = data["rsm"]!
+//            NSLog("\(operation.request.URL!.absoluteString)\n\(info)")
             success?(info)
             _ = try? DataManager.defaultManager!.saveChanges() // It's not a good idea to be placed here, but this could reduce duplicate codes.
         } else {
             var userInfo = [
                 NSLocalizedDescriptionKey: data["err"]!,
-                NSURLErrorKey: operation.response.URL!
+                NSURLErrorKey: operation.request.URL!
             ]
             if operation.error != nil {
                 userInfo[NSUnderlyingErrorKey] = operation.error

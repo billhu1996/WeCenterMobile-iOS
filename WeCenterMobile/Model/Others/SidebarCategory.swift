@@ -37,7 +37,7 @@ enum SidebarCategory: String {
 
 func localizedStringFromSidebarCategory(category: SidebarCategory) -> String {
     let data: [SidebarCategory: String] = [
-        .Home: "主页",
+        .Home: "首页",
         .Explore: "发现",
         .ReadingList: "我在读",
         .User: "个人中心",

@@ -8,6 +8,8 @@
 	<dict>
 		<key>Famous User List</key>
 		<string>api/famous/famous_users/</string>
+		<key>Media User List</key>
+		<string>api/media/media_users/</string>
 		<key>Post Article With URL</key>
 		<string>api/publish/publish_article_by_url/</string>
 		<key>Topic Detail</key>

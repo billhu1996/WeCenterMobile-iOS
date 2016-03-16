@@ -28,13 +28,13 @@ class ExploreViewController: MSRSegmentedViewController, MSRSegmentedViewControl
         navigationItem.titleView = titleLabel
         let theme = SettingsManager.defaultManager.currentTheme
 //        navigationController?.navigationBar.tintColor = .whiteColor()//theme.titleTextColor
-        segmentedControl.indicator = MSRSegmentedControlUnderlineIndicator()
-        segmentedControl.tintColor = theme.backgroundColorB
-        segmentedControl.indicator.tintColor = theme.subtitleTextColor
-        (segmentedControl.backgroundView as! UIToolbar).barStyle = theme.toolbarStyle
+        segmentedControl.indicator = MSRSegmentedControlBlockIndicator()
+        segmentedControl.tintColor = UIColor.whiteColor().colorWithAlphaComponent(0.87)
+        segmentedControl.indicator.tintColor = UIColor.clearColor()
+        segmentedControl.backgroundView = UIView()
+        segmentedControl.backgroundView!.backgroundColor = %+0x3a374a
+        segmentedControl.msr_heightConstraint!.constant = 36
         view.backgroundColor = theme.backgroundColorA
-        segmentedControl.backgroundColor = %+0x3a374a
-        segmentedControl.scrollView.backgroundColor = %+0x3a374a
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Sidebar-Search"), style: .Plain, target: self, action: nil)
         msr_navigationBar!.msr_shadowImageView?.hidden = true
@@ -59,19 +59,22 @@ class ExploreViewController: MSRSegmentedViewController, MSRSegmentedViewControl
             // [FeaturedObjectListType: String] is not SequenceType
             let vcs: [UIViewController] = titles.map {
                 (type, title) in
-                if type == .Famous {
-                    let vc = UserListViewController(user: User.currentUser!, listType: UserListType.Famous)
-                    vc.title = title
-                    vc.superViewController = self
-                    return vc
-                } else {
+                if type == .Recommended {
                     let vc = FeaturedObjectListViewController(type: type)
                     vc.title = title
-                    vc.superViewController = self
+                    return vc
+                } else {
+                    let listType: UserListType = type == .Famous ? .Famous : .Media
+                    let vc = UserListViewController(user: User.currentUser!, listType: listType)
+                    vc.title = title
                     return vc
                 }
             }
             setViewControllers(vcs, animated: false)
+            for i in 0..<numberOfViewControllers {
+                let s = segmentedControl.segmentAtIndex(i) as! MSRDefaultSegment
+                s.titleLabel.font = UIFont.systemFontOfSize(14)
+            }
         }
     }
     

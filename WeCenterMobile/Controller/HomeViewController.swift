@@ -62,11 +62,11 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     }
     override func loadView() {
         super.loadView()
-        title = "我关注的" // Needs localization
+        title = "首页" // Needs localization
         msr_navigationBar!.msr_shadowImageView?.hidden = true
         navigationItem.titleView = titleLabel
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Publishment-Article_Question"), style: .Plain, target: self, action: "showFollowerList")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-QRCode"), style: .Plain, target: self, action: "showFollowerList")
         for i in 0..<nibNames.count {
             tableView.registerNib(UINib(nibName: nibNames[i], bundle: NSBundle.mainBundle()), forCellReuseIdentifier: identifiers[i])
         }
@@ -190,8 +190,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     }
     
     func didPressSearchButton(sender: UIButton) {
-        let s = SearchViewController(superController: self)
-        navigationController?.setViewControllers([s], animated: false)
+        msr_navigationController!.pushViewController(SearchViewController(nibName: nil, bundle: nil), animated: true)
     }
     
     internal func refresh() {

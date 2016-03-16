@@ -199,8 +199,7 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
     }
     
     func didPressSearchButton(sender: UIButton) {
-        let s = SearchViewController(superController: self)
-        navigationController?.setViewControllers([s], animated: false)
+        
     }
     
     internal func refresh() {

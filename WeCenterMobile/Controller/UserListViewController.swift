@@ -36,7 +36,6 @@ class UserListViewController: UITableViewController {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    weak var superViewController: UIViewController?
     let cellNibName = "UserCell"
     let cellReuseIdentifier = "UserCell"
     override func loadView() {
@@ -132,7 +131,11 @@ class UserListViewController: UITableViewController {
             user.fetchFollowings(page: 1, count: count, success: success, failure: failure)
             break
         case .Famous:
-            User.fetchFamous(page: 1, count: count, success: success, failure: failure)
+            User.fetchFamousUsers(page: 1, count: count, success: success, failure: failure)
+            break
+        case .Media:
+            User.fetchMediaUsers(page: 1, count: count, success: success, failure: failure)
+            break
         default:
             break
         }
@@ -168,17 +171,18 @@ class UserListViewController: UITableViewController {
             user.fetchFollowings(page: page + 1, count: count, success: success, failure: failure)
             break
         case .Famous:
-            User.fetchFamous(page: page + 1, count: count, success: success, failure: failure)
+            User.fetchFamousUsers(page: page + 1, count: count, success: success, failure: failure)
+            break
+        case .Media:
+            User.fetchMediaUsers(page: page + 1, count: count, success: success, failure: failure)
+            break
         default:
             break
         }
     }
     
     func didPressSearchButton(sender: UIButton) {
-        if let superViewController = superViewController {
-            let s = SearchViewController(superController: superViewController)
-            navigationController?.setViewControllers([s], animated: false)
-        }
+        
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
