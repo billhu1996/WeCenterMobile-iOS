@@ -28,7 +28,7 @@ class UserC: UITableViewCell {
     }
     
     func update(user user: User) {
-        print(user)
+//        print(user)
         self.userAvatarView.wc_updateWithUser(user)
 //        userNameLabel.text = user.name
         userSignatureLabel.text = user.signature

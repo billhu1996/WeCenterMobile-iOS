@@ -15,6 +15,9 @@ class UserVC: UITableViewController {
     let count = 20
     var page = 1
     var shouldReloadAfterLoadingMore = true
+    lazy var followButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(title: "加关注", style: .Plain, target: self, action: "toggleFollow:")
+    }()
     
     var actions = [Action]()
     
@@ -55,7 +58,7 @@ class UserVC: UITableViewController {
         super.viewDidLoad()
         refresh()
         tableView.mj_header.beginRefreshing()
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Back"), style: .Plain, target: nil, action: "didPressBackButton")
+        self.navigationItem.rightBarButtonItem = self.followButtonItem
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -99,22 +102,24 @@ class UserVC: UITableViewController {
         User.fetch(ID: user.id,
             success: {
                 [weak self] user in
-                self?.user = user
-                self?.reloadData()
-                self?.user.fetchAvatar(
-                    forced: true,
-                    success: {
-                        self?.reloadData()
-                    },
-                    failure: {
-                        [weak self] error in
-                        print(error)
-                        return
-                    })
+                if let self_ = self {
+                    self_.user = user
+                    self_.reloadData()
+                    self_.user.fetchAvatar(
+                        forced: true,
+                        success: {
+                            self_.reloadData()
+                        },
+                        failure: {
+                            error in
+                            print(error)
+                            return
+                        })
+                }
                 return
             },
             failure: {
-                [weak self] error in
+                error in
                 print(error)
                 return
             })
@@ -143,7 +148,9 @@ class UserVC: UITableViewController {
     }
     func reloadData() {
         self.title = self.user.name
-//        self.navigationController?.title = self.user.name
+        if let following = user.following {
+            self.followButtonItem.title = following ? "已关注" : "加关注"
+        }
         self.userCell.update(user: self.user)
         self.tableView.reloadData()
     }
@@ -155,7 +162,7 @@ class UserVC: UITableViewController {
                 return
             },
             failure: {
-                [weak self] error in
+                error in
                 print(error)
                 return
             })
