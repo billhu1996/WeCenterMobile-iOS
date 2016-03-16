@@ -55,7 +55,7 @@ class UserVC: UITableViewController {
         super.viewDidLoad()
         refresh()
         tableView.mj_header.beginRefreshing()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Back"), style: .Plain, target: nil, action: "didPressBackButton")
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Back"), style: .Plain, target: nil, action: "didPressBackButton")
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

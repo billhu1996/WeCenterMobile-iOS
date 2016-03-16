@@ -52,6 +52,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     
     func share(sender: AnyObject) {
         if article != nil {
+            print(self.article!.title!)
             let title = self.article!.title!
             let image = self.article!.user?.avatar ?? defaultUserAvatar
             let body = self.article!.body!.wc_plainString

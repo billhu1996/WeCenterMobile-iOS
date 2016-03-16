@@ -19,6 +19,7 @@ class UserC: UITableViewCell {
     @IBOutlet weak var followingTitleLabel: UILabel!
     @IBOutlet weak var followersTitleLabel: UILabel!
     @IBOutlet weak var userLocationLabel: UILabel!
+    @IBOutlet weak var publicedCountLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,29 +28,27 @@ class UserC: UITableViewCell {
     }
     
     func update(user user: User) {
+        print(user)
         self.userAvatarView.wc_updateWithUser(user)
 //        userNameLabel.text = user.name
         userSignatureLabel.text = user.signature
         followersCountLabel.text = "\(user.followerCount ?? 0)"
         followingCountLabel.text = "\(user.followingCount ?? 0)"
+        publicedCountLabel.text = "\(user.articleCount ?? 0)"
         if user.gender == .Male {
-            followersTitleLabel.text = "关注他的人"
-            followingTitleLabel.text = "他关注的人"
+            followingTitleLabel.text = "他的关注"
         }
         if user.gender == .Female {
-            followersTitleLabel.text = "关注她的人"
-            followingTitleLabel.text = "她关注的人"
+            followingTitleLabel.text = "她的关注"
         }
         if user.gender == .Secret {
-            followersTitleLabel.text = "关注Ta的人"
-            followingTitleLabel.text = "Ta关注的人"
+            followingTitleLabel.text = "Ta的关注"
         }
         userLocationLabel.text = user.province! + "  " + user.city!
 //        self.followButton.hidden = user.isCurrentUser
-        print(user.following)
-        if let following = user.following {
+//        if let following = user.following {
 //            self.followButton.setTitle(following ? "已关注" : "关注", forState: .Normal)
-        }
+//        }
     }
     
 }
