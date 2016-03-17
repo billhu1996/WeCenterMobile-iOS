@@ -18,26 +18,32 @@ import UIKit
 }
 
 class UserListViewController: UITableViewController {
+    
     let listType: UserListType
     var user: User
     var users: [User] = []
     var page = 1
     let count = 20
+    
     lazy var searchBarCell: SearchBarCell = {
         let c = NSBundle.mainBundle().loadNibNamed("SearchBarCell", owner: nil, options: nil).first as! SearchBarCell
         c.searchButton.addTarget(nil, action: "didPressSearchButton:", forControlEvents: .TouchUpInside)
         return c
     }()
+    
     init(user: User, listType: UserListType) {
         self.listType = listType
         self.user = user
         super.init(nibName: nil, bundle: nil)
     }
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     let cellNibName = "UserCell"
     let cellReuseIdentifier = "UserCell"
+    
     override func loadView() {
         super.loadView()
         let titles: [UserListType: String] = [
@@ -47,11 +53,11 @@ class UserListViewController: UITableViewController {
             .Media: "媒体"]
         self.title = titles[listType]!
         let theme = SettingsManager.defaultManager.currentTheme
-        view.backgroundColor = theme.backgroundColorA
+        view.backgroundColor = %+0xf1ede6
         tableView.indicatorStyle = theme.scrollViewIndicatorStyle
         tableView.separatorStyle = .None
         tableView.registerNib(UINib(nibName: cellNibName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellReuseIdentifier)
-        tableView.estimatedRowHeight = 80
+        tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.panGestureRecognizer.requireGestureRecognizerToFail(appDelegate.mainViewController.contentViewController.interactivePopGestureRecognizer)
         tableView.panGestureRecognizer.requireGestureRecognizerToFail(appDelegate.mainViewController.sidebar.screenEdgePanGestureRecognizer)
@@ -60,49 +66,63 @@ class UserListViewController: UITableViewController {
         tableView.msr_setTouchesShouldCancel(true, inContentViewWhichIsKindOfClass: UIButton.self)
         tableView.wc_addRefreshingHeaderWithTarget(self, action: "refresh")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.mj_header.beginRefreshing()
     }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! UserCell
-        cell.userButtonA.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
-        cell.userButtonB.addTarget(self, action: "didPressFollowButton:", forControlEvents: .TouchUpInside)
+        cell.userButton.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
+        cell.followButton.addTarget(self, action: "didPressFollowButton:", forControlEvents: .TouchUpInside)
         cell.update(user: users[indexPath.row])
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
-    }
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
     }
+    
     func didPressUserButton(sender: UIButton) {
         if let user = sender.msr_userInfo as? User {
             msr_navigationController!.pushViewController(UserVC(user: user), animated: true)
         }
     }
+    
     func didPressFollowButton(sender: UIButton) {
         if let user = sender.msr_userInfo as? User {
-            user.toggleFollow(success: {
-                [weak self] in
-                if let this = self {
-                    this.tableView.reloadData()
+            if let indexPath = tableView.indexPathForRowAtPoint(tableView.convertPoint(CGPointZero, fromView: sender)) {
+                if let cell = tableView.cellForRowAtIndexPath(indexPath) as? UserCell {
+                    let following = user.following
+                    user.following = nil
+                    cell.update(user: user)
+                    user.following = following
+                    user.toggleFollow(
+                        success: {
+                            [weak self] in
+                            if cell.followButton.msr_userInfo === user {
+                                cell.update(user: user)
+                            }
+                            return
+                        }, failure: {
+                            error in
+                            print(error)
+                            return
+                        })
                 }
-                return
-                }, failure: {
-                error in
-                return
-            })
+            }
         }
     }
+    
     func refresh() {
         shouldReloadAfterLoadingMore = false
         tableView.mj_footer?.endRefreshing()
@@ -140,7 +160,9 @@ class UserListViewController: UITableViewController {
             break
         }
     }
+    
     var shouldReloadAfterLoadingMore = true
+    
     func loadMore() {
         if tableView.mj_header.isRefreshing() {
             tableView.mj_footer.endRefreshing()
@@ -188,4 +210,5 @@ class UserListViewController: UITableViewController {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return SettingsManager.defaultManager.currentTheme.statusBarStyle
     }
+    
 }

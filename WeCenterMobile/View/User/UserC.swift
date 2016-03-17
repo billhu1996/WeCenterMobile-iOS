@@ -44,7 +44,9 @@ class UserC: UITableViewCell {
         if user.gender == .Secret {
             followingTitleLabel.text = "Ta的关注"
         }
-        userLocationLabel.text = user.province! + "  " + user.city!
+        if let province = user.province {
+            userLocationLabel.text = province + (user.city ?? "")
+        }
 //        self.followButton.hidden = user.isCurrentUser
 //        if let following = user.following {
 //            self.followButton.setTitle(following ? "已关注" : "关注", forState: .Normal)

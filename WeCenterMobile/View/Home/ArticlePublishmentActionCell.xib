@@ -28,7 +28,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sW8-IU-f49">
                                 <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wr5-u5-ieh" userLabel="Top View">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wr5-u5-ieh" userLabel="Top View">
                                 <rect key="frame" x="36" y="8" width="542" height="18"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已阅读" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNw-eO-gGh">
@@ -70,7 +70,7 @@
                                     <constraint firstItem="05q-Ff-jtI" firstAttribute="leading" secondItem="tKi-48-sZt" secondAttribute="trailing" constant="5" id="unf-DA-7lJ"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Z2-c1-RdN" userLabel="Bottom View">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Z2-c1-RdN" userLabel="Bottom View">
                                 <rect key="frame" x="44" y="36" width="534" height="80"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iae-Mp-KKS">
