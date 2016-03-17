@@ -195,6 +195,11 @@ class User: DataObject {
                         user.name = value["user_name"] as? String
                         user.avatarURL = value["avatar_file"] as? String
                         user.signature = value["signature"] as? String
+                        if let following = Int(msr_object: value["has_focus"]) {
+                            user.following = following != 0
+                        } else {
+                            user.following = nil
+                        }
                         users.append(user)
                     }
                     _ = try? DataManager.defaultManager.saveChanges()
@@ -222,6 +227,11 @@ class User: DataObject {
                         user.name = value["user_name"] as? String
                         user.avatarURL = value["avatar_file"] as? String
                         user.signature = value["signature"] as? String
+                        if let following = Int(msr_object: value["has_focus"]) {
+                            user.following = following != 0
+                        } else {
+                            user.following = nil
+                        }
                         users.append(user)
                     }
                     _ = try? DataManager.defaultManager.saveChanges()

@@ -65,6 +65,12 @@
 		951D2F8F1AB7F8C000DCB678 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 951D2F8E1AB7F8C000DCB678 /* Images.xcassets */; };
 		951E12F01B202D7C00F076FE /* UITableView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951E12EF1B202D7C00F076FE /* UITableView+Refresh.swift */; };
 		9520AB151AC2C94600637C84 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9520AB141AC2C94600637C84 /* QuestionViewController.swift */; };
+		952100281C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952100221C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.swift */; };
+		952100291C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952100231C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.xib */; };
+		9521002A1C9B0CBA00AAD6F8 /* UserArticleCommentaryActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952100241C9B0CBA00AAD6F8 /* UserArticleCommentaryActionCell.swift */; };
+		9521002B1C9B0CBA00AAD6F8 /* UserArticleCommentaryActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952100251C9B0CBA00AAD6F8 /* UserArticleCommentaryActionCell.xib */; };
+		9521002C1C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952100261C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.swift */; };
+		9521002D1C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952100271C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.xib */; };
 		9531D6A21AF0A27100E6549D /* AnswerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531D6A11AF0A27100E6549D /* AnswerListViewController.swift */; };
 		9531D6A81AF3D68F00E6549D /* ArticleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531D6A71AF3D68F00E6549D /* ArticleListViewController.swift */; };
 		9531D71A1AF3E4AC00E6549D /* AnswerAdditionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531D6CD1AF3E4AC00E6549D /* AnswerAdditionCell.swift */; };
@@ -703,6 +709,12 @@
 		951D2F8E1AB7F8C000DCB678 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		951E12EF1B202D7C00F076FE /* UITableView+Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Refresh.swift"; sourceTree = "<group>"; };
 		9520AB141AC2C94600637C84 /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = QuestionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		952100221C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserArticleAgreementActionCell.swift; sourceTree = "<group>"; };
+		952100231C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserArticleAgreementActionCell.xib; sourceTree = "<group>"; };
+		952100241C9B0CBA00AAD6F8 /* UserArticleCommentaryActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserArticleCommentaryActionCell.swift; sourceTree = "<group>"; };
+		952100251C9B0CBA00AAD6F8 /* UserArticleCommentaryActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserArticleCommentaryActionCell.xib; sourceTree = "<group>"; };
+		952100261C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserArticlePublishmentActionCell.swift; sourceTree = "<group>"; };
+		952100271C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserArticlePublishmentActionCell.xib; sourceTree = "<group>"; };
 		9531D6A11AF0A27100E6549D /* AnswerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnswerListViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9531D6A71AF3D68F00E6549D /* ArticleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ArticleListViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9531D6CD1AF3E4AC00E6549D /* AnswerAdditionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerAdditionCell.swift; sourceTree = "<group>"; };
@@ -1457,6 +1469,12 @@
 		9531D70E1AF3E4AC00E6549D /* User */ = {
 			isa = PBXGroup;
 			children = (
+				952100221C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.swift */,
+				952100231C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.xib */,
+				952100241C9B0CBA00AAD6F8 /* UserArticleCommentaryActionCell.swift */,
+				952100251C9B0CBA00AAD6F8 /* UserArticleCommentaryActionCell.xib */,
+				952100261C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.swift */,
+				952100271C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.xib */,
 				5CDB12111C7ED0C700ED92BF /* UserC.swift */,
 				5CDB12131C7ED0D800ED92BF /* UserC.xib */,
 				95DC57141AF8A38D0075C3CB /* UserAtView.swift */,
@@ -2383,6 +2401,7 @@
 				9531D74C1AF3E4AC00E6549D /* SidebarCategoryCell.xib in Resources */,
 				9531D72C1AF3E4AC00E6549D /* FeaturedQuestionAnswerCellA.xib in Resources */,
 				5C248AF51C7B2164008F0D7E /* QRCodeTopRight@3x.png in Resources */,
+				952100291C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.xib in Resources */,
 				5C248A8D1C7B041C008F0D7E /* LoginVC.xib in Resources */,
 				950FE1251A1DA2A400167D09 /* Discovery.strings in Resources */,
 				5CA5A8601C940CF000646650 /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -2408,6 +2427,7 @@
 				95EBCF4F1B2DB4430088FC2C /* UserSearchResultCell.xib in Resources */,
 				A93CCCEF1C8B306200A2E04B /* ArticleAgreementActionCell.xib in Resources */,
 				951D2F8F1AB7F8C000DCB678 /* Images.xcassets in Resources */,
+				9521002B1C9B0CBA00AAD6F8 /* UserArticleCommentaryActionCell.xib in Resources */,
 				9531D72E1AF3E4AC00E6549D /* FeaturedQuestionAnswerCellB.xib in Resources */,
 				5CDB12141C7ED0D800ED92BF /* UserC.xib in Resources */,
 				9531D7371AF3E4AC00E6549D /* ArticlePublishmentActionCell.xib in Resources */,
@@ -2431,6 +2451,7 @@
 				A955A3011C02FD9D002501CE /* .gitignore in Resources */,
 				A955A3621C02FDDE002501CE /* WeiboSDK.bundle in Resources */,
 				9515766E1B1B4A5300E5BE8E /* SettingsViewController.storyboard in Resources */,
+				9521002D1C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.xib in Resources */,
 				950FE1261A1DA2A400167D09 /* User.strings in Resources */,
 				95D7840E1B1C7821008EB241 /* Themes.plist in Resources */,
 				5C248AF01C7B2164008F0D7E /* QRCodeLine@2x.png in Resources */,
@@ -2476,6 +2497,7 @@
 				9531D7691AF3E85900E6549D /* UIImageView+DataObject.swift in Sources */,
 				A955A3381C02FD9D002501CE /* UIImage+MSRShape.swift in Sources */,
 				A955A3A51C02FEB7002501CE /* MJRefreshComponent.m in Sources */,
+				952100281C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.swift in Sources */,
 				95DC57101AF785040075C3CB /* Evalation.swift in Sources */,
 				A955A33A1C02FD9D002501CE /* UINavigationBar+MSRAccessor.swift in Sources */,
 				95D7840A1B1C5306008EB241 /* Theme.swift in Sources */,
@@ -2627,6 +2649,7 @@
 				9531D7961AF3E8E400E6549D /* QuestionPublishmentAction.swift in Sources */,
 				A955A3251C02FD9D002501CE /* MSRSegmentedControlCircleIndicator.swift in Sources */,
 				A955A3A31C02FEB7002501CE /* MJRefreshAutoFooter.m in Sources */,
+				9521002A1C9B0CBA00AAD6F8 /* UserArticleCommentaryActionCell.swift in Sources */,
 				A955A1FE1C02FD49002501CE /* AFSecurityPolicy.m in Sources */,
 				9531D7511AF3E4AC00E6549D /* TopicHeaderView.swift in Sources */,
 				9531D7951AF3E8E400E6549D /* QuestionFocusingAction.swift in Sources */,
@@ -2634,6 +2657,7 @@
 				9531D7491AF3E4AC00E6549D /* QuestionTitleCell.swift in Sources */,
 				9531D7531AF3E4AC00E6549D /* UserBodyCell.swift in Sources */,
 				A955A30D1C02FD9D002501CE /* String+MSROperations.swift in Sources */,
+				9521002C1C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.swift in Sources */,
 				9531D71A1AF3E4AC00E6549D /* AnswerAdditionCell.swift in Sources */,
 				95EB77551C9878E40061D7AA /* UIAlertView+AFNetworking.m in Sources */,
 				A9BC4CBF1C1848F4009F5468 /* HotTopicViewController.swift in Sources */,

@@ -21,7 +21,6 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     var evaluate: Evaluation = Evaluation.None
     var userName = ""
     var article: Article? = nil
-//    var superViewController: UIViewController
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
@@ -67,15 +66,6 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
             showDetailViewController(vc, sender: self)
         }
     }
-    
-//    init(superViewController: UIViewController) {
-//        self.superViewController = superViewController
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

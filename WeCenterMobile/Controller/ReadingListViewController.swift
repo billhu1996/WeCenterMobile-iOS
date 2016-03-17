@@ -23,7 +23,7 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
         //
         //        _reader.delegate = self;
         
-        let types: Array<String> = ["AVMetadataObjectTypeQRCode"]
+        let types = ["AVMetadataObjectTypeQRCode"]
         
         var qrViewController = QRCodeReaderViewController.readerWithMetadataObjectTypes(types)
         qrViewController.delegate = self
@@ -65,7 +65,7 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
         title = "我在读" // Needs localization
         navigationItem.titleView = titleLabel
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Publishment-Article_Question"), style: .Plain, target: self, action: "showFollowerList")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-QRCode"), style: .Plain, target: self, action: "showQRCodeViewController")
         for i in 0..<nibNames.count {
             tableView.registerNib(UINib(nibName: nibNames[i], bundle: NSBundle.mainBundle()), forCellReuseIdentifier: identifiers[i])
         }
@@ -154,7 +154,7 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func showFollowerList() {
+    func showQRCodeViewController() {
         presentViewController(qrViewController, animated: true, completion: nil)
     }
     

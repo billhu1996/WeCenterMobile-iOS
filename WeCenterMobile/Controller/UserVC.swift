@@ -10,20 +10,39 @@ import Foundation
 import MJRefresh
 import UIKit
 
+@objc protocol UserActionCell: class {
+    optional var articleButton: UIButton! { get }
+    func update(action action: Action)
+}
+
+extension UserArticlePublishmentActionCell: UserActionCell {}
+extension UserArticleAgreementActionCell: UserActionCell {}
+extension UserArticleCommentaryActionCell: UserActionCell {}
+
 class UserVC: UITableViewController {
+    
     var user: User
     let count = 20
     var page = 1
     var shouldReloadAfterLoadingMore = true
+    
     lazy var followButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(title: "加关注", style: .Plain, target: self, action: "toggleFollow:")
+        [weak self] in
+        let item = UIBarButtonItem(title: "加关注", style: .Plain, target: self, action: "toggleFollow")
+        return item
+    }()
+    
+    lazy var logoutButtonItem: UIBarButtonItem = {
+        [weak self] in
+        let item = UIBarButtonItem(title: "注销", style: .Plain, target: self, action: "logout")
+        return item
     }()
     
     var actions = [Action]()
     
-    let actionTypes: [Action.Type] = [AnswerAction.self, QuestionPublishmentAction.self, QuestionFocusingAction.self, AnswerAgreementAction.self, ArticlePublishmentAction.self, ArticleAgreementAction.self, ArticleCommentaryAction.self]
-    let identifiers = ["AnswerActionCell", "QuestionPublishmentActionCell", "QuestionFocusingActionCell", "AnswerAgreementActionCell", "ArticlePublishmentActionCell", "ArticleAgreementActionCell", "ArticleCommentaryActionCell"]
-    let nibNames = ["AnswerActionCell", "QuestionPublishmentActionCell", "QuestionFocusingActionCell", "AnswerAgreementActionCell", "ArticlePublishmentActionCell", "ArticleAgreementActionCell", "ArticleCommentaryActionCell"]
+    let actionTypes: [Action.Type] = [ArticlePublishmentAction.self, ArticleAgreementAction.self, ArticleCommentaryAction.self]
+    let identifiers = ["UserArticlePublishmentActionCell", "UserArticleAgreementActionCell", "UserArticleCommentaryActionCell"]
+    let nibNames = ["UserArticlePublishmentActionCell", "UserArticleAgreementActionCell", "UserArticleCommentaryActionCell"]
     
     lazy var userCell: UserC = {
         var cell: UserC = NSBundle.mainBundle().loadNibNamed("UserC", owner: nil, options: nil).first as! UserC
@@ -44,6 +63,7 @@ class UserVC: UITableViewController {
         for i in 0..<nibNames.count {
             tableView.registerNib(UINib(nibName: nibNames[i], bundle: NSBundle.mainBundle()), forCellReuseIdentifier: identifiers[i])
         }
+        view.backgroundColor = %+0xf5f2ed
         tableView.separatorStyle = .None
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -51,49 +71,42 @@ class UserVC: UITableViewController {
         tableView.delaysContentTouches = false
         tableView.msr_wrapperView?.delaysContentTouches = false
         tableView.wc_addRefreshingHeaderWithTarget(self, action: "refresh")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         refresh()
         tableView.mj_header.beginRefreshing()
-        self.navigationItem.rightBarButtonItem = self.followButtonItem
+        navigationItem.rightBarButtonItem = user.id == User.currentUser?.id ? logoutButtonItem : followButtonItem
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + min(page * count, actions.count)
+        return [1, min(page * count, actions.count)][section]
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-//            self.userCell.followButton.addTarget(self, action: "toggleFollow:", forControlEvents: .TouchUpInside)
+        if indexPath.section == 0 {
             return self.userCell
         } else {
-            let action = actions[indexPath.row - 1]
+            let action = actions[indexPath.row]
             if let index = (actionTypes.map { action.classForCoder === $0 }).indexOf(true) {
-                let cell = tableView.dequeueReusableCellWithIdentifier(identifiers[index], forIndexPath: indexPath) as! ActionCell
+                let cell = tableView.dequeueReusableCellWithIdentifier(identifiers[index], forIndexPath: indexPath) as! UserActionCell
                 cell.update(action: action)
-                cell.userButton?.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
-                cell.questionButton?.addTarget(self, action: "didPressQuestionButton:", forControlEvents: .TouchUpInside)
-                cell.answerButton?.addTarget(self, action: "didPressAnswerButton:", forControlEvents: .TouchUpInside)
                 cell.articleButton?.addTarget(self, action: "didPressArticleButton:", forControlEvents: .TouchUpInside)
-                cell.commentButton?.addTarget(self, action: "didPressCommentButton:", forControlEvents: .TouchUpInside)
                 return cell as! UITableViewCell
             } else {
                 return UITableViewCell() // Needs specification
             }
         }
     }
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return UITableViewAutomaticDimension
-        } else {
-            return UITableViewAutomaticDimension
-        }
+    
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
@@ -155,7 +168,7 @@ class UserVC: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func toggleFollow(sender: UIButton) {
+    func toggleFollow() {
         user.toggleFollow(
             success: {
                 self.refresh()
@@ -166,6 +179,9 @@ class UserVC: UITableViewController {
                 print(error)
                 return
             })
+    }
+    func logout() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     internal func loadMore() {
         if tableView.mj_header.isRefreshing() {
@@ -194,36 +210,16 @@ class UserVC: UITableViewController {
             })
     }
     
-    func didPressUserButton(sender: UIButton) {
-        if let user = sender.msr_userInfo as? User {
-            msr_navigationController!.pushViewController(UserVC(user: user), animated: true)
-        }
-    }
-    
-    func didPressQuestionButton(sender: UIButton) {
-        if let question = sender.msr_userInfo as? Question {
-            msr_navigationController!.pushViewController(QuestionViewController(question: question), animated: true)
-        }
-    }
-    
-    func didPressAnswerButton(sender: UIButton) {
-        if let answer = sender.msr_userInfo as? Answer {
-            msr_navigationController!.pushViewController(ArticleViewController(dataObject: answer), animated: true)
-        }
-    }
-    
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
             msr_navigationController!.pushViewController(ArticleAnswerViewController(dataObject: article), animated: true)
         }
     }
     
-    func didPressCommentButton(sender: UIButton) {
-        if let article = (sender.msr_userInfo as? ArticleComment)?.article {
-            msr_navigationController!.pushViewController(CommentListViewController(dataObject: article), animated: true)
-        } else if let answer = (sender.msr_userInfo as? AnswerComment)?.answer {
-            msr_navigationController!.pushViewController(CommentListViewController(dataObject: answer), animated: true)
-        }
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return SettingsManager.defaultManager.currentTheme.statusBarStyle
     }
+    
+    
 }
 

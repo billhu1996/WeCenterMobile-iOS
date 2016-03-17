@@ -105,7 +105,6 @@ class UserListViewController: UITableViewController {
                     let following = user.following
                     user.following = nil
                     cell.update(user: user)
-                    user.following = following
                     user.toggleFollow(
                         success: {
                             [weak self] in
@@ -115,6 +114,10 @@ class UserListViewController: UITableViewController {
                             return
                         }, failure: {
                             error in
+                            user.following = following
+                            if cell.followButton.msr_userInfo === user {
+                                cell.update(user: user)
+                            }
                             print(error)
                             return
                         })

@@ -35,7 +35,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     }()
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "我关注的"
+        label.text = "首页"
         label.textColor = .whiteColor()
         label.font = UIFont.boldSystemFontOfSize(17)
         label.sizeToFit()
@@ -115,6 +115,10 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         
     }
     
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
     func showSidebar() {
         appDelegate.mainViewController.sidebar.expand()
     }
@@ -190,7 +194,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     }
     
     func didPressSearchButton(sender: UIButton) {
-        msr_navigationController!.pushViewController(SearchViewController(nibName: nil, bundle: nil), animated: true)
+        msr_navigationController!.pushViewController(SearchViewController(nibName: nil, bundle: nil), animated: false)
     }
     
     internal func refresh() {
