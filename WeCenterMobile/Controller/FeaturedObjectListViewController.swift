@@ -111,16 +111,7 @@ class FeaturedObjectListViewController: UITableViewController {
             msr_navigationController!.pushViewController(UserVC(user: user), animated: true)
         }
     }
-    func didPressQuestionButton(sender: UIButton) {
-        if let question = sender.msr_userInfo as? Question {
-            msr_navigationController!.pushViewController(QuestionViewController(question: question), animated: true)
-        }
-    }
-    func didPressAnswerButton(sender: UIButton) {
-        if let answer = sender.msr_userInfo as? Answer {
-            msr_navigationController!.pushViewController(ArticleViewController(dataObject: answer), animated: true)
-        }
-    }
+    
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
             msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)

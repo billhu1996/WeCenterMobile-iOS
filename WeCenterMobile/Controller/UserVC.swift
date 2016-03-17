@@ -212,7 +212,7 @@ class UserVC: UITableViewController {
     
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
-            msr_navigationController!.pushViewController(ArticleAnswerViewController(dataObject: article), animated: true)
+            msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
         }
     }
     

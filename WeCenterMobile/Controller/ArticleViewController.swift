@@ -2,11 +2,13 @@
 //  ArticleViewController.swift
 //  WeCenterMobile
 //
-//  Created by Darren Liu on 15/5/2.
-//  Copyright (c) 2015年 Beijing Information Science and Technology University. All rights reserved.
+//  Created by Bill Hu on 16/2/23.
+//  Copyright © 2016年 Beijing Information Science and Technology University. All rights reserved.
 //
 
 import DTCoreText
+import MJRefresh
+import SVProgressHUD
 import UIKit
 
 @objc protocol ArticleViewControllerPresentable {
@@ -15,21 +17,12 @@ import UIKit
     /* @TODO: optional */ var date: NSDate? { get }
     /* @TODO: optional */ var body: String? { get }
     var user: User? { get }
-    var id: NSNumber { get }
+    var id: NSNumber! { get }
     var title: String? { get }
     var agreementCount: NSNumber? { get set }
     var evaluationRawValue: NSNumber? { get }
     func fetchDataObjectForArticleViewController(success success: ((ArticleViewControllerPresentable) -> Void)?, failure: ((NSError) -> Void)?)
     func evaluate(value value: Evaluation, success: (() -> Void)?, failure: ((NSError) -> Void)?)
-}
-
-extension Answer: ArticleViewControllerPresentable {
-    func fetchDataObjectForArticleViewController(success success: ((ArticleViewControllerPresentable) -> Void)?, failure: ((NSError) -> Void)?) {
-        Answer.fetch(ID: id, success: { success?($0) }, failure: failure)
-    }
-    var evaluationRawValue: NSNumber? {
-        return evaluation?.rawValue
-    }
 }
 
 extension Article: ArticleViewControllerPresentable {
@@ -41,234 +34,186 @@ extension Article: ArticleViewControllerPresentable {
     }
 }
 
-class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleHeaderViewDelegate, DTAttributedTextContentViewDelegate, DTLazyImageViewDelegate {
+class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DTLazyImageViewDelegate, QuestionBodyCellLinkButtonDelegate, PublishmentViewControllerDelegate {
     
-    lazy var header: ArticleHeaderView = {
+    var dataObject: ArticleViewControllerPresentable
+    var comments = [Comment]()
+    let cellReuseIdentifier = "CommentCell"
+    let cellNibName = "CommentCell"
+    
+    lazy var questionHeaderCell: QuestionHeaderCell = {
         [weak self] in
-        let v = ArticleHeaderView()
-        v.delegate = self
-        v.autoresizingMask = [.FlexibleWidth, .FlexibleBottomMargin]
-        return v
+        let c = NSBundle.mainBundle().loadNibNamed("QuestionHeaderCell", owner: nil, options: nil).first as! QuestionHeaderCell
+        c.userButton.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
+        return c
+        }()
+    lazy var questionTitleCell: QuestionTitleCell = {
+        [weak self] in
+        return NSBundle.mainBundle().loadNibNamed("QuestionTitleCell", owner: nil, options: nil).first as! QuestionTitleCell
+        }()
+    lazy var questionBodyCell: QuestionBodyCell = {
+        [weak self] in
+        let c = NSBundle.mainBundle().loadNibNamed("QuestionBodyCell", owner: nil, options: nil).first as! QuestionBodyCell
+        if let self_ = self {
+            c.lazyImageViewDelegate = self_
+            c.linkButtonDelegate = self_
+            NSNotificationCenter.defaultCenter().addObserver(self_, selector: "attributedTextContentViewDidFinishLayout:", name: DTAttributedTextContentViewDidFinishLayoutNotification, object: c.attributedTextContextView)
+        }
+        return c
+        }()
+    
+    lazy var commentHeaderView: CommentHeaderView = {
+        let c = NSBundle.mainBundle().loadNibNamed("CommentHeaderView", owner: nil, options: nil).first as! CommentHeaderView
+        return c
     }()
+    
+    lazy var commentFooterView: CommentFooterView = {
+        let c = NSBundle.mainBundle().loadNibNamed("CommentFooterView", owner: nil, options: nil).first as! CommentFooterView
+        c.commentButton.addTarget(self, action: "didPressAnswerButton:", forControlEvents: .TouchUpInside)
+        return c
+    }()
+    
+    lazy var tableView: UITableView = {
+        [weak self] in
+        let v = UITableView()
+        v.delegate = self
+        v.dataSource = self
+        return v
+        }()
     
     lazy var footer: ArticleFooterView = {
         [weak self] in
         let v = NSBundle.mainBundle().loadNibNamed("ArticleFooterView", owner: nil, options: nil).first as! ArticleFooterView
         v.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
         return v
-    }()
-    
-    lazy var bodyView: DTAttributedTextView = {
-        [weak self] in
-        let v = DTAttributedTextView()
-        v.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        v.alwaysBounceVertical = true
-        v.delaysContentTouches = false
-        v.msr_setTouchesShouldCancel(true, inContentViewWhichIsKindOfClass: UIButton.self)
-        v.contentInset.top = self!.header.minHeight
-        v.attributedTextContentView.edgeInsets = UIEdgeInsets(top: self!.header.maxHeight - self!.header.minHeight + 10, left: 10, bottom: self!.footer.bounds.height + 10, right: 10)
-        v.contentOffset.y = -v.attributedTextContentView.edgeInsets.top - 10
-        v.scrollIndicatorInsets.bottom = self!.footer.bounds.height
-        v.backgroundColor = UIColor.clearColor()
-        v.attributedTextContentView.delegate = self
-        v.attributedTextContentView.shouldDrawImages = true
-        v.attributedTextContentView.shouldDrawLinks = true
-        v.attributedTextContentView.backgroundColor = UIColor.clearColor()
-        return v
-    }()
-    
-    var dataObject: ArticleViewControllerPresentable
+        }()
     
     init(dataObject: ArticleViewControllerPresentable) {
         self.dataObject = dataObject
         super.init(nibName: nil, bundle: nil)
     }
-
-    required init?(coder aDecoder: NSCoder) {
+    
+    required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func loadView() {
         super.loadView()
         let theme = SettingsManager.defaultManager.currentTheme
-        view.addSubview(bodyView)
-        view.addSubview(footer)
-        bodyView.addSubview(header)
-        bodyView.bringSubviewToFront(header)
-        bodyView.indicatorStyle = theme.scrollViewIndicatorStyle
-        bodyView.frame = view.bounds
-        bodyView.delegate = self
-        bodyView.msr_uiRefreshControl = UIRefreshControl()
-        bodyView.msr_uiRefreshControl!.tintColor = theme.footnoteTextColor
-        bodyView.msr_uiRefreshControl!.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
-        bodyView.panGestureRecognizer.requireGestureRecognizerToFail(msr_navigationController!.interactivePopGestureRecognizer)
-        bodyView.panGestureRecognizer.requireGestureRecognizerToFail(appDelegate.mainViewController.sidebar.screenEdgePanGestureRecognizer)
         view.backgroundColor = theme.backgroundColorA
-        header.frame = CGRect(x: 0, y: -bodyView.contentInset.top, width: bodyView.bounds.width, height: header.maxHeight)
-        header.userButtonA.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
-        header.userButtonB.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
-        header.backButton.addTarget(self, action: "didPressBackButton", forControlEvents: .TouchUpInside)
+        tableView.backgroundColor = theme.backgroundColorA
+        view.addSubview(tableView)
+        view.addSubview(footer)
+        view.bringSubviewToFront(footer)
+        tableView.frame = CGRect(x: 0, y:  0, width: view.bounds.width, height: view.bounds.height - 44)
         footer.frame = CGRect(x: 0, y: view.bounds.height - 44, width: view.bounds.width, height: 44)
-//        footer.shareItem.target = self
-//        footer.shareItem.action = "didPressShareButton"
-        footer.agreeItem.target = self
-        footer.agreeItem.action = "didPressAgreeButton"
-//        footer.disagreeItem.target = self
-//        footer.disagreeItem.action = "didPressDisagreeButton"
+        tableView.indicatorStyle = theme.scrollViewIndicatorStyle
+        tableView.delaysContentTouches = false
+        tableView.msr_wrapperView?.delaysContentTouches = false
+        tableView.msr_setTouchesShouldCancel(true, inContentViewWhichIsKindOfClass: UIButton.self)
+        tableView.separatorStyle = .None
+        tableView.registerNib(UINib(nibName: cellNibName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.panGestureRecognizer.requireGestureRecognizerToFail(msr_navigationController!.interactivePopGestureRecognizer)
+        tableView.panGestureRecognizer.requireGestureRecognizerToFail(appDelegate.mainViewController.sidebar.screenEdgePanGestureRecognizer)
+        tableView.wc_addRefreshingHeaderWithTarget(self, action: "refresh")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Share-Button"), style: .Plain, target: self, action: "didPressShareButton")
+        footer.commentItem.action = "didPressAnswerButton"
         footer.commentItem.target = self
-        footer.commentItem.action = "didPressCommentButton"
-        msr_navigationBar!.hidden = true
-        automaticallyAdjustsScrollViewInsets = false
+        footer.addButton.action = "didPressAddButton"
+        footer.addButton.target = self
+        footer.agreeItem.action = "didPressAgreeButton"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "attributedTextContentViewDidFinishLayout:", name: DTAttributedTextContentViewDidFinishLayoutNotification, object: bodyView.attributedTextContentView)
-        reloadData()
-        bodyView.msr_uiRefreshControl!.beginRefreshing()
-        refresh()
+        tableView.mj_header.beginRefreshing()
+        tableView.becomeFirstResponder()
     }
     
-    func refresh() {
-        dataObject.fetchDataObjectForArticleViewController(
-            success: {
-                [weak self] dataObject in
-                self?.dataObject = dataObject
-                self?.reloadData()
-                self?.bodyView.msr_uiRefreshControl!.endRefreshing()
-            }, failure: {
-                [weak self] error in
-                self?.bodyView.msr_uiRefreshControl!.endRefreshing()
-                return
-            })
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 4
     }
     
-    func reloadData() {
-        let theme = SettingsManager.defaultManager.currentTheme
-        let options = [
-            DTDefaultFontName: UIFont.systemFontOfSize(0).fontName,
-            DTDefaultFontSize: 16,
-            DTDefaultTextColor: theme.bodyTextColor,
-            DTDefaultLineHeightMultiplier: 1.5,
-            DTDefaultLinkColor: UIColor.msr_materialLightBlue(),
-            DTDefaultLinkDecoration: true]
-        header.update(dataObject: dataObject)
-        footer.update(dataObject: dataObject)
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let html = dataObject.date == nil || dataObject.body == nil ? dataObject.body ?? "加载中……" : dataObject.body! + "<br><p align=\"right\">\(dateFormatter.stringFromDate(dataObject.date!))</p>"
-        bodyView.attributedString = NSAttributedString(
-            HTMLData: html.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true),
-            options: options,
-            documentAttributes: nil)
-        bodyView.relayoutText()
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return [1, 1, 1, min(comments.count, 5), 1][section]
     }
     
-    var bodyViewOffsetFirstLessThanHeaderNormalHeight = true
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 3 ? 30 : 0
+    }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView === bodyView {
-            header.frame.origin.y = bodyView.contentOffset.y
-            let offset = bodyView.contentOffset.y + header.minHeight
-            let velocity = bodyView.panGestureRecognizer.velocityInView(view).y
-            let threshold: CGFloat = 200
-            if offset <= header.maxHeight - header.normalHeight {
-                header.frame.size.height = floor(header.maxHeight - offset) // The appearences of blur effect view will not correct unless it's height is an integer.
-                bodyView.scrollIndicatorInsets.top = header.bounds.height
-                bodyViewOffsetFirstLessThanHeaderNormalHeight = true
-            } else {
-                if bodyViewOffsetFirstLessThanHeaderNormalHeight {
-                    bodyViewOffsetFirstLessThanHeaderNormalHeight = false
-                    header.frame.size.height = header.normalHeight
-                    bodyView.scrollIndicatorInsets.top = header.bounds.height
-                }
-            }
-            animate() {
-                [weak self] in
-                if velocity < -threshold && !scrollView.msr_reachedBottom {
-                    self?.footer.transform = CGAffineTransformMakeTranslation(0, self!.footer.bounds.height)
-                }
-                if velocity > threshold || scrollView.msr_reachedBottom {
-                    self?.footer.transform = CGAffineTransformIdentity
-                }
-                return
-            }
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return  section == 3 ? commentHeaderView : nil
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            questionHeaderCell.update(user: dataObject.user, updateImage: true)
+            return questionHeaderCell
+        case 1:
+            questionTitleCell.update(dataObject: dataObject)
+            return questionTitleCell
+        case 2:
+            questionBodyCell.update(dataObject: dataObject)
+            return questionBodyCell
+        case 3:
+            let commentCell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! CommentCell
+            commentCell.userButton.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
+//            commentCell.commentButton.addTarget(self, action: "didPressAnswerButton:", forControlEvents: .TouchUpInside)
+            commentCell.update(comment: comments[indexPath.row])
+            return commentCell
+        default:
+            commentFooterView.commentButton.addTarget(self, action: "didPressAnswerButton:", forControlEvents: UIControlEvents.TouchUpInside)
+            return commentFooterView
         }
     }
     
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if scrollView === bodyView {
-            let offset = targetContentOffset.memory.y + header.minHeight
-            if offset > 0 && offset <= header.maxHeight - header.normalHeight {
-                targetContentOffset.memory = CGPoint(x: 0, y: header.maxHeight - header.minHeight - header.normalHeight)
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        struct _Static {
+            static var id: dispatch_once_t = 0
+            static var commentCell: CommentCell!
+        }
+        dispatch_once(&_Static.id) {
+            [weak self] in
+            if let self_ = self {
+                _Static.commentCell = NSBundle.mainBundle().loadNibNamed(self_.cellReuseIdentifier, owner: nil, options: nil).first as! CommentCell
             }
         }
-    }
-    
-    func articleHeaderViewMaxHeightDidChange(header: ArticleHeaderView) {
-        if header === self.header {
-            header.frame.origin.y = bodyView.contentOffset.y
-            bodyView.attributedTextContentView.edgeInsets.top = header.maxHeight + 10
-            let offset = bodyView.contentOffset.y + header.minHeight
-            if offset <= header.maxHeight - header.normalHeight {
-                animate() {
-                    [weak self] in
-                    self?.scrollViewDidScroll(self!.bodyView)
-                    return
-                }
-            }
+        switch indexPath.section {
+        case 0:
+            questionHeaderCell.update(user: dataObject.user, updateImage: false)
+            return questionHeaderCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        case 1:
+            questionTitleCell.update(dataObject: dataObject)
+            return questionTitleCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        case 2:
+            questionBodyCell.update(dataObject: dataObject)
+            let height = questionBodyCell.requiredRowHeightInTableView(tableView)
+            let insets = questionBodyCell.attributedTextContextView.edgeInsets
+            return height > insets.top + insets.bottom ? height : 0
+        case 3:
+            _Static.commentCell.update(comment: comments[indexPath.row])
+            return _Static.commentCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        default:
+            return commentFooterView.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
         }
-    }
-    
-    func attributedTextContentView(attributedTextContentView: DTAttributedTextContentView!, viewForAttachment attachment: DTTextAttachment!, frame: CGRect) -> UIView! {
-        if attachment is DTImageTextAttachment {
-            let imageView = DTLazyImageView(frame: frame)
-            imageView.delegate = self
-            imageView.url = attachment.contentURL
-            return imageView
-        }
-        return nil
-    }
-    
-    func attributedTextContentView(attributedTextContentView: DTAttributedTextContentView!, viewForLink url: NSURL!, identifier: String!, frame: CGRect) -> UIView! {
-        let button = DTLinkButton()
-        button.URL = url
-        button.GUID = identifier
-        button.frame = frame
-        button.showsTouchWhenHighlighted = true
-        button.minimumHitSize = CGSize(width: 44, height: 44)
-        button.addTarget(self, action: "didPressLinkButton:", forControlEvents: .TouchUpInside)
-        button.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "handleLongPressGesture:"))
-        return button
     }
     
     func lazyImageView(lazyImageView: DTLazyImageView!, didChangeImageSize size: CGSize) {
         let predicate = NSPredicate(format: "contentURL == %@", lazyImageView.url)
-        let attachments = bodyView.attributedTextContentView.layoutFrame.textAttachmentsWithPredicate(predicate) as? [DTImageTextAttachment] ?? []
+        let attachments = questionBodyCell.attributedTextContextView.layoutFrame.textAttachmentsWithPredicate(predicate) as? [DTImageTextAttachment] ?? []
         for attachment in attachments {
             attachment.originalSize = size
-            let v = bodyView.attributedTextContentView
+            let v = questionBodyCell.attributedTextContextView
             let maxWidth = v.bounds.width - v.edgeInsets.left - v.edgeInsets.right
             if size.width > maxWidth {
                 let scale = maxWidth / size.width
                 attachment.displaySize = CGSize(width: size.width * scale, height: size.height * scale)
             }
         }
-        bodyView.attributedTextContentView.layouter = nil
-        bodyView.relayoutText()
-    }
-    
-    func handleLongPressGesture(recoginizer: UILongPressGestureRecognizer) {
-        if recoginizer.state == .Began {
-            didLongPressLinkButton(recoginizer.view as! DTLinkButton)
-        }
-    }
-    
-    func didPressCommentButton() {
-        if let dataObject = dataObject as? CommentListViewControllerPresentable {
-            msr_navigationController!.pushViewController(CommentListViewController(dataObject: dataObject), animated: true)
-        }
+        questionBodyCell.attributedTextContextView.layouter = nil
+        questionBodyCell.attributedTextContextView.relayoutText()
     }
     
     func didLongPressLinkButton(linkButton: DTLinkButton) {
@@ -279,29 +224,47 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleHead
         presentLinkAlertControllerWithURL(linkButton.URL)
     }
     
+    func presentLinkAlertControllerWithURL(URL: NSURL) {
+        let ac = UIAlertController(title: "链接", message: URL.absoluteString, preferredStyle: .ActionSheet)
+        ac.addAction(UIAlertAction(title: "跳转到 Safari", style: .Default) {
+            action in
+            UIApplication.sharedApplication().openURL(URL)
+            })
+        ac.addAction(UIAlertAction(title: "复制到剪贴板", style: .Default) {
+            action in
+            UIPasteboard.generalPasteboard().string = URL.absoluteString
+            SVProgressHUD.showSuccessWithStatus("已复制")
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC / 2)), dispatch_get_main_queue()) {
+                SVProgressHUD.dismiss()
+            }
+            })
+        ac.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
+        presentViewController(ac, animated: true, completion: nil)
+    }
+    
     func didPressUserButton(sender: UIButton) {
         if let user = sender.msr_userInfo as? User {
             msr_navigationController!.pushViewController(UserVC(user: user), animated: true)
         }
     }
     
-    func didPressBackButton() {
-        msr_navigationController!.popViewController(animated: true)
+    func didPressAnswerButton(sender: UIButton) {
+        if let dataObject = dataObject as? CommentListViewControllerPresentable {
+            msr_navigationController!.pushViewController(CommentListViewController(dataObject: dataObject), animated: true)
+        }
     }
     
-    func didPressShareButton() {
-        let title = dataObject.title!
-        let image = dataObject.user?.avatar ?? defaultUserAvatar
-        let body = dataObject.body!.wc_plainString
-        let url: String = (dataObject is Answer) ? "\(NetworkManager.defaultManager!.website)?/question/\((dataObject as! Answer).question!.id)" : "\(NetworkManager.defaultManager!.website)?/article/\(dataObject.id)"
-        var items = [title, body, NSURL(string: url)!]
-        if image != nil {
-            items.append(image!)
+    func didPressAnswerButton() {
+        if let dataObject = dataObject as? CommentListViewControllerPresentable {
+            msr_navigationController!.pushViewController(CommentListViewController(dataObject: dataObject, editing: true), animated: true)
         }
-        let vc = UIActivityViewController(
-            activityItems: items,
-            applicationActivities: [SinaWeiboActivity(), WeChatSessionActivity(), WeChatTimelineActivity()])
-        showDetailViewController(vc, sender: self)
+    }
+    
+    func didPressAddButton() {
+        let alert = UIAlertController(title: "确认添加到在读列表？", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func didPressAgreeButton() {
@@ -311,12 +274,6 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleHead
         }
     }
     
-    func didPressDisagreeButton() {
-        if let rawValue = dataObject.evaluationRawValue?.integerValue {
-            let e = Evaluation(rawValue: rawValue)!
-            evaluate(value: e == .Down ? .None : .Down)
-        }
-    }
     
     func evaluate(value value: Evaluation) {
         let count = dataObject.agreementCount?.integerValue
@@ -341,38 +298,113 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, ArticleHead
             })
     }
     
-    func presentLinkAlertControllerWithURL(URL: NSURL) {
-        let ac = UIAlertController(title: "链接", message: URL.absoluteString, preferredStyle: .ActionSheet)
-        ac.addAction(UIAlertAction(title: "跳转到 Safari", style: .Default) {
-            action in
-            UIApplication.sharedApplication().openURL(URL)
-        })
-        ac.addAction(UIAlertAction(title: "复制到剪贴板", style: .Default) {
-            [weak self] action in
-            UIPasteboard.generalPasteboard().string = URL.absoluteString
-            let ac = UIAlertController(title: "已复制", message: nil, preferredStyle: .Alert)
-            self?.presentViewController(ac, animated: true) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC / 2)), dispatch_get_main_queue()) {
-                    ac.dismissViewControllerAnimated(true, completion: nil)
-                }
-            }
-        })
-        ac.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
-        presentViewController(ac, animated: true, completion: nil)
+//    func didPressAdditionButton() {
+//        let apc = NSBundle.mainBundle().loadNibNamed("PublishmentViewControllerB", owner: nil, options: nil).first as! PublishmentViewController
+//        let answer = Answer.temporaryObject()
+//        answer.question = Question.temporaryObject()
+//        answer.question!.id = question.id
+//        apc.delegate = self
+//        apc.dataObject = answer
+//        apc.headerLabel.text = "发布回答"
+//        showDetailViewController(apc, sender: self)
+//    }
+    
+    func publishmentViewControllerDidSuccessfullyPublishDataObject(publishmentViewController: PublishmentViewController) {
+        tableView.mj_header.beginRefreshing()
+    }
+    
+//    func toggleFocus() {
+//        let focusing = question.focusing
+//        question.focusing = nil
+//        reloadQuestionFooterCell()
+//        question.toggleFocus(
+//            success: {
+//                [weak self] in
+//                self?.reloadQuestionFooterCell()
+//                return
+//            },
+//            failure: {
+//                [weak self] error in
+//                self?.question.focusing = focusing
+//                self?.reloadQuestionFooterCell()
+//            })
+//    }
+    
+    func refresh() {
+        dataObject.fetchDataObjectForArticleViewController(
+            success: {
+                [weak self] dataObject in
+                self?.dataObject = dataObject
+                self?.reloadData()
+                self?.tableView.mj_header.endRefreshing()
+            }, failure: {
+                [weak self] error in
+                self?.tableView.mj_header.endRefreshing()
+                return
+            })
+    }
+    
+    func reloadData() {
+        let theme = SettingsManager.defaultManager.currentTheme
+        let options = [
+            DTDefaultFontName: UIFont.systemFontOfSize(0).fontName,
+            DTDefaultFontSize: 16,
+            DTDefaultTextColor: theme.bodyTextColor,
+            DTDefaultLineHeightMultiplier: 1.5,
+            DTDefaultLinkColor: UIColor.msr_materialLightBlue(),
+            DTDefaultLinkDecoration: true]
+        questionHeaderCell.update(user: dataObject.user, updateImage: true)
+        footer.update(dataObject: dataObject)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let html = dataObject.date == nil || dataObject.body == nil ? dataObject.body ?? "加载中……" : dataObject.body! + "<br><p align=\"right\">\(dateFormatter.stringFromDate(dataObject.date!))</p>"
+        questionBodyCell.attributedString = NSAttributedString(
+            HTMLData: html.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true),
+            options: options,
+            documentAttributes: nil)
+        
+        if let dataObject = dataObject as? CommentListViewControllerPresentable {
+            dataObject.fetchCommentsForCommentListViewController(
+                success: {
+                    [weak self] comments in
+                    self?.comments = comments
+                    self?.tableView.reloadData()
+                    self?.tableView.mj_header.endRefreshing()
+                }, failure: {
+                    [weak self] error in
+                    self?.tableView.reloadData()
+                    self?.tableView.mj_header.endRefreshing()
+                })
+        }
+//        bodyView.relayoutText()
+    }
+    
+    func reloadQuestionFooterCell() {
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 4)], withRowAnimation: .None)
+    }
+    
+    func didPressShareButton() {
+        let title = dataObject.title!
+        let image = dataObject.user?.avatar ?? defaultUserAvatar
+        let body = dataObject.body!.wc_plainString
+        let url: String = (dataObject is Answer) ? "\(NetworkManager.defaultManager!.website)?/question/\((dataObject as! Answer).question!.id)" : "\(NetworkManager.defaultManager!.website)?/article/\(dataObject.id)"
+        var items = [title, body, NSURL(string: url)!]
+        if image != nil {
+            items.append(image!)
+        }
+        let vc = UIActivityViewController(
+            activityItems: items,
+            applicationActivities: [SinaWeiboActivity(), WeChatSessionActivity(), WeChatTimelineActivity()])
+        showDetailViewController(vc, sender: self)
     }
     
     func attributedTextContentViewDidFinishLayout(notification: NSNotification) {
-        bodyView.contentSize.height = max(bodyView.attributedTextContentView.bounds.height, bodyView.bounds.height + header.maxHeight - header.normalHeight - header.minHeight)
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .None)
     }
     
-    func animate(animations: (() -> Void)) {
-        UIView.animateWithDuration(0.5,
-            delay: 0,
-            usingSpringWithDamping: 1,
-            initialSpringVelocity: 0.7,
-            options: .BeginFromCurrentState,
-            animations: animations,
-            completion: nil)
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

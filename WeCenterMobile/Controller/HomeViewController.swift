@@ -159,18 +159,6 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         }
     }
     
-    func didPressQuestionButton(sender: UIButton) {
-        if let question = sender.msr_userInfo as? Question {
-            msr_navigationController!.pushViewController(QuestionViewController(question: question), animated: true)
-        }
-    }
-    
-    func didPressAnswerButton(sender: UIButton) {
-        if let answer = sender.msr_userInfo as? Answer {
-            msr_navigationController!.pushViewController(ArticleViewController(dataObject: answer), animated: true)
-        }
-    }
-    
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
             if let url = article.url {
@@ -180,7 +168,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
                 webViewController.requestURL = url
                 msr_navigationController!.pushViewController(webViewController, animated: true)
             } else {
-                msr_navigationController!.pushViewController(ArticleAnswerViewController(dataObject: article), animated: true)
+                msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
             }
         }
     }

@@ -44,6 +44,9 @@ extension Article: CommentListViewControllerPresentable {
 
 class CommentListViewController: UITableViewController, UITextFieldDelegate {
     var dataObject: CommentListViewControllerPresentable
+    var article: Article {
+        return dataObject as! Article
+    }
     var comments = [Comment]()
     var startEditing = false
     let cellReuseIdentifier = "CommentCell"
@@ -76,25 +79,22 @@ class CommentListViewController: UITableViewController, UITextFieldDelegate {
     }
     override func loadView() {
         super.loadView()
-        title = "评论"
+        title = "? 评论 · \(article.agreementCount ?? 0) 赞"
         tableView = TableViewWithKeyboardBar()
         tableView.delegate = self
         tableView.dataSource = self
-        let theme = SettingsManager.defaultManager.currentTheme
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
-        refreshControl!.tintColor = theme.footnoteTextColor
         tableView.delaysContentTouches = false
         tableView.msr_wrapperView?.delaysContentTouches = false
         tableView.msr_setTouchesShouldCancel(true, inContentViewWhichIsKindOfClass: UIButton.self)
         tableView.registerNib(UINib(nibName: cellNibName, bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellReuseIdentifier)
-        tableView.indicatorStyle = theme.scrollViewIndicatorStyle
         tableView.separatorStyle = .None
         tableView.contentInset.bottom = 8
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.keyboardDismissMode = .OnDrag
-        tableView.backgroundColor = theme.backgroundColorA
+        tableView.backgroundColor = %+0xf2ede6
         tableView.panGestureRecognizer.requireGestureRecognizerToFail(msr_navigationController!.interactivePopGestureRecognizer)
         keyboardBar.userAtView.removeButton.addTarget(self, action: "removeAtUser", forControlEvents: .TouchUpInside)
         keyboardBar.publishButton.addTarget(self, action: "publishComment", forControlEvents: .TouchUpInside)
@@ -129,7 +129,7 @@ class CommentListViewController: UITableViewController, UITextFieldDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! CommentCell
         cell.update(comment: comment)
         cell.userButton.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
-        cell.commentButton.addTarget(self, action: "didPressCommentButton:", forControlEvents: .TouchUpInside)
+        cell.replyButton.addTarget(self, action: "didPressReplyButton:", forControlEvents: .TouchUpInside)
         return cell
     }
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -142,38 +142,16 @@ class CommentListViewController: UITableViewController, UITextFieldDelegate {
             msr_navigationController!.pushViewController(UserVC(user: user), animated: true)
         }
     }
-    func didPressCommentButton(sender: UIButton) {
+    func didPressReplyButton(sender: UIButton) {
         keyboardBar.textField.resignFirstResponder()
-        if let comment = sender.msr_userInfo as? Comment {
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            alertController.addAction(UIAlertAction(
-                title: "回复",
-                style: .Default) {
-                    [weak self] action in
-                    if comment.user != nil {
-                        let user = DataManager.temporaryManager!.create("User") as! User
-                        user.id = comment.user!.id
-                        user.name = comment.user!.name
-                        self?.keyboardBar.userAtView.msr_userInfo = user
-                        self?.animate() {
-                            self?.keyboardBar.userAtView.userNameLabel.text = user.name
-                            self?.keyboardBar.userAtView.hidden = false
-                        }
-                    }
-                    return
-                })
-            alertController.addAction(UIAlertAction(
-                title: "复制",
-                style: .Default) {
-                    action in
-                    UIPasteboard.generalPasteboard().string = comment.body
-                    return
-                })
-            alertController.addAction(UIAlertAction(
-                title: "取消",
-                style: .Cancel,
-                handler: nil))
-            presentViewController(alertController, animated: true, completion: nil)
+        if let user = sender.msr_userInfo as? User {
+            let temporaryUser = User.temporaryObject()
+            temporaryUser.id = user.id
+            temporaryUser.name = user.name
+            keyboardBar.userAtView.msr_userInfo = temporaryUser
+            keyboardBar.userAtView.userNameLabel.text = user.name
+            keyboardBar.userAtView.hidden = false
+            keyboardBar.textField.becomeFirstResponder()
         }
     }
     internal func publishComment() {

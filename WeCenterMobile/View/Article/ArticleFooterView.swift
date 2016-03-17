@@ -56,15 +56,11 @@ class ArticleFooterView: UIToolbar {
     }
     
     func update(dataObject dataObject: ArticleViewControllerPresentable) {
-        if let count = dataObject.agreementCount {
+        if let _ = dataObject.agreementCount {
             agreeItem.enabled = true
-//            disagreeItem.enabled = true
-//            agreementCountItem.title = "\(count)"
             activityIndicatorView.stopAnimating()
         } else {
             agreeItem.enabled = false
-//            disagreeItem.enabled = false
-//            agreementCountItem.title = ""
             activityIndicatorView.startAnimating()
         }
         agreeItem.image = dataObject.evaluationRawValue?.integerValue == Evaluation.Up.rawValue ? highlightedAgreeImage : normalAgreeImage

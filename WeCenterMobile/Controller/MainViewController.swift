@@ -199,9 +199,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             case .Search:
 //                contentViewController.setViewControllers([SearchViewController()], animated: true)
                 break
-            case .Topic:
-                contentViewController.setViewControllers([HotTopicViewController()], animated: true)
-                break
             case .Settings:
                 let svc = UIStoryboard(name: "SettingsViewController", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! SettingsViewController
                 contentViewController.setViewControllers([svc], animated: true)

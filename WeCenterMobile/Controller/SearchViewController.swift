@@ -119,21 +119,9 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    func didPressTopicButton(sender: UIButton) {
-        if let topic = sender.msr_userInfo as? Topic {
-            msr_navigationController!.pushViewController(TopicViewController(topic: topic), animated: true)
-        }
-    }
-    
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
             msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
-        }
-    }
-    
-    func didPressQuestionButton(sender: UIButton) {
-        if let question = sender.msr_userInfo as? Question {
-            msr_navigationController!.pushViewController(QuestionViewController(question: question), animated: true)
         }
     }
     
