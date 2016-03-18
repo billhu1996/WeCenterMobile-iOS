@@ -18,13 +18,8 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
         return c
     }()
     lazy var qrViewController: QRCodeReaderViewController = {
-        //        NSArray *types = @[AVMetadataObjectTypeQRCode];
-        //        _reader        = [QRCodeReaderViewController readerWithMetadataObjectTypes:types];
-        //
-        //        _reader.delegate = self;
-        
+        [weak self] in
         let types = ["AVMetadataObjectTypeQRCode"]
-        
         var qrViewController = QRCodeReaderViewController.readerWithMetadataObjectTypes(types)
         qrViewController.delegate = self
         return qrViewController
@@ -145,9 +140,15 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
     }
     
     func reader(reader: QRCodeReaderViewController!, didScanResult result: String!) {
-        dismissViewControllerAnimated(true) { () -> Void in
-            self.webViewController.requestURL = result
-            self.msr_navigationController!.pushViewController(self.webViewController, animated: true)
+        dismissViewControllerAnimated(true) {
+            [weak self] in
+            if let self_ = self {
+                let article = Article.temporaryObject()
+                article.id = -1
+                self_.webViewController.requestURL = result
+                self_.webViewController.article = article
+                self_.msr_navigationController!.pushViewController(self_.webViewController, animated: true)
+            }
         }
     }
     func readerDidCancel(reader: QRCodeReaderViewController!) {
@@ -169,7 +170,6 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
             if let url = article.url {
                 self.webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
                 self.webViewController.article = article
-                self.webViewController.published = false
                 self.webViewController.requestURL = url
                 self.msr_navigationController!.pushViewController(self.webViewController, animated: true)
             } else {

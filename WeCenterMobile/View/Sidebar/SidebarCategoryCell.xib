@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FOO-ub-sSG" id="hGa-fi-04N">
-                <rect key="frame" x="0.0" y="0.0" width="200" height="49"/>
+                <rect key="frame" x="0.0" y="0.0" width="200" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sidebar-Test" translatesAutoresizingMaskIntoConstraints="NO" id="bSh-0f-Cvq">

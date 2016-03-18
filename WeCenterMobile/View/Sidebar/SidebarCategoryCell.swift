@@ -19,10 +19,9 @@ class SidebarCategoryCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let view = UIView(frame: frame)
-        view.backgroundColor = UIColor.greenColor()
-        self.selectedBackgroundView = view
         msr_scrollView?.delaysContentTouches = false
+        selectedBackgroundView = UIView()
+        selectedBackgroundView!.backgroundColor = %+0xff921e
         setNeedsLayout()
         layoutIfNeeded()
     }
@@ -41,10 +40,8 @@ class SidebarCategoryCell: UITableViewCell {
     }
     
     func updateTheme() {
-        let theme = SettingsManager.defaultManager.currentTheme
-        categoryImageView.tintColor = theme.titleTextColor
-        categoryTitleLabel.textColor = theme.titleTextColor
-//        selectedBackgroundView!.backgroundColor = theme.highlightColor
+        categoryImageView.tintColor = selected ? UIColor.whiteColor() : UIColor.blackColor().colorWithAlphaComponent(0.87)
+        categoryTitleLabel.textColor = categoryImageView.tintColor
     }
     
     override func prepareForReuse() {

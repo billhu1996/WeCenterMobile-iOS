@@ -15,12 +15,13 @@ import SocialWechat
 class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegate {
     
     var requestURL = ""
-    var loaded = true;
-    var published = false
-    var articleID = -1
-    var evaluate: Evaluation = Evaluation.None
+    var loaded = true
     var userName = ""
-    var article: Article? = nil
+    var article: Article = {
+        let ret = Article.temporaryObject()
+        ret.id = -1
+        return ret
+    }()
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
@@ -31,58 +32,52 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         let item = UIBarButtonItem(image: UIImage(named: "WebVCShareGreen"), style: .Plain, target: self, action: "share:")
-        self.navigationItem.rightBarButtonItem = item
-        
-        self.loaded = false;
-        self.view.backgroundColor = UIColor.whiteColor();
-        
-        if article != nil {
-            self.articleID = (self.article?.id.integerValue)!
-            self.evaluate = (self.article?.evaluation)!
-            let v = NSBundle.mainBundle().loadNibNamed("TitleView", owner: nil, options: nil).first as! TitleView
-            v.nameLabel.text = self.article?.user?.name
-            v.avatarImage.wc_updateWithUser(self.article?.user)
-            v.backgroundColor = UIColor.clearColor()
-            self.navigationItem.titleView = v
-        }
-        
-        self.reloadData()
+        navigationItem.rightBarButtonItem = item
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        loaded = false;
+        view.backgroundColor = UIColor.whiteColor();
+        let v = NSBundle.mainBundle().loadNibNamed("TitleView", owner: nil, options: nil).first as! TitleView
+        v.nameLabel.text = article.user?.name
+        v.avatarImage.wc_updateWithUser(article.user)
+        v.backgroundColor = UIColor.clearColor()
+        navigationItem.titleView = v
+        reloadData()
     }
     
     func share(sender: AnyObject) {
-        if article != nil {
-            print(self.article!.title!)
-            let title = self.article!.title!
-            let image = self.article!.user?.avatar ?? defaultUserAvatar
-            let body = self.article!.body!.wc_plainString
-            let url: String = self.requestURL
-            var items = [title, body, NSURL(string: url)!]
-            if image != nil {
-                items.append(image!)
-            }
-            let vc = UIActivityViewController(
-                activityItems: items,
-                applicationActivities: [WeChatSessionActivity(), WeChatTimelineActivity()])
-            showDetailViewController(vc, sender: self)
+        print(article.title!)
+        let title = article.title!
+        let body = article.body!.wc_plainString
+        let url = requestURL
+        var items = [title, body, NSURL(string: url)!]
+        if let image = article.image {
+            items.append(image)
         }
+        let vc = UIActivityViewController(
+            activityItems: items,
+            applicationActivities: [WeChatSessionActivity(), WeChatTimelineActivity()])
+        showDetailViewController(vc, sender: self)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if !self.loaded {
-            self.webView.frame = self.view.bounds;
-            self.webView.delegate = self;
-            self.view.addSubview(self.webView)
-            let req: NSURLRequest = NSURLRequest.init(URL: NSURL.init(string: self.requestURL)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData  , timeoutInterval: 60)
-            self.webView.loadRequest(req)
-            self.loaded = true;
+        if !loaded {
+            webView.frame = view.bounds;
+            webView.delegate = self;
+            view.addSubview(webView)
+            let req: NSURLRequest = NSURLRequest.init(URL: NSURL(string: requestURL)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60)
+            webView.loadRequest(req)
+            loaded = true;
         }
         
     }
     
     func back() {
-        self.navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func addToReadingList(sender: AnyObject) {
@@ -92,7 +87,7 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
-            self.publish(1)
+            publish(1)
         }
     }
     
@@ -100,69 +95,47 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
         if webView.loading {
             return
         }
-        if self.articleID == -1 {
+        if article.id == -1 {
             addToReadingList(self)
         }
     }
     
     @IBAction func comment(sender: AnyObject) {
-        if self.articleID != -1 {
-            let article = Article.temporaryObject()
-            article.id = self.articleID
+        if article.id != -1 {
+            let temporaryArticle = Article.temporaryObject()
+            temporaryArticle.id = article.id
+            temporaryArticle.title = article.title
+            temporaryArticle.agreementCount = article.agreementCount
             let vc = CommentListViewController(dataObject: article, editing: true)
-            self.msr_navigationController!.pushViewController(vc, animated: true)
+            msr_navigationController!.pushViewController(vc, animated: true)
         }
-        self.publish(2)
+        publish(2)
     }
     
     @IBAction func like(sender: AnyObject) {
-        if self.articleID != -1 {
-            let article = Article.temporaryObject()
-            article.id = self.articleID
-            if self.evaluate == .None {
-                article.evaluate(value: .Up,
-                    success: {
-                        [weak self] in
-                        if let self_ = self {
-                            self_.evaluate = .Up
-                            self_.reloadData()
-                        }
-                    },
-                    failure: {
-                        error in
-                        print(error)
-                    })
-            }
-            if self.evaluate == .Up {
-                article.evaluate(value: .None,
-                    success: {
-                        [weak self] in
-                        if let self_ = self {
-                            self_.evaluate = .None
-                            self_.reloadData()
-                        }
-                    },
-                    failure: {
-                        error in
-                        print(error)
+        if article.id != -1 {
+            article.evaluate(value: article.evaluation == .Up ? .None : .Up,
+                success: {
+                    [weak self] in
+                    if let self_ = self {
+                        self_.reloadData()
+                    }
+                },
+                failure: {
+                    error in
+                    print(error)
                 })
-            }
         }
-        self.publish(3)
+        publish(3)
     }
     
     func publish(mode: Int) {
-        if self.published {
-            return
-        }
         let article = Article.temporaryObject()
-        article.url = self.requestURL
+        article.url = requestURL
         article.postWithURL(
             success: {
-                [weak self] articleID in
+                [weak self] article in
                 if let self_ = self {
-                    self_.published = true
-                    self_.articleID = articleID
                     if mode == 1 {
                         let alertView = UIAlertView(title: "发布成功", message: "", delegate: self, cancelButtonTitle: "好的")
                         alertView.show()
@@ -170,64 +143,47 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
                     }
                     if mode == 2 {
                         let article = Article.temporaryObject()
-                        article.id = self_.articleID
+                        article.id = self_.article.id
+                        article.title = self_.article.title
+                        article.agreementCount = self_.article.agreementCount
                         let vc = CommentListViewController(dataObject: article, editing: true)
                         self_.msr_navigationController!.pushViewController(vc, animated: true)
                         self_.reloadData()
                     }
                     if mode == 3 {
-                        let article = Article.temporaryObject()
-                        article.id = self_.articleID
-                        if self_.evaluate == .None {
-                            article.evaluate(value: .Up,
-                                success: {
-                                    [weak self] in
-                                    if let self_ = self {
-                                        self_.evaluate = .Up
-                                        self_.reloadData()
-                                    }
-                                },
-                                failure: {
-                                    error in
-                                    print(error)
-                            })
-                        }
-                        if self_.evaluate == .Up {
-                            article.evaluate(value: .None,
-                                success: {
-                                    [weak self] in
-                                    if let self_ = self {
-                                        self_.evaluate = .None
-                                        self_.reloadData()
-                                    }
-                                },
-                                failure: {
-                                    error in
-                                    print(error)
-                            })
-                        }
+                        article.evaluate(value: article.evaluation == .Up ? .None : .Up,
+                            success: {
+                                [weak self] in
+                                if let self_ = self {
+                                    self_.reloadData()
+                                }
+                            },
+                            failure: {
+                                error in
+                                print(error)
+                        })
                     }
                 }
             },
             failure: {
                 error in
                 print(error)
-        })
+            })
     }
     
     func reloadData() {
-        if self.published {
-            self.addButton.setImage(UIImage(named: "WebVCAddGreen"), forState: .Normal)
+        if article.id != -1 {
+            addButton.setImage(UIImage(named: "WebVCAddGreen"), forState: .Normal)
         } else {
-            self.addButton.setImage(UIImage(named: "WebVCAddGray"), forState: .Normal)
+            addButton.setImage(UIImage(named: "WebVCAddGray"), forState: .Normal)
         }
-        if self.evaluate == .None {
-            self.likeButton.setImage(UIImage(named: "WebVCLikeGray"), forState: .Normal)
+        if article.evaluation == .None {
+            likeButton.setImage(UIImage(named: "WebVCLikeGray"), forState: .Normal)
         } else {
-            self.likeButton.setImage(UIImage(named: "WebVCLikeGreen"), forState: .Normal)
+            likeButton.setImage(UIImage(named: "WebVCLikeGreen"), forState: .Normal)
         }
-//        if self.articleID != -1 {
-//            self.commentLabel.text = "\(self.article.)"
+//        if articleID != -1 {
+//            commentLabel.text = "\(article.)"
 //        }
     }
 }

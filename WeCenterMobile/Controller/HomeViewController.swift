@@ -164,7 +164,6 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
             if let url = article.url {
                 let webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
                 webViewController.article = article
-                webViewController.published = false
                 webViewController.requestURL = url
                 msr_navigationController!.pushViewController(webViewController, animated: true)
             } else {

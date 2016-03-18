@@ -36,6 +36,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         v.enableBouncing = false
         v.overlay = UIView()
         v.overlay!.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.6)
+        v.backgroundView = UIView()
+        v.backgroundView!.backgroundColor = %+0xf5f2ed
         v.delegate = self
         if let self_ = self {
             v.contentView.addSubview(self_.tableView)
@@ -88,8 +90,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let self_ = self {
             return SidebarCategory.allValues.map {
                 let cell = NSBundle.mainBundle().loadNibNamed("SidebarCategoryCell", owner: nil, options: nil).first as! SidebarCategoryCell
-                cell.selectedBackgroundView = UIView(frame: cell.frame)
-                cell.selectedBackgroundView?.backgroundColor = UIColor.orangeColor()
                 cell.update(category: $0)
                 return cell
             }
@@ -122,6 +122,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: .None)
+        cells.first!.selected = true
+        cells.first!.updateTheme()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currentUserPropertyDidChange:", name: CurrentUserPropertyDidChangeNotificationName, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "currentThemeDidChange", name: CurrentThemeDidChangeNotificationName, object: nil)
     }
@@ -184,8 +186,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         sidebar.collapse()
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        if let category = (cell as? SidebarCategoryCell)?.category {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as? SidebarCategoryCell
+        cell?.updateTheme()
+        if let category = cell?.category {
             switch category {
             case .User:
                 contentViewController.setViewControllers([UserVC(user: User.currentUser!)], animated: true)
@@ -212,6 +215,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if cell is SidebarLogoutCell {
             dismissViewControllerAnimated(true, completion: nil)
         }
+    }
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as? SidebarCategoryCell
+        cell?.updateTheme()
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return [50, 50][indexPath.section]
@@ -273,9 +280,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let indexPath = tableView.indexPathForSelectedRow
         tableView.reloadData()
         tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
+        if let row = indexPath?.row {
+            cells[row].selected = true
+            cells[row].updateTheme()
+        }
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return sidebar.collapsed ? contentViewController.preferredStatusBarStyle() : .LightContent
+        return sidebar.collapsed ? .LightContent : .Default
     }
     override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
         return .Slide
