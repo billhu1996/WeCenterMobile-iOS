@@ -29,6 +29,15 @@ class Article: DataObject {
     @NSManaged var imageURL: String?
 
     var evaluation: Evaluation? = nil
+    var focusing: Bool? = nil
+    
+    var isPublishedByCurrentUser: Bool {
+        return user?.isCurrentUser ?? false
+    }
+    
+    var isInReadingList: Bool {
+        return isPublishedByCurrentUser || (focusing ?? false)
+    }
     
     class func fetch(ID ID: NSNumber, success: ((Article) -> Void)?, failure: ((NSError) -> Void)?) {
         NetworkManager.defaultManager!.GET("Article Detail",
@@ -49,6 +58,8 @@ class Article: DataObject {
                 }
                 article.title = (info["title"] as! String)
                 article.body = (info["message"] as! String)
+                let url = info["url"] as? String
+                article.url = url ?? "" == "" ? nil : url
                 article.agreementCount = Int(msr_object: info["votes"])
                 if let voteInfo = info["vote_info"] as? [String: AnyObject] {
                     article.evaluation = Evaluation(rawValue: Int(msr_object: voteInfo["rating"])!)
@@ -56,6 +67,7 @@ class Article: DataObject {
                     article.evaluation = Evaluation.None
                 }
                 article.topics = Set()
+                article.focusing = Bool(msr_object: info["is_favorite"])
                 if let topicsInfo = data["article_topics"] as? [NSDictionary] {
                     for topicInfo in topicsInfo {
                         let topicID = Int(msr_object: topicInfo["topic_id"])!
@@ -64,7 +76,6 @@ class Article: DataObject {
                         article.topics.insert(topic)
                     }
                 }
-                article.url = ""
                 _ = try? DataManager.defaultManager.saveChanges()
                 success?(article)
             },
@@ -167,6 +178,24 @@ class Article: DataObject {
             failure: failure)
     }
     
+    func focus(success success: (() -> Void)?, failure: ((NSError) -> Void)?) {
+        NetworkManager.defaultManager!.POST("Focus Article/Answer",
+            parameters: [
+                "item_id": id,
+                "item_type": "article"
+            ],
+            success: {
+                [weak self] data in
+                if let self_ = self {
+                    self_.focusing = true
+                    success?()
+                } else {
+                    failure?(NSError(domain: NetworkManager.defaultManager!.website, code: NetworkManager.defaultManager!.internalErrorCode.integerValue, userInfo: nil)) // Needs specification
+                }
+            },
+            failure: failure)
+    }
+    
     func post(success success: (() -> Void)?, failure: ((NSError) -> Void)?) {
         let topics = [Topic](self.topics)
         var topicsParameter = ""
@@ -200,7 +229,6 @@ class Article: DataObject {
             ],
             success: {
                 data in
-                print(data)
                 let id = Int(msr_object: data["article_id"])!
                 let article = Article.cachedObjectWithID(id)
                 success?(article)

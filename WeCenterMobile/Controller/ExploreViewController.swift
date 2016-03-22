@@ -36,7 +36,7 @@ class ExploreViewController: MSRSegmentedViewController, MSRSegmentedViewControl
         segmentedControl.msr_heightConstraint!.constant = 36
         view.backgroundColor = theme.backgroundColorA
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Sidebar-Search"), style: .Plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Sidebar-Search"), style: .Plain, target: self, action: "didPressSearchButton:")
         msr_navigationBar!.msr_shadowImageView?.hidden = true
         scrollView.msr_setTouchesShouldCancel(true, inContentViewWhichIsKindOfClass: UIButton.self)
         scrollView.delaysContentTouches = false
@@ -103,12 +103,17 @@ class ExploreViewController: MSRSegmentedViewController, MSRSegmentedViewControl
             action in
             presentPublishmentViewController("发布问题", Question.temporaryObject())
         })
+        
         ac.addAction(UIAlertAction(title: "文章", style: .Default) {
             action in
             presentPublishmentViewController("发布文章", Article.temporaryObject())
         })
         ac.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
         presentViewController(ac, animated: true, completion: nil)
+    }
+    
+    func didPressSearchButton(sender: UIButton) {
+        msr_navigationController!.pushViewController(SearchViewController(nibName: nil, bundle: nil), animated: false)
     }
     
 }

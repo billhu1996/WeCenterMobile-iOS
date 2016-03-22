@@ -80,6 +80,7 @@ class CommentListViewController: UITableViewController, UITextFieldDelegate {
     override func loadView() {
         super.loadView()
         title = "? 评论 · \(article.agreementCount ?? 0) 赞"
+        msr_navigationBar!.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         tableView = TableViewWithKeyboardBar()
         tableView.delegate = self
         tableView.dataSource = self

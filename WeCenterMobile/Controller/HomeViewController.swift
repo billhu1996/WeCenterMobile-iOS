@@ -8,6 +8,7 @@
 
 import MJRefresh
 import UIKit
+import QRCodeReaderViewController
 
 @objc protocol ActionCell: class {
     optional var userButton: UIButton! { get }
@@ -26,7 +27,7 @@ extension ArticlePublishmentActionCell: ActionCell {}
 extension ArticleAgreementActionCell: ActionCell {}
 extension ArticleCommentaryActionCell: ActionCell {}
 
-class HomeViewController: UITableViewController, PublishmentViewControllerDelegate {
+class HomeViewController: UITableViewController, PublishmentViewControllerDelegate, QRCodeReaderDelegate {
     
     lazy var searchBarCell: SearchBarCell = {
         let c = NSBundle.mainBundle().loadNibNamed("SearchBarCell", owner: nil, options: nil).first as! SearchBarCell
@@ -66,7 +67,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         msr_navigationBar!.msr_shadowImageView?.hidden = true
         navigationItem.titleView = titleLabel
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-QRCode"), style: .Plain, target: self, action: "showFollowerList")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-QRCode"), style: .Plain, target: self, action: "showQRCodeViewController")
         for i in 0..<nibNames.count {
             tableView.registerNib(UINib(nibName: nibNames[i], bundle: NSBundle.mainBundle()), forCellReuseIdentifier: identifiers[i])
         }
@@ -149,8 +150,31 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         presentViewController(ac, animated: true, completion: nil)
     }
     
-    func showFollowerList() {
-        msr_navigationController!.pushViewController(UserListViewController(user: user, listType: .UserFollowing), animated: true)
+    var qrViewController: QRCodeReaderViewController! = nil
+    
+    func showQRCodeViewController() {
+        let types = ["AVMetadataObjectTypeQRCode"]
+        qrViewController = QRCodeReaderViewController.readerWithMetadataObjectTypes(types)
+        qrViewController.delegate = self
+        presentViewController(qrViewController, animated: true, completion: nil)
+    }
+    
+    func reader(reader: QRCodeReaderViewController!, didScanResult result: String!) {
+        dismissViewControllerAnimated(true) {
+            [weak self] in
+            if let self_ = self {
+                let article = Article.temporaryObject()
+                let webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
+                article.id = -1
+                article.url = result
+                webViewController.article = article
+                self_.msr_navigationController!.pushViewController(webViewController, animated: true)
+            }
+        }
+    }
+    
+    func readerDidCancel(reader: QRCodeReaderViewController!) {
+        reader.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func didPressUserButton(sender: UIButton) {
@@ -161,10 +185,9 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
-            if let url = article.url {
+            if let _ = article.url {
                 let webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
                 webViewController.article = article
-                webViewController.requestURL = url
                 msr_navigationController!.pushViewController(webViewController, animated: true)
             } else {
                 msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)

@@ -12,8 +12,6 @@ class SidebarCategoryCell: UITableViewCell {
     
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var categoryTitleLabel: UILabel!
-    @IBOutlet weak var markCountLabel: UILabel!
-    @IBOutlet weak var markExplanationLabel: UILabel!
     
     var category: SidebarCategory?
     
@@ -30,10 +28,6 @@ class SidebarCategoryCell: UITableViewCell {
         self.category = category
         categoryImageView.image = imageFromSidebarCategory(category)
         categoryTitleLabel.text = localizedStringFromSidebarCategory(category)
-        if category == .ReadingList {
-            markCountLabel.alpha = 1
-            markExplanationLabel.alpha = 1
-        }
         updateTheme()
         setNeedsLayout()
         layoutIfNeeded()

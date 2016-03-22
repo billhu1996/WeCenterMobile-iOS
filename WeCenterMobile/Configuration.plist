@@ -86,6 +86,8 @@
 		<string>article/ajax/article_vote/</string>
 		<key>Search</key>
 		<string>api/search/</string>
+		<key>Focus Article/Answer</key>
+		<string>favorite/ajax/update_favorite_tag/</string>
 	</dict>
 	<key>App Secret</key>
 	<string>cf81ec43d54276b1e951e6aa41d145f2</string>

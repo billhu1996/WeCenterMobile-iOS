@@ -17,17 +17,6 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
         c.searchButton.addTarget(nil, action: "didPressSearchButton:", forControlEvents: .TouchUpInside)
         return c
     }()
-    lazy var qrViewController: QRCodeReaderViewController = {
-        [weak self] in
-        let types = ["AVMetadataObjectTypeQRCode"]
-        var qrViewController = QRCodeReaderViewController.readerWithMetadataObjectTypes(types)
-        qrViewController.delegate = self
-        return qrViewController
-    }()
-    lazy var webViewController: WebViewController = {
-        var webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
-        return webViewController
-    }()
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "我在读"
@@ -145,17 +134,23 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
             if let self_ = self {
                 let article = Article.temporaryObject()
                 article.id = -1
-                self_.webViewController.requestURL = result
-                self_.webViewController.article = article
-                self_.msr_navigationController!.pushViewController(self_.webViewController, animated: true)
+                let webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
+                article.url = result
+                webViewController.article = article
+                self_.msr_navigationController!.pushViewController(webViewController, animated: true)
             }
         }
     }
     func readerDidCancel(reader: QRCodeReaderViewController!) {
-        dismissViewControllerAnimated(true, completion: nil)
+        reader.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    var qrViewController: QRCodeReaderViewController! = nil
+    
     func showQRCodeViewController() {
+        let types = ["AVMetadataObjectTypeQRCode"]
+        qrViewController = QRCodeReaderViewController.readerWithMetadataObjectTypes(types)
+        qrViewController.delegate = self
         presentViewController(qrViewController, animated: true, completion: nil)
     }
     
@@ -167,11 +162,10 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
     
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
-            if let url = article.url {
-                self.webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
-                self.webViewController.article = article
-                self.webViewController.requestURL = url
-                self.msr_navigationController!.pushViewController(self.webViewController, animated: true)
+            if let _ = article.url {
+                let webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
+                webViewController.article = article
+                msr_navigationController!.pushViewController(webViewController, animated: true)
             } else {
                 msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
             }

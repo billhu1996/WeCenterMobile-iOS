@@ -14,66 +14,93 @@ import SocialWechat
 
 class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegate {
     
-    var requestURL = ""
-    var loaded = true
-    var userName = ""
     var article: Article = {
         let ret = Article.temporaryObject()
         ret.id = -1
         return ret
     }()
+    
     @IBOutlet weak var webView: UIWebView!
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var commentButton: UIButton!
-    @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentLabel: UILabel!
-    @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var commentImageView: UIImageView!
+    @IBOutlet weak var shareImageView: UIImageView!
+    @IBOutlet weak var addImageView: UIImageView!
+    @IBOutlet weak var likeImageView: UIImageView!
+    
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+    
+    var firstAppear = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let item = UIBarButtonItem(image: UIImage(named: "WebVCShareGreen"), style: .Plain, target: self, action: "share:")
-        navigationItem.rightBarButtonItem = item
+        webView.frame = view.bounds;
+        webView.delegate = self;
+        let hColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
+        commentButton.msr_setBackgroundImageWithColor(hColor, forState: .Highlighted)
+        shareButton.msr_setBackgroundImageWithColor(hColor, forState: .Highlighted)
+        addButton.msr_setBackgroundImageWithColor(hColor, forState: .Highlighted)
+        likeButton.msr_setBackgroundImageWithColor(hColor, forState: .Highlighted)
+        view.addSubview(webView)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        loaded = false;
-        view.backgroundColor = UIColor.whiteColor();
-        let v = NSBundle.mainBundle().loadNibNamed("TitleView", owner: nil, options: nil).first as! TitleView
-        v.nameLabel.text = article.user?.name
-        v.avatarImage.wc_updateWithUser(article.user)
-        v.backgroundColor = UIColor.clearColor()
-        navigationItem.titleView = v
-        reloadData()
+        if firstAppear {
+            firstAppear = false
+            view.backgroundColor = UIColor.whiteColor();
+            let v = NSBundle.mainBundle().loadNibNamed("TitleView", owner: nil, options: nil).first as! TitleView
+            v.nameLabel.text = article.user?.name
+            v.avatarImage.wc_updateWithUser(article.user)
+            v.backgroundColor = UIColor.clearColor()
+            navigationItem.titleView = v
+            if article.id != -1 {
+                reloadData()
+                Article.fetch(
+                    ID: article.id,
+                    success: {
+                        [weak self] article in
+                        if let self_ = self {
+                            self_.article = article
+                            self_.reloadData(true)
+                        }
+                    },
+                    failure: {
+                        error in
+                        print(error)
+                        return
+                })
+            } else {
+                reloadData(true)
+            }
+        }
     }
     
-    func share(sender: AnyObject) {
-        print(article.title!)
-        let title = article.title!
-        let body = article.body!.wc_plainString
-        let url = requestURL
-        var items = [title, body, NSURL(string: url)!]
-        if let image = article.image {
-            items.append(image)
+    @IBAction func share(sender: AnyObject) {
+        if article.id != -1 {
+            let title = article.title!
+            let body = article.body!.wc_plainString
+            let url = article.url!
+            var items = [title, body, NSURL(string: url)!]
+            if let image = article.image {
+                items.append(image)
+            }
+            let vc = UIActivityViewController(
+                activityItems: items,
+                applicationActivities: [WeChatSessionActivity(), WeChatTimelineActivity()])
+            showDetailViewController(vc, sender: self)
+        } else {
+            let ac = UIAlertController(title: "错误", message: "您不能分享未发布的内容。", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "好的", style: .Cancel, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
         }
-        let vc = UIActivityViewController(
-            activityItems: items,
-            applicationActivities: [WeChatSessionActivity(), WeChatTimelineActivity()])
-        showDetailViewController(vc, sender: self)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if !loaded {
-            webView.frame = view.bounds;
-            webView.delegate = self;
-            view.addSubview(webView)
-            let req: NSURLRequest = NSURLRequest.init(URL: NSURL(string: requestURL)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60)
-            webView.loadRequest(req)
-            loaded = true;
-        }
-        
+        reloadData()
     }
     
     func back() {
@@ -81,14 +108,39 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     }
     
     @IBAction func addToReadingList(sender: AnyObject) {
-        let alertView = UIAlertView(title: "确认添加到在读列表？", message: "", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "添加")
-        alertView.show()
-    }
-    
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex == 1 {
-            publish(1)
+        if article.id != -1 && article.isInReadingList {
+            let ac = UIAlertController(title: "文章已经在您的在读列表中", message: "", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "好的", style: .Cancel, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
+            return
         }
+        let ac = UIAlertController(title: "确认添加到在读列表？", message: "", preferredStyle: .Alert)
+        ac.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
+        ac.addAction(UIAlertAction(title: "添加", style: .Default) {
+            [weak self] _ in
+            if let self_ = self {
+                if self_.article.id != -1 && !self_.article.isInReadingList {
+                    self_.article.focus(
+                        success: {
+                            [weak self] in
+                            if let self_ = self {
+                                self_.reloadData()
+                            }
+                        },
+                        failure: {
+                            [weak self] error in
+                            let ac = UIAlertController(title: "错误", message: (error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误。", preferredStyle: .Alert)
+                            ac.addAction(UIAlertAction(title: "好的", style: .Cancel, handler: nil))
+                            self?.presentViewController(ac, animated: true, completion: nil)
+                            return
+                        })
+                } else {
+                    self_.publish()
+                }
+            }
+            return
+        })
+        presentViewController(ac, animated: true, completion: nil)
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
@@ -102,14 +154,13 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     
     @IBAction func comment(sender: AnyObject) {
         if article.id != -1 {
-            let temporaryArticle = Article.temporaryObject()
-            temporaryArticle.id = article.id
-            temporaryArticle.title = article.title
-            temporaryArticle.agreementCount = article.agreementCount
             let vc = CommentListViewController(dataObject: article, editing: true)
             msr_navigationController!.pushViewController(vc, animated: true)
+        } else {
+            let ac = UIAlertController(title: "错误", message: "您不能对未发布的内容进行评论。", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "好的", style: .Cancel, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
         }
-        publish(2)
     }
     
     @IBAction func like(sender: AnyObject) {
@@ -122,47 +173,26 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
                     }
                 },
                 failure: {
-                    error in
-                    print(error)
+                    [weak self] error in
+                    let ac = UIAlertController(title: "错误", message: (error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误。", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "好的", style: .Cancel, handler: nil))
+                    self?.presentViewController(ac, animated: true, completion: nil)
+                    return
                 })
+        } else {
+            let ac = UIAlertController(title: "错误", message: "您不能对未发布的内容进行评价。", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "好的", style: .Cancel, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
         }
-        publish(3)
     }
     
-    func publish(mode: Int) {
-        let article = Article.temporaryObject()
-        article.url = requestURL
+    func publish() {
         article.postWithURL(
             success: {
                 [weak self] article in
                 if let self_ = self {
-                    if mode == 1 {
-                        let alertView = UIAlertView(title: "发布成功", message: "", delegate: self, cancelButtonTitle: "好的")
-                        alertView.show()
-                        self_.reloadData()
-                    }
-                    if mode == 2 {
-                        let article = Article.temporaryObject()
-                        article.id = self_.article.id
-                        article.title = self_.article.title
-                        article.agreementCount = self_.article.agreementCount
-                        let vc = CommentListViewController(dataObject: article, editing: true)
-                        self_.msr_navigationController!.pushViewController(vc, animated: true)
-                        self_.reloadData()
-                    }
-                    if mode == 3 {
-                        article.evaluate(value: article.evaluation == .Up ? .None : .Up,
-                            success: {
-                                [weak self] in
-                                if let self_ = self {
-                                    self_.reloadData()
-                                }
-                            },
-                            failure: {
-                                error in
-                                print(error)
-                        })
-                    }
+                    self_.article = article
+                    self_.reloadData()
                 }
             },
             failure: {
@@ -171,19 +201,20 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
             })
     }
     
-    func reloadData() {
-        if article.id != -1 {
-            addButton.setImage(UIImage(named: "WebVCAddGreen"), forState: .Normal)
-        } else {
-            addButton.setImage(UIImage(named: "WebVCAddGray"), forState: .Normal)
+    func reloadData(reloadWebView: Bool = false) {
+        if reloadWebView {
+            if let url = article.url {
+                let request = NSURLRequest(URL: NSURL(string: url)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60)
+                webView.loadRequest(request)
+            }
         }
-        if article.evaluation == .None {
-            likeButton.setImage(UIImage(named: "WebVCLikeGray"), forState: .Normal)
-        } else {
-            likeButton.setImage(UIImage(named: "WebVCLikeGreen"), forState: .Normal)
-        }
-//        if articleID != -1 {
-//            commentLabel.text = "\(article.)"
-//        }
+        commentImageView.image = UIImage(named: article.id != -1 ? "WebVCCommentGreen" : "WebVCCommentGray")
+        shareImageView.image = UIImage(named: article.id != -1 ? "WebVCShareGreen" : "WebVCShareGray")
+        addImageView.image = UIImage(named: article.id != -1 && article.isInReadingList ? "WebVCAddGreen" : "WebVCAddGray")
+        likeImageView.image = UIImage(named: article.evaluation == Evaluation.Up && !article.isPublishedByCurrentUser ? "WebVCLikeGreen" : "WebVCLikeGray")
+        commentButton.enabled = article.id != -1
+        shareButton.enabled = article.id != -1
+        likeButton.enabled = article.id != -1
     }
+    
 }

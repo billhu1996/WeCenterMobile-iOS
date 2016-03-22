@@ -39,11 +39,6 @@ class FeaturedObjectListViewController: UITableViewController {
             }
         }
     }
-    lazy var searchBarCell: SearchBarCell = {
-        let c = NSBundle.mainBundle().loadNibNamed("SearchBarCell", owner: nil, options: nil).first as! SearchBarCell
-        c.searchButton.addTarget(nil, action: "didPressSearchButton:", forControlEvents: .TouchUpInside)
-        return c
-    }()
     let identifiers = ["FeaturedQuestionAnswerCellA", "FeaturedQuestionAnswerCellB", "FeaturedArticleCell"]
     let nibNames = ["FeaturedQuestionAnswerCellA", "FeaturedQuestionAnswerCellB", "FeaturedArticleCell"]
     init(type: FeaturedObjectListType) {
@@ -79,13 +74,10 @@ class FeaturedObjectListViewController: UITableViewController {
         return 1
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count + 1
+        return objects.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            return searchBarCell
-        }
-        let object = objects[indexPath.row - 1]
+        let object = objects[indexPath.row]
         if var index = (objectTypes.map { object.classForCoder === $0 }).indexOf(true) {
             if let o = object as? FeaturedQuestionAnswer {
                 index += o.answers.count == 0 ? 1 : 0
@@ -116,10 +108,6 @@ class FeaturedObjectListViewController: UITableViewController {
         if let article = sender.msr_userInfo as? Article {
             msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
         }
-    }
-    
-    func didPressSearchButton(sender: UIButton) {
-        
     }
     
     func refresh() {
