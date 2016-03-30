@@ -159,6 +159,7 @@
 		9588F6021A1D9D1C001BC426 /* WeCenterMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9588F6011A1D9D1C001BC426 /* WeCenterMobileTests.swift */; };
 		958CB5BB1AB98DC3002ECCF4 /* PublishmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958CB5BA1AB98DC3002ECCF4 /* PublishmentViewController.swift */; };
 		959AB65E1B1C2D90008C586A /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959AB65D1B1C2D90008C586A /* SettingsManager.swift */; };
+		95A0FC831CAC130900641016 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A0FC821CAC130900641016 /* AssetsLibrary.framework */; };
 		95A7BA681B7F5AE100FB91AE /* SidebarCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7BA671B7F5AE100FB91AE /* SidebarCategory.swift */; };
 		95B9BDC31ABAA67900692889 /* PublishmentViewControllerA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95B9BDC21ABAA67900692889 /* PublishmentViewControllerA.xib */; };
 		95C73C751B7F6AEB003D3072 /* SidebarLogoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95C73C741B7F6AEB003D3072 /* SidebarLogoutCell.xib */; };
@@ -805,6 +806,7 @@
 		9588F6011A1D9D1C001BC426 /* WeCenterMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeCenterMobileTests.swift; sourceTree = "<group>"; };
 		958CB5BA1AB98DC3002ECCF4 /* PublishmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PublishmentViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		959AB65D1B1C2D90008C586A /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		95A0FC821CAC130900641016 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		95A7BA671B7F5AE100FB91AE /* SidebarCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarCategory.swift; sourceTree = "<group>"; };
 		95B9BDC21ABAA67900692889 /* PublishmentViewControllerA.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublishmentViewControllerA.xib; sourceTree = "<group>"; };
 		95C73C741B7F6AEB003D3072 /* SidebarLogoutCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SidebarLogoutCell.xib; sourceTree = "<group>"; };
@@ -1038,6 +1040,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A0FC831CAC130900641016 /* AssetsLibrary.framework in Frameworks */,
 				5CAFA95B1C96940D006E66A2 /* CoreGraphics.framework in Frameworks */,
 				5CAFA9591C9693B6006E66A2 /* libiconv.2.dylib in Frameworks */,
 				95EAF69A1B3B21B600863F19 /* Accounts.framework in Frameworks */,
@@ -1298,6 +1301,7 @@
 		950FE7E11A1DA52500167D09 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				95A0FC821CAC130900641016 /* AssetsLibrary.framework */,
 				95EAF6981B3B21AE00863F19 /* Accounts.framework */,
 				5CAFA95A1C96940D006E66A2 /* CoreGraphics.framework */,
 				9554D8F11ADE2E2100C94061 /* CoreMotion.framework */,

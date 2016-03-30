@@ -160,7 +160,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     }
     
     func reader(reader: QRCodeReaderViewController!, didScanResult result: String!) {
-        dismissViewControllerAnimated(true) {
+        reader.dismissViewControllerAnimated(true) {
             [weak self] in
             if let self_ = self {
                 let article = Article.temporaryObject()

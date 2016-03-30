@@ -264,7 +264,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         let alert = UIAlertController(title: "确认添加到在读列表？", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Default, handler: nil))
         alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     func didPressAgreeButton() {
@@ -395,7 +395,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         let vc = UIActivityViewController(
             activityItems: items,
-            applicationActivities: [SinaWeiboActivity(), WeChatSessionActivity(), WeChatTimelineActivity()])
+            applicationActivities: [WeChatSessionActivity(), WeChatTimelineActivity()]) // SinaWeiboActivity()
         showDetailViewController(vc, sender: self)
     }
     

@@ -11,6 +11,7 @@ import UIKit
 import WeChatSDK
 import UMSocial
 import SocialWechat
+import SVProgressHUD
 
 class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegate {
     
@@ -118,12 +119,18 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
         ac.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
         ac.addAction(UIAlertAction(title: "添加", style: .Default) {
             [weak self] _ in
+            SVProgressHUD.show()
             if let self_ = self {
                 if self_.article.id != -1 && !self_.article.isInReadingList {
+                    SVProgressHUD.dismiss()
                     self_.article.focus(
                         success: {
                             [weak self] in
                             if let self_ = self {
+                                SVProgressHUD.showSuccessWithStatus("已加入在读")
+                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC / 2)), dispatch_get_main_queue()) {
+                                    SVProgressHUD.dismiss()
+                                }
                                 self_.reloadData()
                             }
                         },
@@ -187,17 +194,25 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     }
     
     func publish() {
+        SVProgressHUD.show()
         article.postWithURL(
             success: {
                 [weak self] article in
                 if let self_ = self {
+                    SVProgressHUD.dismiss()
+                    SVProgressHUD.showSuccessWithStatus("已加入在读")
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC / 2)), dispatch_get_main_queue()) {
+                        SVProgressHUD.dismiss()
+                    }
                     self_.article = article
                     self_.reloadData()
                 }
             },
             failure: {
-                error in
-                print(error)
+                [weak self] error in
+                let ac = UIAlertController(title: "错误", message: (error.userInfo[NSLocalizedDescriptionKey] as? String) ?? "未知错误。", preferredStyle: .Alert)
+                ac.addAction(UIAlertAction(title: "好的", style: .Cancel, handler: nil))
+                self?.presentViewController(ac, animated: true, completion: nil)
             })
     }
     

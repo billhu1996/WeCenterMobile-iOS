@@ -36,8 +36,7 @@ class LoginVC: UIViewController, QRCodeReaderDelegate {
         let snsPlatform = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
         snsPlatform.loginClickHandler(self, UMSocialControllerService.defaultControllerService(), true, {response in
             if response.responseCode == UMSResponseCodeSuccess {
-                
-                let snsAccount:UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
+                let snsAccount: UMSocialAccountEntity = UMSocialAccountManager.socialAccountDictionary()[UMShareToWechatSession] as! UMSocialAccountEntity
                 print(snsAccount)
                 print("username is \(snsAccount.userName), uid is \(snsAccount.usid), token is \(snsAccount.accessToken) url is \(snsAccount.iconURL)")
                 User.registerWithEmail("\(snsAccount.usid)@zaidu.com",

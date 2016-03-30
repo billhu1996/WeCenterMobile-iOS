@@ -228,11 +228,14 @@ class Article: DataObject {
                 "url": url
             ],
             success: {
-                data in
-                let id = Int(msr_object: data["article_id"])!
-                let article = Article.cachedObjectWithID(id)
-                success?(article)
-                return
+                [weak self] data in
+                if let self_ = self {
+                    let id = Int(msr_object: data["article_id"])!
+                    let article = Article.cachedObjectWithID(id)
+                    article.url = self_.url
+                    article.user = User.currentUser
+                    success?(article)
+                }
             },
             failure: failure)
     }

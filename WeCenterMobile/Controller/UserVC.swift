@@ -212,7 +212,13 @@ class UserVC: UITableViewController {
     
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
-            msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
+            if article.url != nil {
+                let webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
+                webViewController.article = article
+                msr_navigationController!.pushViewController(webViewController, animated: true)
+            } else {
+                msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
+            }
         }
     }
     

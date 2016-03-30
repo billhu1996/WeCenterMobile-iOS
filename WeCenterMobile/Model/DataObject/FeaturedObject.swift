@@ -120,6 +120,7 @@ class FeaturedObject: DataObject {
                             article.viewCount = Int(msr_object: object["views"])
                             article.body = object["message"] as? String
                             article.imageURL = object["imgUrl"] as? String
+                            article.url = object["url"] as? String
                             var topics = Set<Topic>()
                             if let topicsInfo = object["topics"] as? [NSDictionary] {
                                 for topicInfo in topicsInfo {

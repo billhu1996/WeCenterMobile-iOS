@@ -254,9 +254,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func didTapSignatureLabel(recognizer: UITapGestureRecognizer) {
         if recognizer.state == .Ended {
             sidebar.collapse()
-            let uevc = NSBundle.mainBundle().loadNibNamed("UserEditViewController", owner: nil, options: nil).first as! UserEditViewController
-            uevc.delegate = self
-            showDetailViewController(uevc, sender: self)
+            contentViewController.pushViewController(UserVC(user: User.currentUser!), animated: true)
         }
     }
     func didPressSettingsButton(sender: UIButton) {
