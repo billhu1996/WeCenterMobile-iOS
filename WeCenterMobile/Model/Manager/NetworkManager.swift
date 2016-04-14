@@ -113,7 +113,7 @@ class NetworkManager: NSObject {
             }
             let error = NSError(
                 domain: website,
-                code: self.internalErrorCode.integerValue,
+                code: internalErrorCode.integerValue,
                 userInfo: userInfo)
             NSLog("\(error)")
             failure?(error)

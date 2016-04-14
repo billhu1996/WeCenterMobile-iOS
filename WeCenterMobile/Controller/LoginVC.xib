@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,28 +16,53 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1j-VS-5Pm">
-                        <rect key="frame" x="172" y="470" width="30" height="30"/>
-                        <state key="normal" title="登陆"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login-Welcome-5" translatesAutoresizingMaskIntoConstraints="NO" id="LGM-Wj-B0E">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Bs-gL-ZMJ">
+                        <rect key="frame" x="0.0" y="507" width="375" height="160"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="160" id="eeC-FV-zyu"/>
+                        </constraints>
                         <connections>
-                            <action selector="login" destination="mY1-LQ-mh2" eventType="touchUpInside" id="fPA-vx-Esv"/>
+                            <action selector="login" destination="mY1-LQ-mh2" eventType="touchUpInside" id="sZa-SD-LVH"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9e8-fo-2fA">
-                        <rect key="frame" x="172" y="534" width="30" height="30"/>
-                        <state key="normal" title="注册"/>
-                        <connections>
-                            <action selector="register" destination="mY1-LQ-mh2" eventType="touchUpInside" id="Z9h-QD-d5y"/>
-                        </connections>
-                    </button>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xpv-Nh-KfG" customClass="PICollectionPageView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="M2t-Dd-Dph">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="LGM-Wj-B0E" firstAttribute="top" secondItem="Zs2-Ik-ns9" secondAttribute="top" id="879-81-D5k"/>
+                    <constraint firstItem="xpv-Nh-KfG" firstAttribute="top" secondItem="Zs2-Ik-ns9" secondAttribute="top" id="96T-x8-UoG"/>
+                    <constraint firstAttribute="bottom" secondItem="xpv-Nh-KfG" secondAttribute="bottom" id="Gi2-uc-k4S"/>
+                    <constraint firstItem="LGM-Wj-B0E" firstAttribute="leading" secondItem="Zs2-Ik-ns9" secondAttribute="leading" id="I7D-kM-8NZ"/>
+                    <constraint firstItem="6Bs-gL-ZMJ" firstAttribute="leading" secondItem="Zs2-Ik-ns9" secondAttribute="leading" id="KbP-h4-Zef"/>
+                    <constraint firstAttribute="trailing" secondItem="LGM-Wj-B0E" secondAttribute="trailing" id="VLA-u3-28d"/>
+                    <constraint firstAttribute="bottom" secondItem="6Bs-gL-ZMJ" secondAttribute="bottom" id="X5U-gF-MVP"/>
+                    <constraint firstItem="xpv-Nh-KfG" firstAttribute="leading" secondItem="Zs2-Ik-ns9" secondAttribute="leading" id="eUG-id-8PX"/>
+                    <constraint firstAttribute="trailing" secondItem="xpv-Nh-KfG" secondAttribute="trailing" id="nSZ-3v-xtv"/>
+                    <constraint firstAttribute="trailing" secondItem="6Bs-gL-ZMJ" secondAttribute="trailing" id="qAb-UZ-ZHB"/>
+                    <constraint firstAttribute="bottom" secondItem="LGM-Wj-B0E" secondAttribute="bottom" id="x5e-PP-W3o"/>
+                </constraints>
             </view>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
-                <outlet property="weiXinLoginButton" destination="c1j-VS-5Pm" id="9uW-YM-N0H"/>
+                <outlet property="loginButton" destination="6Bs-gL-ZMJ" id="GQM-Ee-Stc"/>
+                <outlet property="pageView" destination="xpv-Nh-KfG" id="zBz-bY-mIv"/>
             </connections>
             <point key="canvasLocation" x="56" y="355"/>
         </viewController>
     </objects>
+    <resources>
+        <image name="Login-Welcome-5" width="451" height="800"/>
+    </resources>
 </document>

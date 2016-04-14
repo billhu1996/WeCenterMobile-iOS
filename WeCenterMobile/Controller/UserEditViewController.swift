@@ -220,7 +220,7 @@ class UserEditViewController: UIViewController, UITextFieldDelegate, UITextViewD
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return SettingsManager.defaultManager.currentTheme.statusBarStyle
+        return .Default
     }
     
     func keyboardWillChangeFrame(notification: NSNotification) {

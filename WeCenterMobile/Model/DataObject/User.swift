@@ -501,13 +501,17 @@ class User: DataObject {
         }
     }
     
-    class func loginWithName(name: String, password: String, success: ((User) -> Void)?, failure: ((NSError) -> Void)?) {
+    class func loginWithName(name: String, password: String, avatarURL: String?, success: ((User) -> Void)?, failure: ((NSError) -> Void)?) {
         NetworkManager.clearCookies()
+        var parameters = [
+            "user_name": name.stringByRemovingPercentEncoding!,
+            "password": password.stringByRemovingPercentEncoding!
+        ]
+        if let url = avatarURL {
+            parameters["user_avatar"] = url
+        }
         NetworkManager.defaultManager!.POST("User Login",
-            parameters: [
-                "user_name": name.stringByRemovingPercentEncoding!,
-                "password": password.stringByRemovingPercentEncoding!
-            ],
+            parameters: parameters,
             success: {
                 data in
                 let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies!

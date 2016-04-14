@@ -58,6 +58,16 @@ module MJRefresh {
     
 }
 
+module PICollectionPageView {
+    
+    requires objc, objc_arc
+    
+    use UIKit
+    
+    umbrella header "PICollectionPageView/PICollectionPageView/PICollectionPageView.h"
+    
+}
+
 module RMDateSelectionViewController {
     
     requires objc, objc_arc

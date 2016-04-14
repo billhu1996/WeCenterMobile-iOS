@@ -19,7 +19,7 @@ extension UserArticlePublishmentActionCell: UserActionCell {}
 extension UserArticleAgreementActionCell: UserActionCell {}
 extension UserArticleCommentaryActionCell: UserActionCell {}
 
-class UserVC: UITableViewController {
+class UserVC: UITableViewController, UserEditViewControllerDelegate {
     
     var user: User
     let count = 20
@@ -45,7 +45,13 @@ class UserVC: UITableViewController {
     let nibNames = ["UserArticlePublishmentActionCell", "UserArticleAgreementActionCell", "UserArticleCommentaryActionCell"]
     
     lazy var userCell: UserC = {
+        [weak self] in
         var cell: UserC = NSBundle.mainBundle().loadNibNamed("UserC", owner: nil, options: nil).first as! UserC
+        if let self_ = self {
+            if self_.user.isCurrentUser {
+                cell.userAvatarButton.addTarget(self, action: #selector(UserVC.didPressUserButton), forControlEvents: .TouchUpInside)
+            }
+        }
         return cell
     }()
     
@@ -220,6 +226,16 @@ class UserVC: UITableViewController {
                 msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
             }
         }
+    }
+    
+    func didPressUserButton() {
+        let uevc = NSBundle.mainBundle().loadNibNamed("UserEditViewController", owner: nil, options: nil).first as! UserEditViewController
+        uevc.delegate = self
+        presentViewController(uevc, animated: true, completion: nil)
+    }
+    
+    func userEditViewControllerDidUpdateUserProfile(uevc: UserEditViewController) {
+        tableView.mj_header.beginRefreshing()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

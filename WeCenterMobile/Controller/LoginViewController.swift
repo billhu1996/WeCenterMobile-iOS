@@ -137,6 +137,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         loginActivityIndicatorView.startAnimating()
         User.loginWithName(userNameField.text ?? "",
             password: passwordField.text ?? "",
+            avatarURL: nil,
             success: {
                 [weak self] user in
                 User.currentUser = user

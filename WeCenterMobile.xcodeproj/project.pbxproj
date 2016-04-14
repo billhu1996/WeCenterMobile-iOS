@@ -151,6 +151,9 @@
 		956140171AE2E92E0077FBA0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 950FE7CF1A1DA4EC00167D09 /* libz.dylib */; };
 		9568F39F1AEC748A00B201A8 /* UserEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9568F39E1AEC748A00B201A8 /* UserEditViewController.swift */; };
 		9568F3A21AEC74AB00B201A8 /* UserEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9568F3A11AEC74AB00B201A8 /* UserEditViewController.xib */; };
+		956A4BB41CBFDAEB004DBE32 /* PageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 956A4BB31CBFDAEB004DBE32 /* PageViewCell.xib */; };
+		956A4BB61CBFDB1A004DBE32 /* PageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956A4BB51CBFDB1A004DBE32 /* PageViewCell.swift */; };
+		956A4BBA1CBFDCB6004DBE32 /* PICollectionPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 956A4BB91CBFDCB6004DBE32 /* PICollectionPageView.m */; };
 		956E70EF1AAFC4E100A3FD7D /* WeCenterMobile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 956E70ED1AAFC4E100A3FD7D /* WeCenterMobile.xcdatamodeld */; };
 		956EF0781B16F9FE00C9DA2A /* TableViewWithKeyboardBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956EF0771B16F9FE00C9DA2A /* TableViewWithKeyboardBar.swift */; };
 		958600871B187CB50054DAA8 /* SidebarUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958600861B187CB50054DAA8 /* SidebarUserView.swift */; };
@@ -793,6 +796,10 @@
 		955E2A051AF75C2100A04791 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		9568F39E1AEC748A00B201A8 /* UserEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEditViewController.swift; sourceTree = "<group>"; };
 		9568F3A11AEC74AB00B201A8 /* UserEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserEditViewController.xib; sourceTree = "<group>"; };
+		956A4BB31CBFDAEB004DBE32 /* PageViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageViewCell.xib; sourceTree = "<group>"; };
+		956A4BB51CBFDB1A004DBE32 /* PageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewCell.swift; sourceTree = "<group>"; };
+		956A4BB81CBFDCB6004DBE32 /* PICollectionPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PICollectionPageView.h; sourceTree = "<group>"; };
+		956A4BB91CBFDCB6004DBE32 /* PICollectionPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PICollectionPageView.m; sourceTree = "<group>"; };
 		956E70EE1AAFC4E100A3FD7D /* WeCenterMobile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeCenterMobile.xcdatamodel; sourceTree = "<group>"; };
 		956EF0771B16F9FE00C9DA2A /* TableViewWithKeyboardBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewWithKeyboardBar.swift; sourceTree = "<group>"; };
 		958600861B187CB50054DAA8 /* SidebarUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarUserView.swift; sourceTree = "<group>"; };
@@ -1257,6 +1264,7 @@
 				A98240531C03091900F73E9A /* GBDeviceInfo.h */,
 				A955A3761C02FEB7002501CE /* MJRefresh */,
 				A955A2BA1C02FD9D002501CE /* Msr */,
+				956A4BB71CBFDCB6004DBE32 /* PICollectionPageView */,
 				A955A34C1C02FDC2002501CE /* RMActionController */,
 				A955A3501C02FDCE002501CE /* RMDateSelectionViewController */,
 				A955A3541C02FDDE002501CE /* SinaWeiboSDK */,
@@ -1475,6 +1483,8 @@
 				956EF0771B16F9FE00C9DA2A /* TableViewWithKeyboardBar.swift */,
 				9531D7661AF3E85900E6549D /* UIImageView+DataObject.swift */,
 				951E12EF1B202D7C00F076FE /* UITableView+Refresh.swift */,
+				956A4BB31CBFDAEB004DBE32 /* PageViewCell.xib */,
+				956A4BB51CBFDB1A004DBE32 /* PageViewCell.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -1540,6 +1550,16 @@
 				9531D7851AF3E8E400E6549D /* WeChatTimelineActivity.swift */,
 			);
 			path = Sharing;
+			sourceTree = "<group>";
+		};
+		956A4BB71CBFDCB6004DBE32 /* PICollectionPageView */ = {
+			isa = PBXGroup;
+			children = (
+				956A4BB81CBFDCB6004DBE32 /* PICollectionPageView.h */,
+				956A4BB91CBFDCB6004DBE32 /* PICollectionPageView.m */,
+			);
+			name = PICollectionPageView;
+			path = PICollectionPageView/PICollectionPageView;
 			sourceTree = "<group>";
 		};
 		9588F5DA1A1D9D1C001BC426 = {
@@ -2437,6 +2457,7 @@
 				5C248AED1C7B2164008F0D7E /* QRCodeBottomLeft@3x.png in Resources */,
 				9531D7291AF3E4AC00E6549D /* FeaturedArticleCell.xib in Resources */,
 				5CA5A85A1C940CF000646650 /* UMSCommentInputControlleriPad.xib in Resources */,
+				956A4BB41CBFDAEB004DBE32 /* PageViewCell.xib in Resources */,
 				5CA5A85C1C940CF000646650 /* UMShareEditViewControlleriPad.xib in Resources */,
 				5C00C2671C7B2A1B00B06B6E /* WebViewController.xib in Resources */,
 				95EBCF491B2DB40D0088FC2C /* ArticleSearchResultCell.xib in Resources */,
@@ -2520,6 +2541,7 @@
 				9531D7891AF3E8E400E6549D /* Answer.swift in Sources */,
 				A955A1FD1C02FD49002501CE /* AFNetworkReachabilityManager.m in Sources */,
 				9531D73A1AF3E4AC00E6549D /* QuestionPublishmentActionCell.swift in Sources */,
+				956A4BBA1CBFDCB6004DBE32 /* PICollectionPageView.m in Sources */,
 				95EB77591C9878E40061D7AA /* UIRefreshControl+AFNetworking.m in Sources */,
 				A955A3A91C02FEB7002501CE /* MJRefreshAutoNormalFooter.m in Sources */,
 				A955A34F1C02FDC2002501CE /* RMActionController.m in Sources */,
@@ -2531,6 +2553,7 @@
 				9531D7921AF3E8E400E6549D /* FeaturedObject.swift in Sources */,
 				A955A3131C02FD9D002501CE /* CGContext+MSRInitialzier.swift in Sources */,
 				A955A30B1C02FD9D002501CE /* String+MSREncoding.swift in Sources */,
+				956A4BB61CBFDB1A004DBE32 /* PageViewCell.swift in Sources */,
 				A955A3371C02FD9D002501CE /* UIImage+MSRResize.swift in Sources */,
 				A955A3A81C02FEB7002501CE /* MJRefreshAutoGifFooter.m in Sources */,
 				A955A1FF1C02FD49002501CE /* AFURLConnectionOperation.m in Sources */,

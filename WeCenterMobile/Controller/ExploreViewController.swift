@@ -30,9 +30,9 @@ class ExploreViewController: MSRSegmentedViewController, MSRSegmentedViewControl
 //        navigationController?.navigationBar.tintColor = .whiteColor()//theme.titleTextColor
         segmentedControl.indicator = MSRSegmentedControlBlockIndicator()
         segmentedControl.tintColor = UIColor.whiteColor().colorWithAlphaComponent(0.87)
-        segmentedControl.indicator.tintColor = UIColor.clearColor()
+        segmentedControl.indicator.tintColor = %+0x036564 // UIColor.clearColor()
         segmentedControl.backgroundView = UIView()
-        segmentedControl.backgroundView!.backgroundColor = %+0x3a374a
+        segmentedControl.backgroundView!.backgroundColor = %+0x033649
         segmentedControl.msr_heightConstraint!.constant = 36
         view.backgroundColor = theme.backgroundColorA
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")

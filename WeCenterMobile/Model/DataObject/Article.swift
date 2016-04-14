@@ -163,7 +163,7 @@ class Article: DataObject {
                 "item_id": id,
                 "rating": value.rawValue],
             success: {
-                [weak self] data in
+                [weak self] _ in
                 if let self_ = self {
                     self_.evaluation = value
                     if let count = self_.agreementCount?.integerValue {

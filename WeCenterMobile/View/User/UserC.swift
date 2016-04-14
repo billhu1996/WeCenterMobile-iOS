@@ -12,6 +12,7 @@ class UserC: UITableViewCell {
     
     @IBOutlet weak var userAvatarView: MSRRoundedImageView!
 //    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userAvatarButton: UIButton!
     @IBOutlet weak var userSignatureLabel: UILabel!
 //    @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var followingCountLabel: UILabel!

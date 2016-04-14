@@ -37,3 +37,9 @@
 [submodule "WeCenterMobile/External/MQRCodeReaderViewController"]
 	path = WeCenterMobile/External/MQRCodeReaderViewController
 	url = https://github.com/Everyb0dyLies/MQRCodeReaderViewController.git
+[submodule "WeCenterMobile/External/KVNMaskedPageControl"]
+	path = WeCenterMobile/External/KVNMaskedPageControl
+	url = https://github.com/donnellyk/KVNMaskedPageControl
+[submodule "WeCenterMobile/External/PICollectionPageView"]
+	path = WeCenterMobile/External/PICollectionPageView
+	url = https://github.com/carabina/PICollectionPageView

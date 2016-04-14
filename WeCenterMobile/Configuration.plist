@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Website</key>
-	<string>http://we.edustack.org/</string>
+	<string>http://121.201.28.174:8080/</string>
 	<key>Path</key>
 	<dict>
 		<key>Famous User List</key>
@@ -83,7 +83,7 @@
 		<key>Evaluate Answer</key>
 		<string>question/ajax/answer_vote/</string>
 		<key>Evaluate Article</key>
-		<string>article/ajax/article_vote/</string>
+		<string>api/article/article_vote/</string>
 		<key>Search</key>
 		<string>api/search/</string>
 		<key>Focus Article/Answer</key>

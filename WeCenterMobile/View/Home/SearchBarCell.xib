@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -42,7 +42,7 @@
                         </constraints>
                     </imageView>
                 </subviews>
-                <color key="backgroundColor" red="0.015686274509803921" green="0.61176470588235299" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.011764705882352941" green="0.086274509803921567" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6ED-gH-kZP" secondAttribute="bottom" constant="8" id="1MW-jt-BQJ"/>
                     <constraint firstItem="MJw-de-J3u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Cis-RP-DNm" secondAttribute="trailing" constant="10" id="20N-97-h0x"/>

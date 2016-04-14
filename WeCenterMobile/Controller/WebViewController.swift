@@ -221,12 +221,17 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
             if let url = article.url {
                 let request = NSURLRequest(URL: NSURL(string: url)!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60)
                 webView.loadRequest(request)
+                if false {
+                    let ac = UIAlertController(title: "错误", message: "您扫描的二维码并非指向一个网页。", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "好", style: .Default, handler: nil))
+                    presentViewController(ac, animated: true, completion: nil)
+                }
             }
         }
         commentImageView.image = UIImage(named: article.id != -1 ? "WebVCCommentGreen" : "WebVCCommentGray")
         shareImageView.image = UIImage(named: article.id != -1 ? "WebVCShareGreen" : "WebVCShareGray")
         addImageView.image = UIImage(named: article.id != -1 && article.isInReadingList ? "WebVCAddGreen" : "WebVCAddGray")
-        likeImageView.image = UIImage(named: article.evaluation == Evaluation.Up && !article.isPublishedByCurrentUser ? "WebVCLikeGreen" : "WebVCLikeGray")
+        likeImageView.image = UIImage(named: article.evaluation == Evaluation.Up ? "WebVCLikeGreen" : "WebVCLikeGray")
         commentButton.enabled = article.id != -1
         shareButton.enabled = article.id != -1
         likeButton.enabled = article.id != -1

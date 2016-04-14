@@ -16,7 +16,7 @@ class SearchBarCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         searchButton.msr_setBackgroundImageWithColor(contentView.backgroundColor!.colorWithAlphaComponent(0.5), forState: .Highlighted)
-        searchImageView.tintColor = %+0x049c55
+        searchImageView.tintColor = %+0x033649
         setNeedsLayout()
         layoutIfNeeded()
     }
