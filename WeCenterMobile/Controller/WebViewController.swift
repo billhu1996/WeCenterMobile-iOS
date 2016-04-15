@@ -81,17 +81,29 @@ class WebViewController: UIViewController, UIAlertViewDelegate, UIWebViewDelegat
     
     @IBAction func share(sender: AnyObject) {
         if article.id != -1 {
-            let title = article.title!
-            let body = article.body!.wc_plainString
-            let url = article.url!
-            var items = [title, body, NSURL(string: url)!]
-            if let image = article.image {
-                items.append(image)
-            }
-            let vc = UIActivityViewController(
-                activityItems: items,
-                applicationActivities: [WeChatSessionActivity(), WeChatTimelineActivity()])
-            showDetailViewController(vc, sender: self)
+            let message = WXMediaMessage()
+            let webpageObject = WXWebpageObject()
+            webpageObject.webpageUrl = article.url ?? NetworkManager.defaultManager!.website
+            message.title = article.title
+            message.description = article.body?.wc_plainString
+            message.thumbData = article.image?.msr_imageOfSize(CGSize(width: 100, height: 100)).dataForPNGRepresentation()
+            message.mediaObject = webpageObject
+            let request = SendMessageToWXReq()
+            request.bText = false
+            request.message = message
+            let ac = UIAlertController(title: "分享", message: "请选择您要分享到的地方。", preferredStyle: .ActionSheet)
+            ac.addAction(UIAlertAction(title: "微信好友", style: .Default) {
+                _ in
+                request.scene = Int32(WXSceneSession.rawValue)
+                WXApi.sendReq(request)
+            })
+            ac.addAction(UIAlertAction(title: "微信朋友圈", style: .Default) {
+                _ in
+                request.scene = Int32(WXSceneTimeline.rawValue)
+                WXApi.sendReq(request)
+            })
+            ac.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
         } else {
             let ac = UIAlertController(title: "错误", message: "您不能分享未发布的内容。", preferredStyle: .Alert)
             ac.addAction(UIAlertAction(title: "好的", style: .Cancel, handler: nil))
