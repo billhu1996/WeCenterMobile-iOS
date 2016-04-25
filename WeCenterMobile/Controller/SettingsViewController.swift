@@ -72,6 +72,7 @@ class SettingsViewController: UITableViewController {
     }
     
     func logout() {
+        appDelegate.clearCaches()
         dismissViewControllerAnimated(true, completion: nil)
     }
     

@@ -89,15 +89,22 @@
                                 <color key="textColor" red="0.99215686274509807" green="0.5725490196078431" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBB-Qs-rNg">
+                                <rect key="frame" x="0.0" y="0.0" width="77" height="70"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="7Ez-hq-6dq" secondAttribute="trailing" id="1wf-5u-mo4"/>
                             <constraint firstItem="7Ez-hq-6dq" firstAttribute="top" secondItem="Jqx-mP-klg" secondAttribute="top" constant="3" id="6Dh-Zg-2NB"/>
                             <constraint firstAttribute="height" constant="70" id="B6P-Em-bD6"/>
+                            <constraint firstAttribute="bottom" secondItem="ZBB-Qs-rNg" secondAttribute="bottom" id="Fdp-Dm-tIG"/>
                             <constraint firstItem="XF2-Ba-cex" firstAttribute="top" secondItem="7Ez-hq-6dq" secondAttribute="bottom" constant="8" id="GZ1-FL-hQB"/>
+                            <constraint firstAttribute="trailing" secondItem="ZBB-Qs-rNg" secondAttribute="trailing" id="gXu-Qe-ilz"/>
+                            <constraint firstItem="ZBB-Qs-rNg" firstAttribute="top" secondItem="Jqx-mP-klg" secondAttribute="top" id="hUh-gS-9I8"/>
                             <constraint firstItem="7Ez-hq-6dq" firstAttribute="leading" secondItem="Jqx-mP-klg" secondAttribute="leading" id="jap-2t-toN"/>
                             <constraint firstAttribute="trailing" secondItem="XF2-Ba-cex" secondAttribute="trailing" id="mwz-7L-gId"/>
+                            <constraint firstItem="ZBB-Qs-rNg" firstAttribute="leading" secondItem="Jqx-mP-klg" secondAttribute="leading" id="v12-NS-3zw"/>
                             <constraint firstItem="XF2-Ba-cex" firstAttribute="leading" secondItem="Jqx-mP-klg" secondAttribute="leading" id="vUl-TA-bkE"/>
                         </constraints>
                     </view>
@@ -116,14 +123,21 @@
                                 <color key="textColor" red="0.99215686274509807" green="0.5725490196078431" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fss-oN-15M">
+                                <rect key="frame" x="0.0" y="0.0" width="77" height="70"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5Pl-7T-Dla" firstAttribute="leading" secondItem="88e-uM-z7O" secondAttribute="leading" id="0YW-OC-TGF"/>
                             <constraint firstAttribute="trailing" secondItem="w0q-bs-E9U" secondAttribute="trailing" id="2Cq-HV-ONb"/>
+                            <constraint firstItem="fss-oN-15M" firstAttribute="leading" secondItem="88e-uM-z7O" secondAttribute="leading" id="2np-7l-H3o"/>
                             <constraint firstAttribute="height" constant="70" id="331-4I-m1V"/>
                             <constraint firstAttribute="trailing" secondItem="5Pl-7T-Dla" secondAttribute="trailing" id="5I0-jp-RSR"/>
                             <constraint firstItem="w0q-bs-E9U" firstAttribute="leading" secondItem="88e-uM-z7O" secondAttribute="leading" id="76L-d5-K8D"/>
+                            <constraint firstItem="fss-oN-15M" firstAttribute="top" secondItem="88e-uM-z7O" secondAttribute="top" id="IN4-7O-GHz"/>
+                            <constraint firstAttribute="trailing" secondItem="fss-oN-15M" secondAttribute="trailing" id="XII-kJ-75f"/>
+                            <constraint firstAttribute="bottom" secondItem="fss-oN-15M" secondAttribute="bottom" id="YiI-AT-AJW"/>
                             <constraint firstItem="w0q-bs-E9U" firstAttribute="top" secondItem="88e-uM-z7O" secondAttribute="top" constant="3" id="dEx-gb-pOc"/>
                             <constraint firstItem="5Pl-7T-Dla" firstAttribute="top" secondItem="w0q-bs-E9U" secondAttribute="bottom" constant="8" id="stm-Ou-iSj"/>
                         </constraints>
@@ -187,10 +201,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="followersButton" destination="fss-oN-15M" id="PLZ-p9-5dD"/>
                 <outlet property="followersCountLabel" destination="5Pl-7T-Dla" id="Px0-zG-evO"/>
                 <outlet property="followersTitleLabel" destination="w0q-bs-E9U" id="8Oh-mX-NWQ"/>
                 <outlet property="followingCountLabel" destination="XF2-Ba-cex" id="emy-RV-V6j"/>
                 <outlet property="followingTitleLabel" destination="7Ez-hq-6dq" id="GEA-oQ-cC0"/>
+                <outlet property="followingsButton" destination="ZBB-Qs-rNg" id="rBO-SE-HX6"/>
                 <outlet property="publicedCountLabel" destination="FW6-6O-08f" id="inP-sl-jkE"/>
                 <outlet property="userAvatarButton" destination="NZC-i4-a6i" id="Ay8-hs-vOJ"/>
                 <outlet property="userAvatarView" destination="QIQ-gp-B0U" id="puL-8C-HeH"/>

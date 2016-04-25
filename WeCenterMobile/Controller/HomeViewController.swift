@@ -31,7 +31,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
     
     lazy var searchBarCell: SearchBarCell = {
         let c = NSBundle.mainBundle().loadNibNamed("SearchBarCell", owner: nil, options: nil).first as! SearchBarCell
-        c.searchButton.addTarget(nil, action: "didPressSearchButton:", forControlEvents: .TouchUpInside)
+        c.searchButton.addTarget(nil, action: #selector(HomeViewController.didPressSearchButton(_:)), forControlEvents: .TouchUpInside)
         return c
     }()
     lazy var titleLabel: UILabel = {
@@ -66,8 +66,8 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         title = "首页" // Needs localization
         msr_navigationBar!.msr_shadowImageView?.hidden = true
         navigationItem.titleView = titleLabel
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: "showSidebar")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-QRCode"), style: .Plain, target: self, action: "showQRCodeViewController")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-Root"), style: .Plain, target: self, action: #selector(HomeViewController.showSidebar))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Navigation-QRCode"), style: .Plain, target: self, action: #selector(HomeViewController.showQRCodeViewController))
         for i in 0..<nibNames.count {
             tableView.registerNib(UINib(nibName: nibNames[i], bundle: NSBundle.mainBundle()), forCellReuseIdentifier: identifiers[i])
         }
@@ -80,7 +80,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         tableView.msr_setTouchesShouldCancel(true, inContentViewWhichIsKindOfClass: UIButton.self)
         tableView.delaysContentTouches = false
         tableView.msr_wrapperView?.delaysContentTouches = false
-        tableView.wc_addRefreshingHeaderWithTarget(self, action: "refresh")
+        tableView.wc_addRefreshingHeaderWithTarget(self, action: #selector(HomeViewController.refresh))
     }
     
     override func viewDidLoad() {
@@ -104,11 +104,9 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         if let index = (actionTypes.map { action.classForCoder === $0 }).indexOf(true) {
             let cell = tableView.dequeueReusableCellWithIdentifier(identifiers[index], forIndexPath: indexPath) as! ActionCell
             cell.update(action: action)
-            cell.userButton?.addTarget(self, action: "didPressUserButton:", forControlEvents: .TouchUpInside)
-            cell.questionButton?.addTarget(self, action: "didPressQuestionButton:", forControlEvents: .TouchUpInside)
-            cell.answerButton?.addTarget(self, action: "didPressAnswerButton:", forControlEvents: .TouchUpInside)
-            cell.articleButton?.addTarget(self, action: "didPressArticleButton:", forControlEvents: .TouchUpInside)
-            cell.commentButton?.addTarget(self, action: "didPressCommentButton:", forControlEvents: .TouchUpInside)
+            cell.userButton?.addTarget(self, action: #selector(HomeViewController.didPressUserButton(_:)), forControlEvents: .TouchUpInside)
+            cell.articleButton?.addTarget(self, action: #selector(HomeViewController.didPressArticleButton(_:)), forControlEvents: .TouchUpInside)
+            cell.commentButton?.addTarget(self, action: #selector(HomeViewController.didPressCommentButton(_:)), forControlEvents: .TouchUpInside)
             return cell as! UITableViewCell
         } else {
             return UITableViewCell() // Needs specification
@@ -222,7 +220,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
                     self_.tableView.reloadData()
                     self_.tableView.mj_header.endRefreshing()
                     if self_.tableView.mj_footer == nil {
-                        self_.tableView.wc_addRefreshingFooterWithTarget(self_, action: "loadMore")
+                        self_.tableView.wc_addRefreshingFooterWithTarget(self_, action: #selector(HomeViewController.loadMore))
                     }
                 }
             },

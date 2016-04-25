@@ -51,6 +51,8 @@ class UserVC: UITableViewController, UserEditViewControllerDelegate {
             if self_.user.isCurrentUser {
                 cell.userAvatarButton.addTarget(self, action: #selector(UserVC.didPressUserButton), forControlEvents: .TouchUpInside)
             }
+            cell.followersButton.addTarget(self, action: #selector(UserVC.didPressFollowersButton), forControlEvents: .TouchUpInside)
+            cell.followingsButton.addTarget(self, action: #selector(UserVC.didPressFollowingsButton), forControlEvents: .TouchUpInside)
         }
         return cell
     }()
@@ -232,6 +234,16 @@ class UserVC: UITableViewController, UserEditViewControllerDelegate {
         let uevc = NSBundle.mainBundle().loadNibNamed("UserEditViewController", owner: nil, options: nil).first as! UserEditViewController
         uevc.delegate = self
         presentViewController(uevc, animated: true, completion: nil)
+    }
+    
+    func didPressFollowersButton() {
+        let ulvc = UserListViewController(user: user, listType: .UserFollower)
+        msr_navigationController!.pushViewController(ulvc, animated: true)
+    }
+    
+    func didPressFollowingsButton() {
+        let ulvc = UserListViewController(user: user, listType: .UserFollowing)
+        msr_navigationController!.pushViewController(ulvc, animated: true)
     }
     
     func userEditViewControllerDidUpdateUserProfile(uevc: UserEditViewController) {

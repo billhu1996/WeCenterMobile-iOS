@@ -164,6 +164,7 @@ class User: DataObject {
                             user.name = value["user_name"] as? String
                             user.avatarURL = value["avatar_file"] as? String
                             user.signature = value["signature"] as? String
+                            user.following = Bool(msr_object: value["follow_check"])
                             self_.followings.insert(user)
                             users.append(user)
                         }
@@ -262,6 +263,7 @@ class User: DataObject {
                             user.name = value["user_name"] as? String
                             user.avatarURL = value["avatar_file"] as? String
                             user.signature = value["signature"] as? String
+                            user.following = Bool(msr_object: value["follow_check"])
                             self_.followers.insert(user)
                             users.append(user)
                         }
@@ -698,6 +700,7 @@ class User: DataObject {
         ]
         if let id = userID {
             parameters["uid"] = id
+            parameters["type"] = "zaidu"
         }
         NetworkManager.defaultManager!.GET("Home List",
             parameters: parameters,
@@ -854,13 +857,15 @@ class User: DataObject {
                                     action.comment!.atUser = User.cachedObjectWithID(atID)
                                 }
                             }
-                            let articleInfo = object["article_info"] as! [String: AnyObject]
-                            action.comment!.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
-                            action.comment!.article!.title = (articleInfo["title"] as! String)
-                            action.comment!.article!.body = (articleInfo["message"] as! String)
-                            action.comment!.article!.imageURL = articleInfo["background_pic"] as? String
-                            action.comment!.article!.date = NSDate(timeIntervalSince1970: Double(msr_object: articleInfo["add_time"])!)
-                            action.comment!.article!.viewCount = Int(msr_object: articleInfo["views"])
+                            if let articleInfo = object["article_info"] as? [String: AnyObject] {
+                                action.comment!.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
+                                action.comment!.article!.title = (articleInfo["title"] as! String)
+                                action.comment!.article!.body = (articleInfo["message"] as! String)
+                                action.comment!.article!.url = object["url"] as? String
+                                action.comment!.article!.imageURL = object["imgUrl"] as? String
+                                action.comment!.article!.date = NSDate(timeIntervalSince1970: Double(msr_object: articleInfo["add_time"])!)
+                                action.comment!.article!.viewCount = Int(msr_object: articleInfo["views"])
+                            }
                             break
                         }
                         actions.append(action_)

@@ -19,7 +19,7 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
     }()
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "我在读"
+        label.text = "我的在读"
         label.textColor = .whiteColor()
         label.font = UIFont.boldSystemFontOfSize(17)
         label.sizeToFit()
@@ -96,6 +96,10 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
             return UITableViewCell() // Needs specification
         }
         
+    }
+    
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
     
     func showSidebar() {
@@ -181,7 +185,7 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
     }
     
     func didPressSearchButton(sender: UIButton) {
-        
+        msr_navigationController!.pushViewController(SearchViewController(nibName: nil, bundle: nil), animated: false)
     }
     
     internal func refresh() {

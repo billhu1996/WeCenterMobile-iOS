@@ -51,7 +51,8 @@ class UserListViewController: UITableViewController {
             .UserFollower: "\(user.name!) 的追随者",
             .Famous: "名人",
             .Media: "媒体"]
-        self.title = titles[listType]!
+        title = titles[listType]!
+        msr_navigationBar!.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         let theme = SettingsManager.defaultManager.currentTheme
         view.backgroundColor = %+0xf1ede6
         tableView.indicatorStyle = theme.scrollViewIndicatorStyle

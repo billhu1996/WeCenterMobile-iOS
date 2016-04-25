@@ -40,6 +40,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         v.placeholder = "搜索用户和内容"
         v.barStyle = theme.navigationBarStyle
         v.keyboardAppearance = theme.keyboardAppearance
+        v.tintColor = UIColor.blackColor().colorWithAlphaComponent(0.87)
         return v
     }()
     
@@ -121,7 +122,13 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     func didPressArticleButton(sender: UIButton) {
         if let article = sender.msr_userInfo as? Article {
-            msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
+            if let _ = article.url {
+                let webViewController = NSBundle.mainBundle().loadNibNamed("WebViewController", owner: nil, options: nil).first as! WebViewController
+                webViewController.article = article
+                msr_navigationController!.pushViewController(webViewController, animated: true)
+            } else {
+                msr_navigationController!.pushViewController(ArticleViewController(dataObject: article), animated: true)
+            }
         }
     }
     

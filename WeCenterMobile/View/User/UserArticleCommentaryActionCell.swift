@@ -35,6 +35,7 @@ class UserArticleCommentaryActionCell: UITableViewCell {
     
     func update(action action: Action) {
         let action = action as! ArticleCommentaryAction
+        detailImageView.image = nil
         if let urlString = action.comment!.article?.imageURL {
             if let url = NSURL(string: urlString) {
                 detailImageView.cancelImageRequestOperation()

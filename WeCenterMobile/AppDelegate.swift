@@ -90,6 +90,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func clearCaches() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey(UserDefaultsCookiesKey)
+        defaults.removeObjectForKey(UserDefaultsUserIDKey)
+        defaults.synchronize()
         NetworkManager.clearCookies()
         do {
             try NSFileManager.defaultManager().removeItemAtURL(cacheFileURL)

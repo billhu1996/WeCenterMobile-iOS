@@ -35,6 +35,7 @@ class UserArticlePublishmentActionCell: UITableViewCell {
     
     func update(action action: Action) {
         let action = action as! ArticlePublishmentAction
+        detailImageView.image = nil
         if let urlString = action.article?.imageURL {
             if let url = NSURL(string: urlString) {
                 detailImageView.cancelImageRequestOperation()

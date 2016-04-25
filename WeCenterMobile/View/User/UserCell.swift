@@ -34,7 +34,11 @@ class UserCell: UITableViewCell {
         userSignatureLabel.text = user.signature?.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
         articleCountLabel.text = "\(user.articleCount ?? 0)"
         followerCountLabel.text = "\(user.followerCount ?? 0)"
-        if let following = user.following {
+        if user.isCurrentUser {
+            followActivityIndicatorView.stopAnimating()
+            followButton.hidden = true
+            followStatusLabel.hidden = true
+        } else if let following = user.following {
             followActivityIndicatorView.stopAnimating()
             followButton.tintColor = following ? UIColor.msr_materialGray() : %+0xff911e
             followStatusLabel.text = following ? "已关注" : "加关注"

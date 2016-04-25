@@ -21,10 +21,13 @@ class UserC: UITableViewCell {
     @IBOutlet weak var followersTitleLabel: UILabel!
     @IBOutlet weak var userLocationLabel: UILabel!
     @IBOutlet weak var publicedCountLabel: UILabel!
+    @IBOutlet weak var followingsButton: UIButton!
+    @IBOutlet weak var followersButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        followingsButton.msr_setBackgroundImageWithColor(UIColor.whiteColor().colorWithAlphaComponent(0.2), forState: .Highlighted)
+        followersButton.msr_setBackgroundImageWithColor(UIColor.whiteColor().colorWithAlphaComponent(0.2), forState: .Highlighted)
         self.selectionStyle = .None
     }
     
@@ -48,10 +51,12 @@ class UserC: UITableViewCell {
         if let province = user.province {
             userLocationLabel.text = province + (user.city ?? "")
         }
-//        self.followButton.hidden = user.isCurrentUser
-//        if let following = user.following {
-//            self.followButton.setTitle(following ? "已关注" : "关注", forState: .Normal)
-//        }
+    }
+    
+    @IBAction func didPressFollowingsButton() {
+    }
+    
+    @IBAction func didPressFollowersButton() {
     }
     
 }

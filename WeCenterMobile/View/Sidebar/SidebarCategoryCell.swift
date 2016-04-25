@@ -19,7 +19,7 @@ class SidebarCategoryCell: UITableViewCell {
         super.awakeFromNib()
         msr_scrollView?.delaysContentTouches = false
         selectedBackgroundView = UIView()
-        selectedBackgroundView!.backgroundColor = %+0xff921e
+        selectedBackgroundView!.backgroundColor = %+0xcdb380
         setNeedsLayout()
         layoutIfNeeded()
     }
