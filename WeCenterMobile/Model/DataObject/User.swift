@@ -689,17 +689,19 @@ class User: DataObject {
         }
     }
     
-    func fetchRelatedActions(page page: Int, count: Int, success: (([Action]) -> Void)?, failure: ((NSError) -> Void)?) {
-        User.fetchActions(page: page, count: count, userID: id, success: success, failure: failure)
+    func fetchRelatedActions(page page: Int, count: Int, includingAgreements: Bool, success: (([Action]) -> Void)?, failure: ((NSError) -> Void)?) {
+        User.fetchActions(page: page, count: count, includingAgreements: includingAgreements, userID: id, success: success, failure: failure)
     }
     
-    class func fetchActions(page page: Int, count: Int, userID: NSNumber?, success: (([Action]) -> Void)?, failure: ((NSError) -> Void)?) {
+    class func fetchActions(page page: Int, count: Int, includingAgreements: Bool, userID: NSNumber?, success: (([Action]) -> Void)?, failure: ((NSError) -> Void)?) {
         var parameters: [String: AnyObject] = [
             "page": page - 1,
             "per_page": count
         ]
         if let id = userID {
             parameters["uid"] = id
+        }
+        if !includingAgreements {
             parameters["type"] = "zaidu"
         }
         NetworkManager.defaultManager!.GET("Home List",
@@ -785,7 +787,14 @@ class User: DataObject {
                             action.article = Article.cachedObjectWithID(Int(msr_object: articleInfo["id"])!)
                             action.article!.title = (articleInfo["title"] as! String)
                             action.article!.body = articleInfo["message"] as? String
-                            action.article!.imageURL = articleInfo["background_pic"] as? String
+                            if Int(msr_object: articleInfo["category_id"]) == 2 {
+                                action.article!.title = (object["outline"] as? String)
+                                action.article!.url = (object["url"] as? String)
+                                action.article!.imageURL = object["imgUrl"] as? String
+                            } else {
+                                action.article!.url = nil
+                                action.article!.imageURL = nil
+                            }
                             action.article!.date = NSDate(timeIntervalSince1970: Double(msr_object: articleInfo["add_time"])!)
                             action.article!.viewCount = Int(msr_object: articleInfo["views"])
                             break

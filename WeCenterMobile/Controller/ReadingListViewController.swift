@@ -194,6 +194,7 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
         user.fetchRelatedActions(
             page: 1,
             count: count,
+            includingAgreements: false,
             success: {
                 [weak self] actions in
                 if let self_ = self {
@@ -222,6 +223,7 @@ class ReadingListViewController: UITableViewController, PublishmentViewControlle
         user.fetchRelatedActions(
             page: page + 1,
             count: count,
+            includingAgreements: false,
             success: {
                 [weak self] actions in
                 if let self_ = self {

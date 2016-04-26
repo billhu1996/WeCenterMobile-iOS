@@ -53,8 +53,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let v = NSBundle.mainBundle().loadNibNamed("LogoutView", owner: nil, options: nil).first as! LogoutView
         v.translatesAutoresizingMaskIntoConstraints = false
         v.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[v(==100)]", options: [], metrics: nil, views: ["v": v]))
+        v.collapseButton.addTarget(self, action: #selector(MainViewController.didPressCollapseButton(_:)), forControlEvents: .TouchUpInside)
         v.logoutButton.addTarget(self, action: "didPressLogoutButton:", forControlEvents: .TouchUpInside)
-        v.settingButton.addTarget(self, action: "didPressSettingsButton:", forControlEvents: .TouchUpInside)
         return v
     }()
     lazy var tableView: UITableView = {
@@ -80,7 +80,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let v = NSBundle.mainBundle().loadNibNamed("SidebarUserView", owner: nil, options: nil).first as! SidebarUserView
         v.update(user: User.currentUser)
         if let self_ = self {
-            let tgr = UITapGestureRecognizer(target: self_, action: "didTapSignatureLabel:")
+            let tgr = UITapGestureRecognizer(target: self_, action: #selector(MainViewController.didTapSignatureLabel(_:)))
             v.overlay.addGestureRecognizer(tgr)
         }
         return v
@@ -97,13 +97,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             return []
         }
     }()
-//    lazy var logoutCell: SidebarLogoutCell = {
-//        [weak self] in
-//        let cell = NSBundle.mainBundle().loadNibNamed("SidebarLogoutCell", owner: nil, options: nil).first as! SidebarLogoutCell
-//        cell.logoutButton.addTarget(self, action: "didPressLogoutButton:", forControlEvents: .TouchUpInside)
-//        cell.SettingButton.addTarget(self, action: "didPressSettingsButton:", forControlEvents: .TouchUpInside)
-//        return cell
-//    }()
     convenience init() {
         self.init(nibName: nil, bundle: nil)
     }
@@ -124,8 +117,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: .None)
         cells.first!.selected = true
         cells.first!.updateTheme()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currentUserPropertyDidChange:", name: CurrentUserPropertyDidChangeNotificationName, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "currentThemeDidChange", name: CurrentThemeDidChangeNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.currentUserPropertyDidChange(_:)), name: CurrentUserPropertyDidChangeNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.currentThemeDidChange), name: CurrentThemeDidChangeNotificationName, object: nil)
     }
     var firstAppear = true
     override func viewDidAppear(animated: Bool) {
@@ -202,18 +195,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             case .Search:
 //                contentViewController.setViewControllers([SearchViewController()], animated: true)
                 break
-            case .Settings:
-                let svc = UIStoryboard(name: "SettingsViewController", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! SettingsViewController
-                contentViewController.setViewControllers([svc], animated: true)
-                break
             case .ReadingList:
                 contentViewController.setViewControllers([ReadingListViewController(user: User.currentUser!)], animated: true)
                 break
             default:
                 break
             }
-        } else if cell is SidebarLogoutCell {
-            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
@@ -257,14 +244,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             contentViewController.pushViewController(UserVC(user: User.currentUser!), animated: true)
         }
     }
-    func didPressSettingsButton(sender: UIButton) {
-        let svc = UIStoryboard(name: "SettingsViewController", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! SettingsViewController
+    func didPressCollapseButton(sender: UIButton) {
         sidebar.collapse()
-        contentViewController.setViewControllers([svc], animated: true)
     }
     func didPressLogoutButton(sender: UIButton) {
-        sidebar.collapse()
-//        dismissViewControllerAnimated(true, completion: nil)
+        appDelegate.clearCaches()
+        dismissViewControllerAnimated(true, completion: nil)
     }
     func currentUserPropertyDidChange(notification: NSNotification) {
         let key = notification.userInfo![KeyUserInfoKey] as! String

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -15,16 +15,16 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yxo-xw-lan">
                     <rect key="frame" x="10" y="10" width="135" height="135"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQn-ak-9rt">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQn-ak-9rt" userLabel="Logout Button">
                             <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sidebar-Settings" translatesAutoresizingMaskIntoConstraints="NO" id="DU3-Id-FSZ">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sidebar-Logout" translatesAutoresizingMaskIntoConstraints="NO" id="DU3-Id-FSZ">
                             <rect key="frame" x="30" y="10" width="75" height="75"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="DU3-Id-FSZ" secondAttribute="height" id="hQs-iw-9Ce"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcf-Qj-WPt">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注销" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcf-Qj-WPt">
                             <rect key="frame" x="51" y="93" width="34" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.55294117647058827" green="0.51372549019607838" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
@@ -48,13 +48,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQQ-lK-fN2">
                     <rect key="frame" x="326" y="10" width="135" height="135"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7w4-cg-K1g">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7w4-cg-K1g" userLabel="Collapse Button">
                             <rect key="frame" x="8" y="0.0" width="119" height="135"/>
                             <state key="normal">
                                 <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sidebar-Logout" translatesAutoresizingMaskIntoConstraints="NO" id="GgB-Ti-nUj">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sidebar-Collapse" translatesAutoresizingMaskIntoConstraints="NO" id="GgB-Ti-nUj">
                             <rect key="frame" x="30" y="10" width="75" height="75"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="GgB-Ti-nUj" secondAttribute="height" id="Ns0-Wm-URw"/>
@@ -93,14 +93,14 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="logoutButton" destination="7w4-cg-K1g" id="vsq-JF-R2R"/>
-                <outlet property="settingButton" destination="CQn-ak-9rt" id="Qr3-vy-OvK"/>
+                <outlet property="collapseButton" destination="7w4-cg-K1g" id="ehb-rG-gga"/>
+                <outlet property="logoutButton" destination="CQn-ak-9rt" id="fdj-0J-Yth"/>
             </connections>
             <point key="canvasLocation" x="319.5" y="325.5"/>
         </view>
     </objects>
     <resources>
-        <image name="Sidebar-Logout" width="36" height="38"/>
-        <image name="Sidebar-Settings" width="46" height="46"/>
+        <image name="Sidebar-Collapse" width="36" height="38"/>
+        <image name="Sidebar-Logout" width="30" height="30"/>
     </resources>
 </document>

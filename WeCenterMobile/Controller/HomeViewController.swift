@@ -211,6 +211,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         User.fetchActions(
             page: 1,
             count: count,
+            includingAgreements: true,
             userID: nil,
             success: {
                 [weak self] actions in
@@ -240,6 +241,7 @@ class HomeViewController: UITableViewController, PublishmentViewControllerDelega
         User.fetchActions(
             page: page + 1,
             count: count,
+            includingAgreements: true,
             userID: nil,
             success: {
                 [weak self] actions in

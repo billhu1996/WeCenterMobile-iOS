@@ -56,8 +56,6 @@
 		950FE5071A1DA2B500167D09 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950FE12F1A1DA2B300167D09 /* MainViewController.swift */; };
 		950FE50D1A1DA2B500167D09 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950FE1361A1DA2B300167D09 /* UserListViewController.swift */; };
 		950FE7E81A1DA53A00167D09 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 950FE7D31A1DA4F900167D09 /* libxml2.dylib */; };
-		9515766C1B1A055400E5BE8E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9515766B1B1A055400E5BE8E /* SettingsViewController.swift */; };
-		9515766E1B1B4A5300E5BE8E /* SettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9515766D1B1B4A5300E5BE8E /* SettingsViewController.storyboard */; };
 		951D2F8F1AB7F8C000DCB678 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 951D2F8E1AB7F8C000DCB678 /* Images.xcassets */; };
 		951E12F01B202D7C00F076FE /* UITableView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951E12EF1B202D7C00F076FE /* UITableView+Refresh.swift */; };
 		952100281C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952100221C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.swift */; };
@@ -695,8 +693,6 @@
 		950FE7DB1A1DA51400167D09 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		950FE7DD1A1DA51900167D09 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		950FE7DF1A1DA52000167D09 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		9515766B1B1A055400E5BE8E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		9515766D1B1B4A5300E5BE8E /* SettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsViewController.storyboard; sourceTree = "<group>"; };
 		951D2F8E1AB7F8C000DCB678 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		951E12EF1B202D7C00F076FE /* UITableView+Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Refresh.swift"; sourceTree = "<group>"; };
 		952100221C9B0CBA00AAD6F8 /* UserArticleAgreementActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserArticleAgreementActionCell.swift; sourceTree = "<group>"; };
@@ -1239,8 +1235,6 @@
 				954A76AA1AFD0323002A72A9 /* PublishmentViewControllerB.xib */,
 				A97A7C601C7BDC9E00650067 /* ReadingListViewController.swift */,
 				95EBCF3C1B2BF0810088FC2C /* SearchViewController.swift */,
-				9515766D1B1B4A5300E5BE8E /* SettingsViewController.storyboard */,
-				9515766B1B1A055400E5BE8E /* SettingsViewController.swift */,
 				950FE1361A1DA2B300167D09 /* UserListViewController.swift */,
 				9568F39E1AEC748A00B201A8 /* UserEditViewController.swift */,
 				9568F3A11AEC74AB00B201A8 /* UserEditViewController.xib */,
@@ -2447,7 +2441,6 @@
 				9568F3A21AEC74AB00B201A8 /* UserEditViewController.xib in Resources */,
 				A955A3011C02FD9D002501CE /* .gitignore in Resources */,
 				A955A3621C02FDDE002501CE /* WeiboSDK.bundle in Resources */,
-				9515766E1B1B4A5300E5BE8E /* SettingsViewController.storyboard in Resources */,
 				9521002D1C9B0CBA00AAD6F8 /* UserArticlePublishmentActionCell.xib in Resources */,
 				950FE1261A1DA2A400167D09 /* User.strings in Resources */,
 				95D7840E1B1C7821008EB241 /* Themes.plist in Resources */,
@@ -2634,7 +2627,6 @@
 				A955A3151C02FD9D002501CE /* MSRAlertAction.swift in Sources */,
 				95EB77531C9878E40061D7AA /* AFNetworkActivityIndicatorManager.m in Sources */,
 				9531D7A01AF3E8E400E6549D /* WeChatSessionActivity.swift in Sources */,
-				9515766C1B1A055400E5BE8E /* SettingsViewController.swift in Sources */,
 				A955A3311C02FD9D002501CE /* UIColor+MSRMaterialColor.swift in Sources */,
 				9531D74F1AF3E4AC00E6549D /* TopicCell.swift in Sources */,
 				5C248AE81C7B2164008F0D7E /* QRCodeReaderAanimationLineView.m in Sources */,

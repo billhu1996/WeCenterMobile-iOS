@@ -23,7 +23,9 @@ class SettingsManager: NSObject {
                 if let current = defaults.objectForKey(UserDefaultsCurrentThemeNameKey) as? String {
                     return Theme(name: current, configuration: infos[current] as? NSDictionary ?? [:])
                 } else {
-                    if let name = infos.allKeys.first as? String {
+                    if (infos.allKeys as! [String]).contains("Day") {
+                        return Theme(name: "Day", configuration: infos["Day"] as? NSDictionary ?? [:])
+                    } else if let name = infos.allKeys.first as? String {
                         return Theme(name: name, configuration: infos[name] as? NSDictionary ?? [:])
                     }
                 }

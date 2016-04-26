@@ -149,6 +149,7 @@ class UserVC: UITableViewController, UserEditViewControllerDelegate {
         user.fetchRelatedActions(
             page: 1,
             count: count,
+            includingAgreements: true,
             success: {
                 [weak self] actions in
                 if let self_ = self {
@@ -200,6 +201,7 @@ class UserVC: UITableViewController, UserEditViewControllerDelegate {
         user.fetchRelatedActions(
             page: page + 1,
             count: count,
+            includingAgreements: true,
             success: {
                 [weak self] actions in
                 if let self_ = self {

@@ -10,14 +10,14 @@ import UIKit
 
 class LogoutView: UIView {
     
-    @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var collapseButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         let theme = SettingsManager.defaultManager.currentTheme
-        settingButton.msr_setBackgroundImageWithColor(theme.highlightColor, forState: .Highlighted)
         logoutButton.msr_setBackgroundImageWithColor(theme.highlightColor, forState: .Highlighted)
+        collapseButton.msr_setBackgroundImageWithColor(theme.highlightColor, forState: .Highlighted)
         
     }
 }
